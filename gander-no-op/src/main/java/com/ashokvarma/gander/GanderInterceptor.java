@@ -14,6 +14,7 @@ import okhttp3.Response;
  * @version 1.0
  * @since 02/06/18
  */
+@SuppressWarnings("NullableProblems")
 public class GanderInterceptor implements Interceptor {
 
     public enum Period {
