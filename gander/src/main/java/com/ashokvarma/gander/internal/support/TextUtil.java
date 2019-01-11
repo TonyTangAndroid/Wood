@@ -62,13 +62,13 @@ public class TextUtil {
         });
     }
 
+    public static boolean isNullOrWhiteSpace(CharSequence text) {
+        return text == null || text.length() == 0 || text.toString().trim().length() == 0;
+    }
+
     public interface AsyncTextProvider {
         CharSequence getText();
 
         AppCompatTextView getTextView();
-    }
-
-    public static boolean isNullOrWhiteSpace(CharSequence text) {
-        return text == null || text.length() == 0 || text.toString().trim().length() == 0;
     }
 }

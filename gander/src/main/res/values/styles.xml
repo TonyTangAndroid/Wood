@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/gander_colorAccent</item>
     </style>
 
-    <style name="Gander.Theme" parent="Gander.BaseTheme" />
+    <style name="Gander.Theme" parent="Gander.BaseTheme"/>
 
     <style name="Gander.TextAppearance.ListItem" parent="android:TextAppearance">
         <item name="android:textStyle">bold</item>

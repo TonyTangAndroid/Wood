@@ -31,21 +31,19 @@ public class TransactionListActivity extends BaseGanderActivity implements Trans
     private RecyclerView mRecyclerView;
     private TransactionListViewModel mViewModel;
     private LiveData<PagedList<HttpTransaction>> mCurrentSubscription;
-
-    // 300 mills delay min. Max no limit
-    private Debouncer<String> mSearchDebouncer = new Debouncer<>(300, new Callback<String>() {
-        @Override
-        public void onEmit(String event) {
-            loadResults(event, mViewModel.getTransactions(event));
-        }
-    });
-
     // 100 mills delay. batch all changes in 100 mills and emit last item at the end of 100 mills
     private Sampler<TransactionListWithSearchKeyModel> mTransactionSampler = new Sampler<>(100, new Callback<TransactionListWithSearchKeyModel>() {
         @Override
         public void onEmit(TransactionListWithSearchKeyModel event) {
             mListDiffUtil.setSearchKey(event.mSearchKey);
             mTransactionAdapter.setSearchKey(event.mSearchKey).submitList(event.pagedList);
+        }
+    });
+    // 300 mills delay min. Max no limit
+    private Debouncer<String> mSearchDebouncer = new Debouncer<>(300, new Callback<String>() {
+        @Override
+        public void onEmit(String event) {
+            loadResults(event, mViewModel.getTransactions(event));
         }
     });
 

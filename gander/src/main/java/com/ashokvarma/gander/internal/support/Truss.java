@@ -44,20 +44,26 @@ public class Truss {
         return this;
     }
 
-    /** Starts {@code span} at the current position in the builder. */
+    /**
+     * Starts {@code span} at the current position in the builder.
+     */
     public Truss pushSpan(Object span) {
         stack.addLast(new Span(builder.length(), span));
         return this;
     }
 
-    /** End the most recently pushed span at the current position in the builder. */
+    /**
+     * End the most recently pushed span at the current position in the builder.
+     */
     public Truss popSpan() {
         Span span = stack.removeLast();
         builder.setSpan(span.span, span.start, builder.length(), SPAN_INCLUSIVE_EXCLUSIVE);
         return this;
     }
 
-    /** Create the final {@link CharSequence}, popping any remaining spans. */
+    /**
+     * Create the final {@link CharSequence}, popping any remaining spans.
+     */
     public SpannableStringBuilder build() {
         while (!stack.isEmpty()) {
             popSpan();

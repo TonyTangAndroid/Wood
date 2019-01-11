@@ -17,26 +17,6 @@ import okhttp3.Response;
 @SuppressWarnings("NullableProblems")
 public class GanderInterceptor implements Interceptor {
 
-    public enum Period {
-        /**
-         * Retain data for the last hour.
-         */
-        ONE_HOUR,
-        /**
-         * Retain data for the last day.
-         */
-        ONE_DAY,
-        /**
-         * Retain data for the last week.
-         */
-        ONE_WEEK,
-        /**
-         * Retain data forever.
-         */
-        FOREVER
-    }
-
-
     /**
      * @param context The current Context.
      */
@@ -53,7 +33,6 @@ public class GanderInterceptor implements Interceptor {
     public GanderInterceptor showNotification(boolean sticky) {
         return this;
     }
-
 
     /**
      * Set the retention period for HTTP transaction data captured by this interceptor.
@@ -90,5 +69,24 @@ public class GanderInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         return chain.proceed(chain.request());
+    }
+
+    public enum Period {
+        /**
+         * Retain data for the last hour.
+         */
+        ONE_HOUR,
+        /**
+         * Retain data for the last day.
+         */
+        ONE_DAY,
+        /**
+         * Retain data for the last week.
+         */
+        ONE_WEEK,
+        /**
+         * Retain data forever.
+         */
+        FOREVER
     }
 }

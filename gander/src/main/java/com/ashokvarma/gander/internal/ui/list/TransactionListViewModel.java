@@ -20,9 +20,6 @@ import com.ashokvarma.gander.internal.data.TransactionDao;
  * @since 03/06/18
  */
 public class TransactionListViewModel extends AndroidViewModel {
-    private LiveData<PagedList<HttpTransaction>> mTransactions;
-    private final TransactionDao mTransactionDao;
-
     private final static PagedList.Config config
             = new PagedList.Config.Builder()
             .setPageSize(15) // page size
@@ -30,6 +27,8 @@ public class TransactionListViewModel extends AndroidViewModel {
             .setPrefetchDistance(10)// trigger when to fetch a page
             .setEnablePlaceholders(true)
             .build();
+    private final TransactionDao mTransactionDao;
+    private LiveData<PagedList<HttpTransaction>> mTransactions;
 
     public TransactionListViewModel(Application application) {
         super(application);

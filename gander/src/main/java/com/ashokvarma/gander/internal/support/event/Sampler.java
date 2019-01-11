@@ -44,14 +44,13 @@ public class Sampler<V> {
     }
 
     public static class Counter<T> implements Runnable {
-        private T mEvent;
-        private final Callback<T> mCallback;
-
         static final int STATE_CREATED = 1;
         static final int STATE_QUEUED = 2;
         static final int STATE_RUNNING = 3;
         static final int STATE_FINISHED = 4;
+        private final Callback<T> mCallback;
         int state;
+        private T mEvent;
 
         Counter(T event, Callback<T> callback) {
             mEvent = event;

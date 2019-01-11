@@ -43,7 +43,7 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
     public static final int TYPE_RESPONSE = 1;
 
     private static final String ARG_TYPE = "type";
-
+    BackgroundColorSpan searchHighLightSpan = new BackgroundColorSpan(GanderColorUtil.SEARCHED_HIGHLIGHT_BACKGROUND_COLOR);
     private TextView mHeadersView;
     private AppCompatTextView mBodyView;
     private NestedScrollView mScrollParentView;
@@ -51,16 +51,13 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
     private View mSearchBar;
     private EditText mSearchView;
     private TextView mSearchCountView;
-
     private int mType;
     private GanderColorUtil mColorUtil;
     private HttpTransaction mTransaction;
-
     private String mSearchKey;
     private int mCurrentSearchIndex = 0;
     private List<Integer> mHeaderSearchIndices = new ArrayList<>(0);
     private List<Integer> mBodySearchIndices = new ArrayList<>(0);
-    private ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     private final Debouncer<String> mSearchDebouncer = new Debouncer<>(400, new Callback<String>() {
         @Override
         public void onEmit(String searchKey) {
@@ -70,6 +67,7 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
             updateSearchCount(1, searchKey);
         }
     });
+    private ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
     public TransactionPayloadFragment() {
     }
@@ -221,8 +219,6 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
         }
         return new ArrayList<>(0);
     }
-
-    BackgroundColorSpan searchHighLightSpan = new BackgroundColorSpan(GanderColorUtil.SEARCHED_HIGHLIGHT_BACKGROUND_COLOR);
 
     private void updateSearchCount(int moveToIndex, String searchKey) {
         List<Integer> headerSearchIndices = mHeaderSearchIndices;
