@@ -85,7 +85,7 @@ public class TransactionListActivity extends BaseGanderActivity implements Trans
 
     @Override
     public void onTransactionClicked(HttpTransaction transaction) {
-        TransactionDetailsActivity.start(this, transaction.getId(), transaction.getStatus(), transaction.getResponseCode());
+        TransactionDetailsActivity.start(this, transaction.getId(), transaction.getPriority());
     }
 
     @Override

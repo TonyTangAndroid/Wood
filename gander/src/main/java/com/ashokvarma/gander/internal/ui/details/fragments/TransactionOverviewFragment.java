@@ -71,18 +71,10 @@ public class TransactionOverviewFragment extends Fragment implements Transaction
 
     private void populateUI() {
         if (isAdded() && mTransaction != null) {
-            mUrlView.setText(mTransaction.getUrl());
             mMethodView.setText(mTransaction.getMethod());
-            mProtocolView.setText(mTransaction.getProtocol());
-            mStatusView.setText(mTransaction.getStatus().toString());
-            mResponseView.setText(mTransaction.getResponseSummaryText());
-            mSslView.setText((mTransaction.isSsl() ? R.string.gander_yes : R.string.gander_no));
-            mRequestTimeView.setText(mTransaction.getRequestDateString());
-            mResponseTimeView.setText(mTransaction.getResponseDateString());
-            mDurationView.setText(mTransaction.getDurationString());
-            mRequestSizeView.setText(mTransaction.getRequestSizeString());
-            mResponseSizeView.setText(mTransaction.getResponseSizeString());
-            mTotalSizeView.setText(mTransaction.getTotalSizeString());
+            mRequestTimeView.setText(mTransaction.getRequestDate().toString());
+            mResponseView.setText(mTransaction.getRequestBody());
+            mRequestSizeView.setText(String.valueOf(mTransaction.getRequestContentLength()));
         }
     }
 }

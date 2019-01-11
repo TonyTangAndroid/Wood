@@ -1,6 +1,5 @@
 package com.ashokvarma.gander.sample;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,15 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ashokvarma.gander.Gander;
-import com.ashokvarma.gander.GanderInterceptor;
 
-import java.util.UUID;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import timber.log.Timber;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -62,19 +54,6 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private OkHttpClient getClient(Context context) {
-        return new OkHttpClient.Builder()
-                // Add a GanderInterceptor instance to your OkHttp client
-                .addInterceptor(
-                        new GanderInterceptor(context)
-                                .showNotification(true)
-                                .maxContentLength(250000L)
-                                .retainDataFor(GanderInterceptor.Period.FOREVER)
-                                .redactHeader("Authorization")
-                )
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                .build();
-    }
 
     private void launchGanderDirectly() {
         // Optionally launch Gander directly from your own app UI
@@ -82,49 +61,23 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void doHttpActivity() {
-        SampleApiService.HttpbinApi api = SampleApiService.getInstance(getClient(this));
-        Callback<Void> cb = new Callback<Void>() {
-            @Override
-            public void onResponse(Call call, Response response) {
-            }
 
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                t.printStackTrace();
-            }
-        };
-        api.get().enqueue(cb);
-        api.post(new SampleApiService.Data("posted")).enqueue(cb);
-        api.postForm("I Am String", null, 2.34567891, 1234, false).enqueue(cb);
-        api.patch(new SampleApiService.Data("patched")).enqueue(cb);
-        api.put(new SampleApiService.Data("put")).enqueue(cb);
-        api.delete().enqueue(cb);
-        api.status(201).enqueue(cb);
-        api.status(401).enqueue(cb);
-        api.status(500).enqueue(cb);
-        api.delay(9).enqueue(cb);
-        api.delay(15).enqueue(cb);
-        api.bearer(UUID.randomUUID().toString()).enqueue(cb);
-        api.redirectTo("https://http2.akamai.com").enqueue(cb);
-        api.redirect(3).enqueue(cb);
-        api.redirectRelative(2).enqueue(cb);
-        api.redirectAbsolute(4).enqueue(cb);
-        api.stream(500).enqueue(cb);
-        api.streamBytes(2048).enqueue(cb);
-        api.image("image/png").enqueue(cb);
-        api.gzip().enqueue(cb);
-        api.xml().enqueue(cb);
-        api.utf8().enqueue(cb);
-        api.deflate().enqueue(cb);
-        api.cookieSet("v").enqueue(cb);
-        api.basicAuth("me", "pass").enqueue(cb);
-        api.drip(512, 5, 1, 200).enqueue(cb);
-        api.deny().enqueue(cb);
-        api.cache("Mon").enqueue(cb);
-        api.cache(30).enqueue(cb);
+        Timber.v("This is a verbose message.");
+        Timber.d("This is an debug message ");
+        Timber.i("Hello from Tysons");
+        Timber.w("Warning. Your spaceship is on danger");
+        Timber.e("Something is wrong.");
+        logError();
 
-        // tested with 60 MB as well. Since max size stored is 1 MB in database it won't be any different
-        // large data 1MB Request and 2MB response (PrecomputedText magic test)
-        api.post(new SampleApiService.VeryLargeData()).enqueue(cb);
+    }
+
+    private void logError() {
+        try {
+            String shortSrc = "a";
+            String substring = shortSrc.substring(10);
+            Timber.v(substring);
+        } catch (Exception e) {
+            Timber.e(e);
+        }
     }
 }

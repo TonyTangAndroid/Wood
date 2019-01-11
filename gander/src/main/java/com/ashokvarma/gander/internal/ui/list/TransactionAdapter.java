@@ -24,9 +24,10 @@ import com.ashokvarma.gander.internal.support.GanderColorUtil;
  */
 public class TransactionAdapter extends PagedListAdapter<HttpTransaction, RecyclerView.ViewHolder> {
 
+    private static final int EMPTY_VIEW = 1;
+    private static final int TRANSACTION_VIEW = 2;
     private final LayoutInflater mLayoutInflater;
     private final GanderColorUtil mColorUtil;
-
     private Listener mListener;
     private String mSearchKey;
 
@@ -59,9 +60,6 @@ public class TransactionAdapter extends PagedListAdapter<HttpTransaction, Recycl
         return this;
     }
 
-    private static final int EMPTY_VIEW = 1;
-    private static final int TRANSACTION_VIEW = 2;
-
     @Override
     public int getItemViewType(int position) {
         if (getItem(position) == null) {
@@ -87,23 +85,13 @@ public class TransactionAdapter extends PagedListAdapter<HttpTransaction, Recycl
         HttpTransaction transaction = getItem(position);
         if (transaction != null) {
             TransactionViewHolder holder = ((TransactionViewHolder) genericHolder);
-            holder.path.setText(getHighlightedText(transaction.getMethod().concat(" ").concat(transaction.getPath())));
-            holder.host.setText(getHighlightedText(transaction.getHost()));
-            holder.start.setText(transaction.getRequestStartTimeString());
-            holder.ssl.setVisibility(transaction.isSsl() ? View.VISIBLE : View.GONE);
-            if (transaction.getStatus() == HttpTransaction.Status.Complete) {
-                holder.code.setText(getHighlightedText(String.valueOf(transaction.getResponseCode())));
-                holder.duration.setText(transaction.getDurationString());
-                holder.size.setText(transaction.getTotalSizeString());
-            } else {
-                holder.code.setText(null);
-                holder.duration.setText(null);
-                holder.size.setText(null);
-            }
-            if (transaction.getStatus() == HttpTransaction.Status.Failed) {
-                holder.code.setText("!!!");
-            }
-
+            holder.host.setText(getHighlightedText(transaction.getMethod()));
+            holder.start.setText(transaction.getRequestDate().toString());
+            holder.ssl.setVisibility(View.GONE);
+            holder.code.setText(getHighlightedText(String.valueOf(transaction.getPriority())));
+            holder.duration.setText(getHighlightedText(String.valueOf(transaction.getRequestBody())));
+            holder.host.setText(getHighlightedText(String.valueOf(transaction.getError())));
+            holder.size.setText(String.valueOf(transaction.getRequestContentLength()));
             int color = mColorUtil.getTransactionColor(transaction, true);
             holder.path.setTextColor(color);
             holder.code.setTextColor(color);
@@ -114,6 +102,12 @@ public class TransactionAdapter extends PagedListAdapter<HttpTransaction, Recycl
 
     private CharSequence getHighlightedText(String text) {
         return FormatUtils.formatTextHighlight(text, mSearchKey);
+    }
+
+    interface Listener {
+        void onTransactionClicked(HttpTransaction httpTransaction);
+
+        void onItemsInserted(int firstInsertedItemPosition);
     }
 
     static class EmptyTransactionViewHolder extends RecyclerView.ViewHolder {
@@ -154,11 +148,5 @@ public class TransactionAdapter extends PagedListAdapter<HttpTransaction, Recycl
                 }
             });
         }
-    }
-
-    interface Listener {
-        void onTransactionClicked(HttpTransaction httpTransaction);
-
-        void onItemsInserted(int firstInsertedItemPosition);
     }
 }

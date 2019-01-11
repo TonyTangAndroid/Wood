@@ -10,6 +10,7 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.RoomWarnings;
 import android.arch.persistence.room.Update;
 import android.support.annotation.IntRange;
+import android.util.Log;
 
 import java.util.Date;
 
@@ -22,6 +23,8 @@ import java.util.Date;
  */
 @Dao
 public abstract class TransactionDao {
+    public static final int SEARCH_DEFAULT = Log.VERBOSE;
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract long insertTransaction(HttpTransaction httpTransaction);
 
@@ -43,42 +46,14 @@ public abstract class TransactionDao {
     @Query("SELECT * FROM HttpTransaction WHERE id = :id")
     public abstract LiveData<HttpTransaction> getTransactionsWithId(long id);
 
-    public static final int SEARCH_DEFAULT = 1;
-    public static final int SEARCH_INCLUDE_REQUEST = 2;
-    public static final int SEARCH_INCLUDE_RESPONSE = 3;
-    public static final int SEARCH_INCLUDE_REQUEST_RESPONSE = 4;
-
-    public DataSource.Factory<Integer, HttpTransaction> getAllTransactionsWith(String key, @IntRange(from = 1, to = 4) int searchType) {
+    public DataSource.Factory<Integer, HttpTransaction> getAllTransactionsWith(String key, @IntRange(from = 2, to = 7) int priority) {
         String endWildCard = key + "%";
         String doubleSideWildCard = "%" + key + "%";
-        switch (searchType) {
-            case SEARCH_DEFAULT:
-                return getAllTransactions(endWildCard, doubleSideWildCard);
-            case SEARCH_INCLUDE_REQUEST:
-                return getAllTransactionsIncludeRequest(endWildCard, doubleSideWildCard);
-            case SEARCH_INCLUDE_RESPONSE:
-                return getAllTransactionsIncludeResponse(endWildCard, doubleSideWildCard);
-            case SEARCH_INCLUDE_REQUEST_RESPONSE:
-                return getAllTransactionsIncludeRequestResponse(endWildCard, doubleSideWildCard);
-            default:
-                return getAllTransactions(endWildCard, doubleSideWildCard);
-        }
+        return getAllTransactionsIncludeRequestResponse(endWildCard, doubleSideWildCard, priority);
     }
 
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("SELECT id, method, url, path, host, scheme, request_date, error, response_code, took_ms, request_content_length, response_content_length, request_body_is_plain_text, response_body_is_plain_text FROM HttpTransaction WHERE protocol LIKE :endWildCard OR method LIKE :endWildCard OR url LIKE :doubleWildCard OR request_body LIKE :doubleWildCard OR response_body LIKE :doubleWildCard OR response_message LIKE :doubleWildCard OR response_code LIKE :endWildCard ORDER BY id DESC")
-    abstract DataSource.Factory<Integer, HttpTransaction> getAllTransactionsIncludeRequestResponse(String endWildCard, String doubleWildCard);
-
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("SELECT id, method, url, path, host, scheme, request_date, error, response_code, took_ms, request_content_length, response_content_length, request_body_is_plain_text, response_body_is_plain_text FROM HttpTransaction WHERE protocol LIKE :endWildCard OR method LIKE :endWildCard OR url LIKE :doubleWildCard OR response_body LIKE :doubleWildCard OR response_message LIKE :doubleWildCard OR response_code LIKE :endWildCard ORDER BY id DESC")
-    abstract DataSource.Factory<Integer, HttpTransaction> getAllTransactionsIncludeResponse(String endWildCard, String doubleWildCard);
-
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("SELECT id, method, url, path, host, scheme, request_date, error, response_code, took_ms, request_content_length, response_content_length, request_body_is_plain_text, response_body_is_plain_text FROM HttpTransaction WHERE protocol LIKE :endWildCard OR method LIKE :endWildCard OR url LIKE :doubleWildCard OR request_body LIKE :doubleWildCard OR response_code LIKE :endWildCard ORDER BY id DESC")
-    abstract DataSource.Factory<Integer, HttpTransaction> getAllTransactionsIncludeRequest(String endWildCard, String doubleWildCard);
-
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("SELECT id, method, url, path, host, scheme, request_date, error, response_code, took_ms, request_content_length, response_content_length, request_body_is_plain_text, response_body_is_plain_text FROM HttpTransaction WHERE protocol LIKE :endWildCard OR method LIKE :endWildCard OR url LIKE :doubleWildCard OR response_code LIKE :endWildCard ORDER BY id DESC")
-    abstract DataSource.Factory<Integer, HttpTransaction> getAllTransactions(String endWildCard, String doubleWildCard);
+    @Query("SELECT id, request_date, error, request_content_length,priority,request_body FROM HttpTransaction WHERE (tag LIKE :endWildCard OR request_body LIKE :doubleWildCard OR error LIKE :doubleWildCard) AND priority >= :priority ORDER BY id DESC")
+    abstract DataSource.Factory<Integer, HttpTransaction> getAllTransactionsIncludeRequestResponse(String endWildCard, String doubleWildCard, int priority);
 
 }

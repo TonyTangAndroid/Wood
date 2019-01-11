@@ -3,6 +3,7 @@ package com.ashokvarma.gander.internal.support;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.ashokvarma.gander.R;
 import com.ashokvarma.gander.internal.data.HttpTransaction;
@@ -21,7 +22,7 @@ public class GanderColorUtil {
     public static final int HIGHLIGHT_BACKGROUND_COLOR = Color.parseColor("#FFFD38");
     public static final int HIGHLIGHT_TEXT_COLOR = 0;//none
     public static final boolean HIGHLIGHT_UNDERLINE = false;
-
+    private static GanderColorUtil TRANSACTION_COLOR_UTIL_INSTANCE;
     private final int mColorDefault;
     private final int mColorDefaultTxt;
     private final int mColorRequested;
@@ -40,8 +41,6 @@ public class GanderColorUtil {
         mColor300 = ContextCompat.getColor(context, R.color.gander_status_300);
     }
 
-    private static GanderColorUtil TRANSACTION_COLOR_UTIL_INSTANCE;
-
     public static GanderColorUtil getInstance(Context context) {
         if (TRANSACTION_COLOR_UTIL_INSTANCE == null) {
             TRANSACTION_COLOR_UTIL_INSTANCE = new GanderColorUtil(context);
@@ -54,25 +53,20 @@ public class GanderColorUtil {
     }
 
     public int getTransactionColor(HttpTransaction transaction, boolean txtColors) {
-        HttpTransaction.Status status = transaction.getStatus();
-        Integer responseCode = transaction.getResponseCode();
-        return getTransactionColor(status, responseCode, txtColors);
+        return getTransactionColor(transaction.getPriority(), txtColors);
     }
 
-    public int getTransactionColor(HttpTransaction.Status status, Integer responseCode) {
-        return getTransactionColor(status, responseCode, false);
-    }
 
-    private int getTransactionColor(HttpTransaction.Status status, Integer responseCode, boolean txtColors) {
-        if (status == HttpTransaction.Status.Failed) {
+    public int getTransactionColor(int priority, boolean txtColors) {
+        if (priority >= Log.ERROR) {
             return mColorError;
-        } else if (status == HttpTransaction.Status.Requested) {
+        } else if (priority == Log.VERBOSE) {
             return mColorRequested;
-        } else if (responseCode >= 500) {
+        } else if (priority == Log.INFO) {
             return mColor500;
-        } else if (responseCode >= 400) {
+        } else if (priority == Log.WARN) {
             return mColor400;
-        } else if (responseCode >= 300) {
+        } else if (priority == Log.DEBUG) {
             return mColor300;
         } else {
             return txtColors ? mColorDefaultTxt : mColorDefault;

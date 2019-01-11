@@ -40,26 +40,24 @@ public class NotificationHelper {
     private final NotificationManager mNotificationManager;
     private final GanderColorUtil mColorUtil;
 
+    public NotificationHelper(Context context) {
+        this.mContext = context;
+        mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        mColorUtil = GanderColorUtil.getInstance(context);
+        setUpChannelIfNecessary();
+    }
+
     public static synchronized void clearBuffer() {
         TRANSACTION_BUFFER.clear();
         TRANSACTION_COUNT = 0;
     }
 
     private static synchronized void addToBuffer(HttpTransaction transaction) {
-        if (transaction.getStatus() == HttpTransaction.Status.Requested) {
-            TRANSACTION_COUNT++;
-        }
+        TRANSACTION_COUNT++;
         TRANSACTION_BUFFER.put(transaction.getId(), transaction);
         if (TRANSACTION_BUFFER.size() > BUFFER_SIZE) {
             TRANSACTION_BUFFER.removeAt(0);
         }
-    }
-
-    public NotificationHelper(Context context) {
-        this.mContext = context;
-        mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mColorUtil = GanderColorUtil.getInstance(context);
-        setUpChannelIfNecessary();
     }
 
     private void setUpChannelIfNecessary() {
@@ -108,7 +106,7 @@ public class NotificationHelper {
 
     private CharSequence getNotificationText(HttpTransaction transaction) {
         int color = mColorUtil.getTransactionColor(transaction);
-        String text = transaction.getNotificationText();
+        String text = transaction.getRequestBody();
         // Simple span no Truss required
         SpannableString spannableString = new SpannableString(text);
         spannableString.setSpan(new ForegroundColorSpan(color), 0, text.length(), SPAN_INCLUSIVE_EXCLUSIVE);

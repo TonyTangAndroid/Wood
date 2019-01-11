@@ -44,7 +44,7 @@ android {
 }
 
 dependencies {
-    compile "com.squareup.okhttp3:okhttp:$okhttp3Version"
+    api 'com.jakewharton.timber:timber:4.7.1'
 
     compile "com.android.support:design:$supportLibVersion"
     compile "com.android.support:appcompat-v7:$supportLibVersion"

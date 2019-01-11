@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -41,37 +42,31 @@ public class TransactionDetailsActivity extends BaseGanderActivity {
 
     private static final String ARG_TRANSACTION_ID = "transaction_id";
     private static final String ARG_TRANSACTION_STATUS = "transaction_status";
-    private static final String ARG_TRANSACTION_RESPONSE_CODE = "transaction_response_code";
-
-    public static void start(Context context, long transactionId, HttpTransaction.Status status, Integer responseCode) {
-        Intent intent = new Intent(context, TransactionDetailsActivity.class);
-        intent.putExtra(ARG_TRANSACTION_ID, transactionId);
-        intent.putExtra(ARG_TRANSACTION_STATUS, status.ordinal());
-        intent.putExtra(ARG_TRANSACTION_RESPONSE_CODE, responseCode == null ? -1 : responseCode);
-        context.startActivity(intent);
-    }
-
     private static int SELECTED_TAB_POSITION = 0;
-
     TextView mTitleView;
     Adapter mAdapter;
     AppBarLayout mAppBarLayout;
-
-    private HttpTransaction mTransaction;
     TransactionDetailViewModel mViewModel;
     GanderColorUtil mColorUtil;
+    private HttpTransaction mTransaction;
+
+    public static void start(Context context, long transactionId, int priority) {
+        Intent intent = new Intent(context, TransactionDetailsActivity.class);
+        intent.putExtra(ARG_TRANSACTION_ID, transactionId);
+        intent.putExtra(ARG_TRANSACTION_STATUS, priority);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gander_act_transaction_details);
         long transactionId = getIntent().getLongExtra(ARG_TRANSACTION_ID, 0);
-        int statusOrdinal = getIntent().getIntExtra(ARG_TRANSACTION_STATUS, HttpTransaction.Status.Requested.ordinal());
-        int responseCode = getIntent().getIntExtra(ARG_TRANSACTION_RESPONSE_CODE, -1);
+        int statusOrdinal = getIntent().getIntExtra(ARG_TRANSACTION_STATUS, Log.VERBOSE);
         mColorUtil = GanderColorUtil.getInstance(this);
 
         mAppBarLayout = findViewById(R.id.gander_details_appbar);
-        mAppBarLayout.setBackgroundColor(mColorUtil.getTransactionColor(HttpTransaction.Status.values()[statusOrdinal], responseCode));
+        mAppBarLayout.setBackgroundColor(mColorUtil.getTransactionColor(statusOrdinal, false));
         Toolbar toolbar = findViewById(R.id.gander_details_toolbar);
         setSupportActionBar(toolbar);
         mTitleView = findViewById(R.id.gander_details_toolbar_title);
@@ -111,10 +106,6 @@ public class TransactionDetailsActivity extends BaseGanderActivity {
             if (mTransaction != null)
                 share(FormatUtils.getShareText(this, mTransaction));
             return true;
-        } else if (item.getItemId() == R.id.share_curl) {
-            if (mTransaction != null)
-                share(FormatUtils.getShareCurlCommand(mTransaction));
-            return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
@@ -122,7 +113,7 @@ public class TransactionDetailsActivity extends BaseGanderActivity {
 
     private void populateUI() {
         if (mTransaction != null) {
-            mTitleView.setText(mTransaction.getMethod().concat(" ").concat(mTransaction.getPath()));
+            mTitleView.setText(mTransaction.getMethod().concat(" ").concat(mTransaction.getRequestDate().toString()));
             for (TransactionFragment fragment : mAdapter.fragments) {
                 fragment.transactionUpdated(mTransaction);
             }

@@ -17,8 +17,6 @@ import android.content.Context;
 @TypeConverters({RoomTypeConverters.class})
 
 public abstract class GanderDatabase extends RoomDatabase {
-    public abstract TransactionDao httpTransactionDao();
-
     private static GanderDatabase GANDER_DATABASE_INSTANCE;
 
     public static GanderDatabase getInstance(Context context) {
@@ -27,4 +25,6 @@ public abstract class GanderDatabase extends RoomDatabase {
         }
         return GANDER_DATABASE_INSTANCE;
     }
+
+    public abstract TransactionDao httpTransactionDao();
 }

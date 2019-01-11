@@ -149,12 +149,10 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
             mSearchBar.setBackgroundColor(color);
             if (mType == TYPE_REQUEST) {
                 mSearchView.setHint(R.string.gander_search_request_hint);
-                populateHeaderText(mTransaction.getRequestHeadersString(true));
-                populateBody(mTransaction.requestBodyIsPlainText());
+                populateBody();
             } else if (mType == TYPE_RESPONSE) {
                 mSearchView.setHint(R.string.gander_search_response_hint);
-                populateHeaderText(mTransaction.getResponseHeadersString(true));
-                populateBody(mTransaction.responseBodyIsPlainText());
+                populateBody();
             }
 //            updateSearchCount(1);
         }
@@ -170,38 +168,34 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
         mHeaderSearchIndices = highlightSearchKeyword(mHeadersView, mSearchKey);
     }
 
-    private void populateBody(boolean isPlainText) {
-        if (!isPlainText) {
-            mBodyView.setText(getString(R.string.gander_body_omitted));
-        } else {
-//            mExecutor.shutdown();
-            TextUtil.asyncSetText(mExecutor, new TextUtil.AsyncTextProvider() {
-                @Override
-                public CharSequence getText() {
-                    CharSequence body = null;
-                    String searchKey = mSearchKey;
-                    if (mType == TYPE_REQUEST) {
-                        body = mTransaction.getFormattedRequestBody();
-                    } else if (mType == TYPE_RESPONSE) {
-                        body = mTransaction.getFormattedResponseBody();
-                    }
-                    if (TextUtil.isNullOrWhiteSpace(body) || TextUtil.isNullOrWhiteSpace(searchKey)) {
-                        return body;
-                    } else {
-                        List<Integer> startIndexes = FormatUtils.indexOf(body, searchKey);
-                        SpannableString spannableBody = new SpannableString(body);
-                        FormatUtils.applyHighlightSpan(spannableBody, startIndexes, searchKey.length());
-                        mBodySearchIndices = startIndexes;
-                        return spannableBody;
-                    }
+    private void populateBody() {
+        //            mExecutor.shutdown();
+        TextUtil.asyncSetText(mExecutor, new TextUtil.AsyncTextProvider() {
+            @Override
+            public CharSequence getText() {
+                CharSequence body = null;
+                String searchKey = mSearchKey;
+                if (mType == TYPE_REQUEST) {
+                    body = mTransaction.getRequestBody();
+                } else if (mType == TYPE_RESPONSE) {
+                    body = mTransaction.getRequestBody();
                 }
+                if (TextUtil.isNullOrWhiteSpace(body) || TextUtil.isNullOrWhiteSpace(searchKey)) {
+                    return body;
+                } else {
+                    List<Integer> startIndexes = FormatUtils.indexOf(body, searchKey);
+                    SpannableString spannableBody = new SpannableString(body);
+                    FormatUtils.applyHighlightSpan(spannableBody, startIndexes, searchKey.length());
+                    mBodySearchIndices = startIndexes;
+                    return spannableBody;
+                }
+            }
 
-                @Override
-                public AppCompatTextView getTextView() {
-                    return mBodyView;
-                }
-            });
-        }
+            @Override
+            public AppCompatTextView getTextView() {
+                return mBodyView;
+            }
+        });
     }
 
     private List<Integer> highlightSearchKeyword(TextView textView, String searchKey) {
