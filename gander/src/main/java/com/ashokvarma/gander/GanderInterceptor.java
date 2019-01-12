@@ -39,7 +39,7 @@ public class GanderInterceptor extends Timber.DebugTree {
     private NotificationHelper mNotificationHelper;
     @NonNull
     private RetentionManager mRetentionManager;
-    private long mMaxContentLength = 250000L;
+    private int mMaxContentLength = 250000;
     @NonNull
     private volatile Set<String> headersToRedact = Collections.emptySet();
     private boolean stickyNotification = false;
@@ -88,8 +88,8 @@ public class GanderInterceptor extends Timber.DebugTree {
      * @return The {@link GanderInterceptor} instance.
      */
     @NonNull
-    public GanderInterceptor maxContentLength(long max) {
-        this.mMaxContentLength = Math.min(max, 999999L);// close to => 1 MB Max in a BLOB SQLite.
+    public GanderInterceptor maxContentLength(int max) {
+        this.mMaxContentLength = Math.min(max, 999999);// close to => 1 MB Max in a BLOB SQLite.
         return this;
     }
 
@@ -121,19 +121,18 @@ public class GanderInterceptor extends Timber.DebugTree {
     private void doLog(int priority, String tag, @NonNull String message, Throwable t) {
         HttpTransaction transaction = new HttpTransaction();
         transaction.setPriority(priority);
-        transaction.setRequestDate(new Date());
-        transaction.setMethod(tag);
+        transaction.setDate(new Date());
+        transaction.setTag(tag);
+        transaction.setLength(message.length());
         if (t != null) {
-            transaction.setError(ErrorUtil.asString(t));
+            message = message + "\n" + t.getMessage() + "\n" + ErrorUtil.asString(t);
         }
-        transaction.setRequestContentLength((long) message.length());
-        transaction.setRequestBody(message.substring(0, (int) Math.min(message.length(), mMaxContentLength)));
+        transaction.setBody(message.substring(0, Math.min(message.length(), mMaxContentLength)) + "");
         create(transaction);
     }
 
 
     private void create(@NonNull HttpTransaction transaction) {
-
         long transactionId = mGanderDatabase.httpTransactionDao().insertTransaction(transaction);
         transaction.setId(transactionId);
         if (mNotificationHelper != null) {

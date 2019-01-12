@@ -57,11 +57,10 @@ public class FormatUtils {
 
     public static CharSequence getShareText(Context context, HttpTransaction transaction) {
         SpannableStringBuilder text = new SpannableStringBuilder();
-        text.append(context.getString(R.string.gander_method)).append(": ").append(v(transaction.getMethod())).append("\n");
-        text.append(context.getString(R.string.gander_request_time)).append(": ").append(transaction.getRequestDate().toString()).append("\n");
-        text.append(context.getString(R.string.gander_request_size)).append(": ").append(String.valueOf(transaction.getRequestContentLength())).append("\n");
-        text.append(context.getString(R.string.gander_body_content_truncated)).append(": ").append(String.valueOf(transaction.getRequestBody())).append("\n");
-        text.append(context.getString(R.string.gander_response)).append(": ").append(v(transaction.getError())).append("\n");
+        text.append(context.getString(R.string.gander_method)).append(": ").append(v(transaction.getTag())).append("\n");
+        text.append(context.getString(R.string.gander_request_time)).append(": ").append(transaction.getDate().toString()).append("\n");
+        text.append(context.getString(R.string.gander_request_size)).append(": ").append(String.valueOf(transaction.length())).append("\n");
+        text.append(context.getString(R.string.gander_body_content_truncated)).append(": ").append(String.valueOf(transaction.body())).append("\n");
         text.append("---------- ").append(context.getString(R.string.gander_request)).append(" ----------\n\n");
         return text;
     }

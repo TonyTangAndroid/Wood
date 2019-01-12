@@ -106,7 +106,7 @@ public class NotificationHelper {
 
     private CharSequence getNotificationText(HttpTransaction transaction) {
         int color = mColorUtil.getTransactionColor(transaction);
-        String text = transaction.getRequestBody();
+        String text = transaction.body();
         // Simple span no Truss required
         SpannableString spannableString = new SpannableString(text);
         spannableString.setSpan(new ForegroundColorSpan(color), 0, text.length(), SPAN_INCLUSIVE_EXCLUSIVE);

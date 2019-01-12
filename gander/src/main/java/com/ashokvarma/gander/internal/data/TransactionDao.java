@@ -34,7 +34,7 @@ public abstract class TransactionDao {
     @Delete
     public abstract int deleteTransactions(HttpTransaction... httpTransactions);
 
-    @Query("DELETE FROM HttpTransaction WHERE request_date < :beforeDate")
+    @Query("DELETE FROM HttpTransaction WHERE date < :beforeDate")
     public abstract int deleteTransactionsBefore(Date beforeDate);
 
     @Query("DELETE FROM HttpTransaction")
@@ -53,7 +53,7 @@ public abstract class TransactionDao {
     }
 
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("SELECT id, request_date, error, request_content_length,priority,request_body FROM HttpTransaction WHERE (tag LIKE :endWildCard OR request_body LIKE :doubleWildCard OR error LIKE :doubleWildCard) AND priority >= :priority ORDER BY id DESC")
+    @Query("SELECT id,date,length,priority,body FROM HttpTransaction WHERE (tag LIKE :endWildCard OR body LIKE :doubleWildCard) AND priority >= :priority ORDER BY id DESC")
     abstract DataSource.Factory<Integer, HttpTransaction> getAllTransactionsIncludeRequestResponse(String endWildCard, String doubleWildCard, int priority);
 
 }

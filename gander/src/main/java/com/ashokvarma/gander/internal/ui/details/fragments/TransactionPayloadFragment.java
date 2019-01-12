@@ -157,17 +157,17 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
 
     private void populateBody() {
 
-        gander_tv_tag.setText(mTransaction.getMethod());
-        gander_tv_ts.setText(mTransaction.getRequestDate().toString());
+        gander_tv_tag.setText(mTransaction.getTag());
+        gander_tv_ts.setText(mTransaction.getDate().toString());
         TextUtil.asyncSetText(mExecutor, new TextUtil.AsyncTextProvider() {
             @Override
             public CharSequence getText() {
                 CharSequence body = null;
                 String searchKey = mSearchKey;
                 if (mType == TYPE_REQUEST) {
-                    body = mTransaction.getRequestBody();
+                    body = mTransaction.body();
                 } else if (mType == TYPE_RESPONSE) {
-                    body = mTransaction.getRequestBody();
+                    body = mTransaction.body();
                 }
                 if (TextUtil.isNullOrWhiteSpace(body) || TextUtil.isNullOrWhiteSpace(searchKey)) {
                     return body;

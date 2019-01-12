@@ -4,20 +4,18 @@ import android.arch.persistence.room.TypeConverter;
 
 import java.util.Date;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 03/06/18
- */
 public class RoomTypeConverters {
-    private static final String NAME_VALUE_SEPARATOR = "__:_:__";
-    private static final String LIST_SEPARATOR = "__,_,__";
 
     @TypeConverter
     public static Date fromLongToDate(Long value) {
+        format();
         return value == null ? null : new Date(value);
+    }
+
+    private static void format() {
+//        String pattern = "yyyy-MM-dd HH:mm:ss.SSS";
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.getDefault());
+//        String date = simpleDateFormat.format(new Date());
     }
 
     @TypeConverter

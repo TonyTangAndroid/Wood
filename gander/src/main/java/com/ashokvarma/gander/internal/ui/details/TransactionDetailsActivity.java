@@ -112,7 +112,7 @@ public class TransactionDetailsActivity extends BaseGanderActivity {
 
     private void populateUI() {
         if (mTransaction != null) {
-            mTitleView.setText(mTransaction.getMethod().concat(" ").concat(mTransaction.getRequestDate().toString()));
+            mTitleView.setText(mTransaction.getTag().concat(" ").concat(mTransaction.getDate().toString()));
             for (TransactionFragment fragment : mAdapter.fragments) {
                 fragment.transactionUpdated(mTransaction);
             }

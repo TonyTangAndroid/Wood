@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ashokvarma.gander.R;
@@ -85,10 +84,10 @@ public class TransactionAdapter extends PagedListAdapter<HttpTransaction, Recycl
         HttpTransaction transaction = getItem(position);
         if (transaction != null) {
             TransactionViewHolder holder = ((TransactionViewHolder) genericHolder);
-            holder.tv_tag.setText(getHighlightedText(transaction.getMethod()));
-            holder.tv_time.setText(transaction.getRequestDate().toString());
-            holder.tv_body.setText(getHighlightedText(String.valueOf(transaction.getRequestBody())));
-            holder.tv_size.setText(String.valueOf(transaction.getRequestContentLength()));
+            holder.tv_tag.setText(getHighlightedText(transaction.getTag()));
+            holder.tv_time.setText(transaction.getDate().toString());
+            holder.tv_body.setText(getHighlightedText(String.valueOf(transaction.body())));
+            holder.tv_size.setText(String.valueOf(transaction.length()));
             int color = mColorUtil.getTransactionColor(transaction, true);
             holder.tv_tag.setTextColor(color);
         }
