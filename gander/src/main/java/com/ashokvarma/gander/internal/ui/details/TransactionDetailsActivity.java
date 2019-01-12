@@ -25,7 +25,6 @@ import com.ashokvarma.gander.internal.support.FormatUtils;
 import com.ashokvarma.gander.internal.support.GanderColorUtil;
 import com.ashokvarma.gander.internal.ui.BaseGanderActivity;
 import com.ashokvarma.gander.internal.ui.details.fragments.TransactionFragment;
-import com.ashokvarma.gander.internal.ui.details.fragments.TransactionOverviewFragment;
 import com.ashokvarma.gander.internal.ui.details.fragments.TransactionPayloadFragment;
 
 import java.util.ArrayList;
@@ -123,9 +122,7 @@ public class TransactionDetailsActivity extends BaseGanderActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         mAdapter = new Adapter(getSupportFragmentManager());
-        mAdapter.addFragment(new TransactionOverviewFragment(), getString(R.string.gander_overview));
         mAdapter.addFragment(TransactionPayloadFragment.newInstance(TransactionPayloadFragment.TYPE_REQUEST), getString(R.string.gander_request));
-        mAdapter.addFragment(TransactionPayloadFragment.newInstance(TransactionPayloadFragment.TYPE_RESPONSE), getString(R.string.gander_response));
         viewPager.setAdapter(mAdapter);
         viewPager.addOnPageChangeListener(new SimpleOnPageChangedListener() {
             @Override

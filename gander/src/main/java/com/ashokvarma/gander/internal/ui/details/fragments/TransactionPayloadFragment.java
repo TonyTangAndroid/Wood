@@ -12,7 +12,6 @@ import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
 import android.view.LayoutInflater;
@@ -44,8 +43,9 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
 
     private static final String ARG_TYPE = "type";
     BackgroundColorSpan searchHighLightSpan = new BackgroundColorSpan(GanderColorUtil.SEARCHED_HIGHLIGHT_BACKGROUND_COLOR);
-    private TextView mHeadersView;
     private AppCompatTextView mBodyView;
+    private TextView gander_tv_ts;
+    private TextView gander_tv_tag;
     private NestedScrollView mScrollParentView;
     private FloatingActionButton mSearchFab;
     private View mSearchBar;
@@ -56,15 +56,13 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
     private HttpTransaction mTransaction;
     private String mSearchKey;
     private int mCurrentSearchIndex = 0;
-    private List<Integer> mHeaderSearchIndices = new ArrayList<>(0);
     private List<Integer> mBodySearchIndices = new ArrayList<>(0);
     private final Debouncer<String> mSearchDebouncer = new Debouncer<>(400, new Callback<String>() {
         @Override
         public void onEmit(String searchKey) {
             mSearchKey = searchKey;
-            mHeaderSearchIndices = highlightSearchKeyword(mHeadersView, mSearchKey);
             mBodySearchIndices = highlightSearchKeyword(mBodyView, mSearchKey);
-            updateSearchCount(1, searchKey);
+            updateSearchCount(1);
         }
     });
     private ExecutorService mExecutor = Executors.newSingleThreadExecutor();
@@ -93,7 +91,8 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.gander_frag_transaction_payload, container, false);
-        mHeadersView = view.findViewById(R.id.gander_details_headers);
+        gander_tv_ts = view.findViewById(R.id.gander_tv_ts);
+        gander_tv_tag = view.findViewById(R.id.gander_tv_tag);
         mBodyView = view.findViewById(R.id.gander_details_body);
         mScrollParentView = view.findViewById(R.id.gander_details_scroll_parent);
         mSearchFab = view.findViewById(R.id.gander_details_search_fab);
@@ -156,18 +155,10 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
         }
     }
 
-    private void populateHeaderText(CharSequence headersString) {
-        if (TextUtil.isNullOrWhiteSpace(headersString)) {
-            mHeadersView.setVisibility(View.GONE);
-        } else {
-            mHeadersView.setVisibility(View.VISIBLE);
-            mHeadersView.setText(headersString, TextView.BufferType.SPANNABLE);
-        }
-        mHeaderSearchIndices = highlightSearchKeyword(mHeadersView, mSearchKey);
-    }
-
     private void populateBody() {
-        //            mExecutor.shutdown();
+
+        gander_tv_tag.setText(mTransaction.getMethod());
+        gander_tv_ts.setText(mTransaction.getRequestDate().toString());
         TextUtil.asyncSetText(mExecutor, new TextUtil.AsyncTextProvider() {
             @Override
             public CharSequence getText() {
@@ -220,45 +211,21 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
         return new ArrayList<>(0);
     }
 
-    private void updateSearchCount(int moveToIndex, String searchKey) {
-        List<Integer> headerSearchIndices = mHeaderSearchIndices;
+    private void updateSearchCount(int moveToIndex) {
         List<Integer> bodySearchIndices = mBodySearchIndices;
-        int headerIndicesCount = headerSearchIndices.size();
         int bodyIndicesCount = bodySearchIndices.size();
-        int totalCount = headerIndicesCount + bodyIndicesCount;
-        if (totalCount == 0) {
+        if (bodyIndicesCount == 0) {
             moveToIndex = 0;
         } else {
-            if (moveToIndex > totalCount) {
+            if (moveToIndex > bodyIndicesCount) {
                 moveToIndex = 1;
             } else if (moveToIndex <= 0) {
-                moveToIndex = totalCount;
+                moveToIndex = bodyIndicesCount;
             }
-            // else moveToIndex will be unchanged
         }
 
-        mSearchCountView.setText(String.valueOf(moveToIndex).concat("/").concat(String.valueOf(totalCount)));
-        ((Spannable) mHeadersView.getText()).removeSpan(searchHighLightSpan);
+        mSearchCountView.setText(String.valueOf(moveToIndex).concat("/").concat(String.valueOf(bodyIndicesCount)));
         ((Spannable) mBodyView.getText()).removeSpan(searchHighLightSpan);
-
-        if (moveToIndex > 0) {
-            int scrollToY;
-            if (moveToIndex <= headerIndicesCount) {
-                int headerSearchIndex = headerSearchIndices.get(moveToIndex - 1);
-                int lineNumber = mHeadersView.getLayout().getLineForOffset(headerSearchIndex);
-                scrollToY = mHeadersView.getLayout().getLineTop(lineNumber);
-                ((Spannable) mHeadersView.getText()).setSpan(searchHighLightSpan,
-                        headerSearchIndex, headerSearchIndex + searchKey.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            } else {
-                int bodySearchIndex = bodySearchIndices.get(moveToIndex - headerIndicesCount - 1);
-                int lineNumber = mBodyView.getLayout().getLineForOffset(bodySearchIndex);
-                scrollToY = mHeadersView.getMeasuredHeight() + mBodyView.getLayout().getLineTop(lineNumber);
-                ((Spannable) mBodyView.getText()).setSpan(searchHighLightSpan,
-                        bodySearchIndex, bodySearchIndex + searchKey.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-//            mScrollParentView.scrollTo(0, scrollToY + mLinearParentView.getPaddingTop());//move to exact spot
-            mScrollParentView.scrollTo(0, scrollToY);
-        }
         mCurrentSearchIndex = moveToIndex;
     }
 
@@ -307,9 +274,9 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
                 mSearchView.setText("");
             }
         } else if (id == R.id.gander_details_search_prev) {
-            updateSearchCount(mCurrentSearchIndex - 1, mSearchKey);
+            updateSearchCount(mCurrentSearchIndex - 1);
         } else if (id == R.id.gander_details_search_next) {
-            updateSearchCount(mCurrentSearchIndex + 1, mSearchKey);
+            updateSearchCount(mCurrentSearchIndex + 1);
         }
     }
 }
