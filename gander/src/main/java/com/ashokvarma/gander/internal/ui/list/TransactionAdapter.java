@@ -85,19 +85,13 @@ public class TransactionAdapter extends PagedListAdapter<HttpTransaction, Recycl
         HttpTransaction transaction = getItem(position);
         if (transaction != null) {
             TransactionViewHolder holder = ((TransactionViewHolder) genericHolder);
-            holder.host.setText(getHighlightedText(transaction.getMethod()));
-            holder.start.setText(transaction.getRequestDate().toString());
-            holder.ssl.setVisibility(View.GONE);
-            holder.code.setText(getHighlightedText(String.valueOf(transaction.getPriority())));
-            holder.duration.setText(getHighlightedText(String.valueOf(transaction.getRequestBody())));
-            holder.host.setText(getHighlightedText(String.valueOf(transaction.getError())));
-            holder.size.setText(String.valueOf(transaction.getRequestContentLength()));
+            holder.tv_tag.setText(getHighlightedText(transaction.getMethod()));
+            holder.tv_time.setText(transaction.getRequestDate().toString());
+            holder.tv_body.setText(getHighlightedText(String.valueOf(transaction.getRequestBody())));
+            holder.tv_size.setText(String.valueOf(transaction.getRequestContentLength()));
             int color = mColorUtil.getTransactionColor(transaction, true);
-            holder.path.setTextColor(color);
-            holder.code.setTextColor(color);
+            holder.tv_tag.setTextColor(color);
         }
-        // null no changes
-
     }
 
     private CharSequence getHighlightedText(String text) {
@@ -117,28 +111,18 @@ public class TransactionAdapter extends PagedListAdapter<HttpTransaction, Recycl
     }
 
     class TransactionViewHolder extends RecyclerView.ViewHolder {
-        final View view;
-        final TextView code;
-        final TextView path;
-        final TextView host;
-        final TextView start;
-        final TextView duration;
-        final TextView size;
-        final ImageView ssl;
+        final TextView tv_time;
+        final TextView tv_tag;
+        final TextView tv_size;
+        final TextView tv_body;
 
         TransactionViewHolder(View itemView) {
             super(itemView);
-
-            this.view = itemView;
-            code = view.findViewById(R.id.gander_list_code);
-            path = view.findViewById(R.id.gander_list_path);
-            host = view.findViewById(R.id.gander_list_host);
-            start = view.findViewById(R.id.gander_list_start);
-            duration = view.findViewById(R.id.gander_list_duration);
-            size = view.findViewById(R.id.gander_list_size);
-            ssl = view.findViewById(R.id.gander_list_ssl);
-
-            view.setOnClickListener(new View.OnClickListener() {
+            tv_time = itemView.findViewById(R.id.tv_time);
+            tv_size = itemView.findViewById(R.id.tv_size);
+            tv_tag = itemView.findViewById(R.id.tv_tag);
+            tv_body = itemView.findViewById(R.id.tv_body);
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mListener != null) {

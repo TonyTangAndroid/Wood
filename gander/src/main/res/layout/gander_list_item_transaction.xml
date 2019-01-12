@@ -1,83 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="12dp">
-
-    <TextView
-        android:id="@+id/gander_list_code"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:padding="2dp"
-        android:textAppearance="@style/Gander.TextAppearance.ListItem"
-        tools:text="200"/>
-
-    <TextView
-        android:id="@+id/gander_list_path"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/gander_list_code"
-        android:layout_toRightOf="@id/gander_list_code"
-        android:padding="2dp"
-        android:textAppearance="@style/Gander.TextAppearance.ListItem"
-        tools:text="GET /path/to/some/resource?goes=here"/>
-
-    <TextView
-        android:id="@+id/gander_list_host"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/gander_list_path"
-        android:layout_toEndOf="@id/gander_list_code"
-        android:layout_toRightOf="@id/gander_list_code"
-        android:padding="2dp"
-        tools:text="example.com"/>
-
-    <ImageView
-        android:id="@+id/gander_list_ssl"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_below="@id/gander_list_path"
-        android:layout_marginTop="4dp"
-        android:layout_toEndOf="@id/gander_list_host"
-        android:layout_toRightOf="@id/gander_list_host"
-        android:contentDescription="@string/gander_ssl"
-        android:src="@drawable/gander_ic_https_grey_24dp"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <LinearLayout
-        android:id="@+id/gander_list_meta"
+        android:id="@+id/ll_meta_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/gander_list_host"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/gander_list_start"
-            android:layout_width="72dp"
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="2dp"
-            tools:text="18:29:07"/>
+            tools:text="2019-01-12" />
 
         <TextView
-            android:id="@+id/gander_list_duration"
-            android:layout_width="80dp"
+            android:id="@+id/tv_tag"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="end"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
             android:padding="2dp"
-            tools:text="8023 ms"/>
+            tools:text="WifiCondControl" />
+
 
         <TextView
-            android:id="@+id/gander_list_size"
-            android:layout_width="80dp"
+            android:id="@+id/tv_size"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end"
             android:padding="2dp"
-            tools:text="16.45 KB"/>
+            tools:text="166" />
 
     </LinearLayout>
 
-</RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_body"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="10"
+        tools:text="BlockingExecutor com.google.android.finsky.bn.ao@ef0d347[Running, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 37]" />
+
+</LinearLayout>
