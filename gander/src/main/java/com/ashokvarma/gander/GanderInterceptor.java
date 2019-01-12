@@ -11,37 +11,25 @@ import com.ashokvarma.gander.internal.support.RetentionManager;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Collections;
 import java.util.Date;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.Executor;
 
 import timber.log.Timber;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 02/06/18
- */
 public class GanderInterceptor extends Timber.DebugTree {
 
     @NonNull
     private static final Period DEFAULT_RETENTION = Period.ONE_WEEK;
     @NonNull
-    private final Context mContext;
+    private final Context context;
     @NonNull
-    private final GanderDatabase mGanderDatabase;
+    private final GanderDatabase ganderDatabase;
     private final Executor executor;
     @Nullable
-    private NotificationHelper mNotificationHelper;
+    private NotificationHelper notificationHelper;
     @NonNull
-    private RetentionManager mRetentionManager;
-    private int mMaxContentLength = 250000;
-    @NonNull
-    private volatile Set<String> headersToRedact = Collections.emptySet();
+    private RetentionManager retentionManager;
+    private int maxContentLength = 250000;
     private boolean stickyNotification = false;
 
     /**
@@ -49,9 +37,9 @@ public class GanderInterceptor extends Timber.DebugTree {
      */
     public GanderInterceptor(@NonNull Context context) {
         executor = new JobExecutor();
-        this.mContext = context.getApplicationContext();
-        mGanderDatabase = GanderDatabase.getInstance(context);
-        mRetentionManager = new RetentionManager(this.mContext, DEFAULT_RETENTION);
+        this.context = context.getApplicationContext();
+        ganderDatabase = GanderDatabase.getInstance(context);
+        retentionManager = new RetentionManager(this.context, DEFAULT_RETENTION);
     }
 
     /**
@@ -63,7 +51,7 @@ public class GanderInterceptor extends Timber.DebugTree {
     @NonNull
     public GanderInterceptor showNotification(boolean sticky) {
         this.stickyNotification = sticky;
-        mNotificationHelper = new NotificationHelper(this.mContext);
+        notificationHelper = new NotificationHelper(this.context);
         return this;
     }
 
@@ -76,7 +64,7 @@ public class GanderInterceptor extends Timber.DebugTree {
      */
     @NonNull
     public GanderInterceptor retainDataFor(Period period) {
-        mRetentionManager = new RetentionManager(mContext, period);
+        retentionManager = new RetentionManager(context, period);
         return this;
     }
 
@@ -89,22 +77,7 @@ public class GanderInterceptor extends Timber.DebugTree {
      */
     @NonNull
     public GanderInterceptor maxContentLength(int max) {
-        this.mMaxContentLength = Math.min(max, 999999);// close to => 1 MB Max in a BLOB SQLite.
-        return this;
-    }
-
-    /**
-     * Set headers names that shouldn't be stored by gander
-     *
-     * @param name the name of header to redact
-     * @return The {@link GanderInterceptor} instance.
-     */
-    @NonNull
-    public GanderInterceptor redactHeader(String name) {
-        Set<String> newHeadersToRedact = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        newHeadersToRedact.addAll(headersToRedact);
-        newHeadersToRedact.add(name);
-        headersToRedact = newHeadersToRedact;
+        this.maxContentLength = Math.min(max, 999999);// close to => 1 MB Max in a BLOB SQLite.
         return this;
     }
 
@@ -127,18 +100,18 @@ public class GanderInterceptor extends Timber.DebugTree {
         if (t != null) {
             message = message + "\n" + t.getMessage() + "\n" + ErrorUtil.asString(t);
         }
-        transaction.setBody(message.substring(0, Math.min(message.length(), mMaxContentLength)) + "");
+        transaction.setBody(message.substring(0, Math.min(message.length(), maxContentLength)) + "");
         create(transaction);
     }
 
 
     private void create(@NonNull HttpTransaction transaction) {
-        long transactionId = mGanderDatabase.httpTransactionDao().insertTransaction(transaction);
+        long transactionId = ganderDatabase.httpTransactionDao().insertTransaction(transaction);
         transaction.setId(transactionId);
-        if (mNotificationHelper != null) {
-            mNotificationHelper.show(transaction, stickyNotification);
+        if (notificationHelper != null) {
+            notificationHelper.show(transaction, stickyNotification);
         }
-        mRetentionManager.doMaintenance();
+        retentionManager.doMaintenance();
     }
 
 
@@ -165,15 +138,11 @@ public class GanderInterceptor extends Timber.DebugTree {
      * From https://stackoverflow.com/a/1149712/4068957
      */
     static class ErrorUtil {
-
         public static String asString(Throwable throwable) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             throwable.printStackTrace(pw);
             return sw.toString(); // stack trace as a string
-
         }
-
-
     }
 }
