@@ -6,6 +6,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.widget.TextView;
 
 import com.ashokvarma.gander.R;
 import com.ashokvarma.gander.internal.data.HttpTransaction;
@@ -68,5 +69,28 @@ public class FormatUtils {
 
     private static CharSequence v(CharSequence charSequence) {
         return (charSequence != null) ? charSequence : "";
+    }
+
+    public static List<Integer> highlightSearchKeyword(TextView textView, String searchKey) {
+
+        CharSequence body = textView.getText();
+        if (body instanceof Spannable) {
+            Spannable spannableBody = (Spannable) body;
+            // remove old HighlightSpans
+            HighlightSpan spansToRemove[] = spannableBody.getSpans(0, spannableBody.length() - 1, HighlightSpan.class);
+            for (Object span : spansToRemove) {
+                spannableBody.removeSpan(span);
+            }
+            // add spans only if searchKey size is > 0
+            if (searchKey != null && searchKey.length() > 0) {
+                // get indices of new search
+                List<Integer> startIndexes = indexOf(body.toString(), searchKey);
+                // add spans
+                applyHighlightSpan(spannableBody, startIndexes, searchKey.length());
+                return startIndexes;
+            }
+        }
+
+        return new ArrayList<>(0);
     }
 }

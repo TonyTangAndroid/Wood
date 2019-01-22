@@ -8,13 +8,6 @@ import com.ashokvarma.gander.internal.data.GanderDatabase;
 import com.ashokvarma.gander.internal.data.HttpTransaction;
 import com.ashokvarma.gander.internal.data.TransactionDao;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 03/06/18
- */
 public class TransactionDetailViewModel extends AndroidViewModel {
     private final TransactionDao mTransactionDao;
 
@@ -23,7 +16,7 @@ public class TransactionDetailViewModel extends AndroidViewModel {
         mTransactionDao = GanderDatabase.getInstance(application).httpTransactionDao();
     }
 
-    LiveData<HttpTransaction> getTransactionWithId(long id) {
+    public LiveData<HttpTransaction> getTransactionWithId(long id) {
         return mTransactionDao.getTransactionsWithId(id);
     }
 }

@@ -11,6 +11,11 @@ android {
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    
     defaultConfig {
         applicationId "com.ashokvarma.gander.sample.board"
         minSdkVersion rootProject.ext.minSdkVersion
