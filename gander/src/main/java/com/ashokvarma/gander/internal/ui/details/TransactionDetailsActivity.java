@@ -65,7 +65,7 @@ public class TransactionDetailsActivity extends BaseGanderActivity {
         mColorUtil = GanderColorUtil.getInstance(this);
 
         mAppBarLayout = findViewById(R.id.gander_details_appbar);
-        mAppBarLayout.setBackgroundColor(mColorUtil.getTransactionColor(statusOrdinal, false));
+        mAppBarLayout.setBackgroundColor(mColorUtil.getTransactionColor(statusOrdinal));
         Toolbar toolbar = findViewById(R.id.gander_details_toolbar);
         setSupportActionBar(toolbar);
         mTitleView = findViewById(R.id.gander_details_toolbar_title);

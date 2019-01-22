@@ -88,7 +88,7 @@ public class TransactionAdapter extends PagedListAdapter<HttpTransaction, Recycl
             holder.tv_time.setText(transaction.getDate().toString());
             holder.tv_body.setText(getHighlightedText(String.valueOf(transaction.body())));
             holder.tv_size.setText(String.valueOf(transaction.length()));
-            int color = mColorUtil.getTransactionColor(transaction, true);
+            int color = mColorUtil.getTransactionColor(transaction);
             holder.tv_tag.setTextColor(color);
         }
     }
