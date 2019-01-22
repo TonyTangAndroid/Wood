@@ -12,6 +12,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
 import android.view.LayoutInflater;
@@ -62,7 +63,7 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
         public void onEmit(String searchKey) {
             mSearchKey = searchKey;
             mBodySearchIndices = highlightSearchKeyword(mBodyView, mSearchKey);
-            updateSearchCount(1);
+            updateSearchCount(1, searchKey);
         }
     });
     private ExecutorService mExecutor = Executors.newSingleThreadExecutor();
@@ -211,7 +212,7 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
         return new ArrayList<>(0);
     }
 
-    private void updateSearchCount(int moveToIndex) {
+    private void updateSearchCount(int moveToIndex, String searchKey) {
         List<Integer> bodySearchIndices = mBodySearchIndices;
         int bodyIndicesCount = bodySearchIndices.size();
         if (bodyIndicesCount == 0) {
@@ -226,6 +227,15 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
 
         mSearchCountView.setText(String.valueOf(moveToIndex).concat("/").concat(String.valueOf(bodyIndicesCount)));
         ((Spannable) mBodyView.getText()).removeSpan(searchHighLightSpan);
+
+        if (moveToIndex > 0) {
+            int bodySearchIndex = bodySearchIndices.get(moveToIndex - 1);
+            int lineNumber = mBodyView.getLayout().getLineForOffset(bodySearchIndex);
+            int scrollToY = mBodyView.getLayout().getLineTop(lineNumber);
+            ((Spannable) mBodyView.getText()).setSpan(searchHighLightSpan,
+                    bodySearchIndex, bodySearchIndex + searchKey.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mScrollParentView.scrollTo(0, scrollToY);
+        }
         mCurrentSearchIndex = moveToIndex;
     }
 
@@ -274,9 +284,9 @@ public class TransactionPayloadFragment extends Fragment implements TransactionF
                 mSearchView.setText("");
             }
         } else if (id == R.id.gander_details_search_prev) {
-            updateSearchCount(mCurrentSearchIndex - 1);
+            updateSearchCount(mCurrentSearchIndex - 1, mSearchKey);
         } else if (id == R.id.gander_details_search_next) {
-            updateSearchCount(mCurrentSearchIndex + 1);
+            updateSearchCount(mCurrentSearchIndex + 1, mSearchKey);
         }
     }
 }

@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
         try {
             String shortSrc = "a";
             String substring = shortSrc.substring(10);
-            Timber.v(substring);
+            Timber.v(substring + substring + substring);
         } catch (Exception e) {
             Timber.e(e);
         }
