@@ -4,7 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingStart="16dp"
+    android:paddingLeft="16dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="8dp">
 
     <LinearLayout
         android:id="@+id/ll_meta_data"
@@ -26,17 +31,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:padding="2dp"
             tools:text="WifiCondControl" />
-
 
         <TextView
             android:id="@+id/tv_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="2dp"
             tools:text="166" />
-
     </LinearLayout>
 
 
