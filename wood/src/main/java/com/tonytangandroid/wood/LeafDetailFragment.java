@@ -36,13 +36,10 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import hugo.weaving.DebugLog;
-
 import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 import static com.tonytangandroid.wood.WoodColorUtil.SEARCHED_HIGHLIGHT_BACKGROUND_COLOR;
 
-@DebugLog
 public class LeafDetailFragment extends Fragment implements View.OnClickListener, TextUtil.AsyncTextProvider, TextWatcher {
 
     private static final String ARG_ID = "arg_id";

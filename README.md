@@ -34,12 +34,12 @@ Based on your IDE you can import library in one of the following ways
 
 2, Add the dependency in your `build.gradle` file. Add it alongside the `no-op` variant to isolate Wood from release builds as follows:
 ```gradle
-debugImplementation 'com.github.TonyTangAndroid.Wood:wood:0.1.7'
-releaseImplementation 'com.github.TonyTangAndroid.Wood:wood-no-op:0.1.7'
+debugImplementation 'com.github.TonyTangAndroid.Wood:wood:0.3.1'
+releaseImplementation 'com.github.TonyTangAndroid.Wood:wood-no-op:0.3.1'
 ```
 If you want this in library in both release and compile, then try this : 
 ```gradle
-implementation 'com.github.TonyTangAndroid.Wood:wood:0.1.7'
+implementation 'com.github.TonyTangAndroid.Wood:wood:0.3.1'
 ```
 
 ### Usage
