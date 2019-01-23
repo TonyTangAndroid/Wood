@@ -17,7 +17,7 @@ android {
     }
     
     defaultConfig {
-        applicationId "com.tonytangandroid.gander.sample.board"
+        applicationId "com.tonytangandroid.wood.sample.board"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
@@ -34,9 +34,9 @@ android {
 }
 
 dependencies {
-    implementation project(':gander')
-//    debugImplementation project(':gander')
-//    releaseImplementation project(':gander-no-op')
+    implementation project(':wood')
+//    debugImplementation project(':wood')
+//    releaseImplementation project(':wood-no-op')
 
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
 //    testImplementation 'junit:junit:4.12'

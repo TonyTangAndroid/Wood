@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="wood_colorPrimary">#607D8B</color>
+    <color name="wood_colorPrimaryDark">#455A64</color>
+    <color name="wood_colorAccent">#616161</color>
+
+    <color name="wood_loader">#CECECE</color>
+
+    <color name="wood_status_default">@android:color/black</color>
+    <color name="wood_log_verbose">@android:color/darker_gray</color>
+    <color name="wood_log_debug">@android:color/holo_blue_light</color>
+    <color name="wood_log_info">@android:color/holo_green_light</color>
+    <color name="wood_log_warning">@android:color/holo_orange_light</color>
+    <color name="wood_log_error">@android:color/holo_red_light</color>
+    <color name="wood_log_assert">@android:color/holo_red_dark</color>
+</resources>

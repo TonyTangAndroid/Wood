@@ -15,8 +15,8 @@
         android:text="@string/do_http_activity"/>
 
     <Button
-        android:id="@+id/launch_gander_directly"
+        android:id="@+id/launch_wood_directly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/launch_gander_directly"/>
+        android:text="@string/launch_wood_directly"/>
 </LinearLayout>

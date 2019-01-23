@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="wood_status_bar_padding">0dp</dimen>
+    <dimen name="wood_search_bar_height">48dp</dimen>
+    <!--<dimen name="wood_navigation_bar_padding">0dp</dimen>-->
+</resources>

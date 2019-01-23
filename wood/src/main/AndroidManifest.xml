@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tonytangandroid.wood">
+
+    <application>
+        <service
+            android:name=".internal.support.ClearTransactionsService"
+            android:exported="false" />
+        <service
+            android:name=".internal.support.DismissNotificationService"
+            android:exported="false" />
+
+        <activity
+            android:name=".internal.ui.list.TransactionListActivity"
+            android:label="@string/wood_name"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.tonytangandroid.wood.task"
+            android:theme="@style/Wood.Theme" />
+
+        <activity
+            android:name=".internal.ui.details.TransactionDetailsActivity"
+            android:parentActivityName=".internal.ui.list.TransactionListActivity"
+            android:theme="@style/Wood.Theme" />
+    </application>
+
+</manifest>

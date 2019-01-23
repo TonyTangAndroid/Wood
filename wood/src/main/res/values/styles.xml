@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Wood.BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/wood_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/wood_colorPrimaryDark</item>
+        <item name="colorAccent">@color/wood_colorAccent</item>
+    </style>
+
+    <style name="Wood.Theme" parent="Wood.BaseTheme"/>
+
+    <style name="Wood.TextAppearance.ListItem" parent="android:TextAppearance">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Wood.TextAppearance.Label" parent="android:TextAppearance.Small">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Wood.TextAppearance.Value" parent="android:TextAppearance.Small">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textIsSelectable">true</item>
+    </style>
+
+    <style name="Wood.TextAppearance.TransactionTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:gravity">top</item>
+        <item name="android:textSize" tools:ignore="SpUsage">16dp</item>
+        <item name="android:maxLines">2</item>
+    </style>
+</resources>

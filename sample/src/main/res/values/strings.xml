@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gander</string>
+    <string name="app_name">Wood</string>
     <string name="do_http_activity">Do HTTP activity</string>
-    <string name="launch_gander_directly">Launch Gander directly</string>
+    <string name="launch_wood_directly">Launch Wood directly</string>
 </resources>

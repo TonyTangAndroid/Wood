@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Wood</string>
+
+    <string name="wood_name">Wood</string>
+    <string name="wood_loading">Loading …</string>
+    <string name="wood_notification_title">Recording HTTP activity</string>
+    <string name="wood_clear">"Clear "</string>
+    <string name="wood_dismiss">dismiss</string>
+    <string name="wood_browse_sql_database">Browse SQLite database</string>
+    <string name="wood_overview">Overview</string>
+    <string name="wood_request">Request</string>
+    <string name="wood_response">Response</string>
+    <string name="wood_url">URL</string>
+    <string name="wood_method">Method</string>
+    <string name="wood_protocol">Protocol</string>
+    <string name="wood_status">Status</string>
+    <string name="wood_ssl">SSL</string>
+    <string name="wood_request_time">Request time</string>
+    <string name="wood_response_time">Response time</string>
+    <string name="wood_duration">Duration</string>
+    <string name="wood_request_size">Request size</string>
+    <string name="wood_response_size">Response size</string>
+    <string name="wood_total_size">Total size</string>
+    <string name="wood_yes">Yes</string>
+    <string name="wood_no">No</string>
+    <string name="wood_share">Share</string>
+    <string name="wood_share_as_text">Share as text</string>
+    <string name="wood_share_as_curl">Share as curl command</string>
+    <string name="wood_body_omitted">(encoded or binary body omitted)</string>
+    <string name="wood_search">Search</string>
+    <string name="wood_body_unexpected_eof">\n\n--- Unexpected end of content ---</string>
+    <string name="wood_body_content_truncated">\n\n--- Content truncated ---</string>
+    <string name="wood_notification_category">Wood HTTP notifications</string>
+    <string name="wood_search_request_hint"><font size="12">Search Request and Headers</font></string>
+    <string name="wood_search_response_hint"><font size="12">Search Response and Headers</font></string>
+    <string name="copy">Copy</string>
+</resources>
