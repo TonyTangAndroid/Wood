@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ashokvarma.gander">
+    package="com.tonytangandroid.gander">
 
     <application>
         <service
@@ -14,7 +14,7 @@
             android:name=".internal.ui.list.TransactionListActivity"
             android:label="@string/gander_name"
             android:launchMode="singleTask"
-            android:taskAffinity="com.ashokvarma.gander.task"
+            android:taskAffinity="com.tonytangandroid.gander.task"
             android:theme="@style/Gander.Theme" />
 
         <activity

@@ -1,8 +1,8 @@
-package com.ashokvarma.gander.sample;
+package com.tonytangandroid.gander.sample;
 
 import android.app.Application;
 
-import com.ashokvarma.gander.GanderInterceptor;
+import com.tonytangandroid.gander.GanderInterceptor;
 
 import timber.log.Timber;
 

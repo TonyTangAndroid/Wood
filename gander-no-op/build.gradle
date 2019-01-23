@@ -4,7 +4,7 @@ ext {
     bintrayRepo = 'maven'
     bintrayName = 'GanderNoOp'
 
-    publishedGroupId = 'com.ashokvarma.android'
+    publishedGroupId = 'com.tonytangandroid.android'
     libraryName = 'GanderNoOp'
     artifact = 'gander-no-op'
 

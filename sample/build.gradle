@@ -17,7 +17,7 @@ android {
     }
     
     defaultConfig {
-        applicationId "com.ashokvarma.gander.sample.board"
+        applicationId "com.tonytangandroid.gander.sample.board"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode

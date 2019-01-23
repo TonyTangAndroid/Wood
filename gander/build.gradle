@@ -5,7 +5,7 @@ ext {
     bintrayRepo = 'maven'
     bintrayName = 'Gander'
 
-    publishedGroupId = 'com.ashokvarma.android'
+    publishedGroupId = 'com.tonytangandroid.android'
     libraryName = 'Gander'
     artifact = 'gander'
 

@@ -1,4 +1,4 @@
-package com.ashokvarma.gander.sample;
+package com.tonytangandroid.gander.sample;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,7 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.ashokvarma.gander.Gander;
+import com.tonytangandroid.gander.Gander;
 
 import timber.log.Timber;
 
