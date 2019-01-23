@@ -12,7 +12,6 @@
 
         <activity
             android:name=".internal.ui.list.TransactionListActivity"
-            android:label="@string/wood_name"
             android:launchMode="singleTask"
             android:taskAffinity="com.tonytangandroid.wood.task"
             android:theme="@style/Wood.Theme" />

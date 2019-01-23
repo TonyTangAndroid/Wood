@@ -40,7 +40,7 @@ class TransactionViewHolder extends RecyclerView.ViewHolder {
 
 
     void bind(HttpTransaction transaction) {
-        tv_tag.setText(getHighlightedText(transaction.getTag()));
+        tv_tag.setText(transaction.getTag());
         tv_time.setText(transaction.getDate().toString());
         tv_body.setText(getHighlightedText(String.valueOf(transaction.body())));
         tv_size.setText(String.valueOf(transaction.length()));
