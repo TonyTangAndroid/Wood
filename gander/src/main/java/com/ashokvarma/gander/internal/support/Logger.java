@@ -1,14 +1,9 @@
 package com.ashokvarma.gander.internal.support;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 03/06/18
- */
+@SuppressLint("LogNotTimber")
 public class Logger {
     private static final String LOG_TAG = "GanderInterceptor";
 

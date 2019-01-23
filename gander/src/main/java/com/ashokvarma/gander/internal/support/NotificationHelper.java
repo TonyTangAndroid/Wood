@@ -19,17 +19,9 @@ import com.ashokvarma.gander.internal.data.HttpTransaction;
 
 import static android.text.Spanned.SPAN_INCLUSIVE_EXCLUSIVE;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 03/06/18
- */
 public class NotificationHelper {
 
-    private static final String CHANNEL_ID = "gander_notif";
-    private static final int NOTIFICATION_ID = 1139;
+    private static final String CHANNEL_ID = "gander_notification_log_channel";
     private static final int BUFFER_SIZE = 10;
 
     private static final LongSparseArray<HttpTransaction> TRANSACTION_BUFFER = new LongSparseArray<>();
@@ -98,7 +90,7 @@ public class NotificationHelper {
         }
         builder.addAction(getDismissAction());
         builder.addAction(getClearAction());
-        mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+        mNotificationManager.notify(CHANNEL_ID.hashCode(), builder.build());
     }
 
     private CharSequence getNotificationText(HttpTransaction transaction) {
@@ -127,6 +119,6 @@ public class NotificationHelper {
     }
 
     public void dismiss() {
-        mNotificationManager.cancel(NOTIFICATION_ID);
+        mNotificationManager.cancel(CHANNEL_ID.hashCode());
     }
 }
