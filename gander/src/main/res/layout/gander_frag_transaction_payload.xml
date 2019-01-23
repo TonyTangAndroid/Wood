@@ -14,33 +14,12 @@
         android:paddingBottom="48dp"
         android:scrollbars="vertical">
 
-        <LinearLayout
-            android:id="@+id/gander_details_linear_parent"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/gander_details_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-
-            <TextView
-                android:id="@+id/gander_tv_ts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textIsSelectable="true" />
-
-            <TextView
-                android:id="@+id/gander_tv_tag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textIsSelectable="true" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/gander_details_body"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textIsSelectable="true" />
-
-        </LinearLayout>
+            android:padding="16dp"
+            android:textIsSelectable="true" />
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
@@ -72,11 +51,13 @@
             android:layout_weight="1"
             android:background="@null"
             android:imeOptions="actionSearch"
+            android:importantForAutofill="no"
+            android:inputType="text"
             android:textColor="#FFFFFF"
             android:textColorHint="#33FFFFFF"
             android:textCursorDrawable="@drawable/search_cursor"
-            android:textSize="16sp" />
-        <!--android:textCursorDrawable="@null" />-->
+            android:textSize="16sp"
+            tools:ignore="LabelFor,UnusedAttribute" />
 
         <TextView
             android:id="@+id/gander_details_search_count"
@@ -95,7 +76,8 @@
             android:layout_gravity="center_vertical"
             android:background="?selectableItemBackgroundBorderless"
             android:padding="5dp"
-            android:src="@drawable/gander_ic_close_white_24dp" />
+            android:src="@drawable/gander_ic_close_white_24dp"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/gander_details_search_prev"
@@ -104,7 +86,8 @@
             android:layout_gravity="center_vertical"
             android:background="?selectableItemBackgroundBorderless"
             android:padding="5dp"
-            android:src="@drawable/gander_ic_arrow_up_white_24dp" />
+            android:src="@drawable/gander_ic_arrow_up_white_24dp"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/gander_details_search_next"
@@ -113,7 +96,8 @@
             android:layout_gravity="center_vertical"
             android:background="?selectableItemBackgroundBorderless"
             android:padding="5dp"
-            android:src="@drawable/gander_ic_arrow_down_white_24dp" />
+            android:src="@drawable/gander_ic_arrow_down_white_24dp"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 

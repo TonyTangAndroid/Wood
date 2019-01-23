@@ -12,6 +12,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.Spannable;
@@ -63,8 +65,6 @@ public class TransactionPayloadFragment extends Fragment implements View.OnClick
     private final BackgroundColorSpan colorSpan = new BackgroundColorSpan(SEARCHED_HIGHLIGHT_BACKGROUND_COLOR);
 
 
-    private TextView tv_ts;
-    private TextView tv_tag;
     private View search_bar;
     private EditText et_key_word;
     private TextView tv_search_count;
@@ -100,8 +100,6 @@ public class TransactionPayloadFragment extends Fragment implements View.OnClick
     }
 
     private void bindView(View rootView) {
-        tv_ts = rootView.findViewById(R.id.gander_tv_ts);
-        tv_tag = rootView.findViewById(R.id.gander_tv_tag);
         tv_body = rootView.findViewById(R.id.gander_details_body);
         nested_scroll_view = rootView.findViewById(R.id.gander_details_scroll_parent);
         floating_action_button = rootView.findViewById(R.id.gander_details_search_fab);
@@ -174,9 +172,10 @@ public class TransactionPayloadFragment extends Fragment implements View.OnClick
     }
 
     private void populateBody() {
-        requireActivity().setTitle(httpTransaction.getTag());
-        tv_tag.setText(httpTransaction.getTag());
-        tv_ts.setText(httpTransaction.getDate().toString());
+        ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setTitle(httpTransaction.getTag());
+        actionBar.setSubtitle(httpTransaction.getDate().toString());
         TextUtil.asyncSetText(executor, this);
     }
 
