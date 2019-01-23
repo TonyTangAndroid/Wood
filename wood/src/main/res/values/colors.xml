@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="wood_colorPrimary">#607D8B</color>
-    <color name="wood_colorPrimaryDark">#455A64</color>
-    <color name="wood_colorAccent">#616161</color>
 
-    <color name="wood_loader">#CECECE</color>
+    <color name="wood_colorPrimary">#8bc34a</color>
+    <color name="wood_colorPrimaryDark">#5a9216</color>
+    <color name="wood_colorAccent">#bef67a</color>
 
     <color name="wood_status_default">@android:color/black</color>
     <color name="wood_log_verbose">@android:color/darker_gray</color>
