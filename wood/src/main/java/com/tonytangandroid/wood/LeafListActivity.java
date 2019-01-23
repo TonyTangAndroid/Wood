@@ -1,4 +1,4 @@
-package com.tonytangandroid.wood.internal.ui.list;
+package com.tonytangandroid.wood;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
@@ -15,21 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.tonytangandroid.wood.R;
-import com.tonytangandroid.wood.internal.data.HttpTransaction;
-import com.tonytangandroid.wood.internal.support.NotificationHelper;
-import com.tonytangandroid.wood.internal.support.event.Callback;
-import com.tonytangandroid.wood.internal.support.event.Debouncer;
-import com.tonytangandroid.wood.internal.support.event.Sampler;
-import com.tonytangandroid.wood.internal.ui.details.TransactionDetailsActivity;
+public class LeafListActivity extends AppCompatActivity implements LeafAdapter.Listener, SearchView.OnQueryTextListener {
 
-public class TransactionListActivity extends AppCompatActivity implements TransactionAdapter.Listener, SearchView.OnQueryTextListener {
-
-    private TransactionAdapter adapter;
+    private LeafAdapter adapter;
     private ListDiffUtil listDiffUtil;
     private RecyclerView recyclerView;
-    private TransactionListViewModel viewModel;
-    private LiveData<PagedList<HttpTransaction>> currentSubscription;
+    private LeafListViewModel viewModel;
+    private LiveData<PagedList<Leaf>> currentSubscription;
 
     // 100 mills delay. batch all changes in 100 mills and emit last item at the end of 100 mills
     private Sampler<TransactionListWithSearchKeyModel> transactionSampler = new Sampler<>(100, new Callback<TransactionListWithSearchKeyModel>() {
@@ -58,16 +50,16 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
 
         recyclerView = findViewById(R.id.wood_transaction_list);
         listDiffUtil = new ListDiffUtil();
-        adapter = new TransactionAdapter(this, listDiffUtil, this);
+        adapter = new LeafAdapter(this, listDiffUtil, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-        viewModel = ViewModelProviders.of(this).get(TransactionListViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(LeafListViewModel.class);
         loadResults(null, viewModel.getTransactions(null));
     }
 
-    private void loadResults(final String searchKey, LiveData<PagedList<HttpTransaction>> pagedListLiveData) {
+    private void loadResults(final String searchKey, LiveData<PagedList<Leaf>> pagedListLiveData) {
         if (currentSubscription != null && currentSubscription.hasObservers()) {
             currentSubscription.removeObservers(this);
         }
@@ -75,13 +67,13 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
         currentSubscription.observe(this, list -> consume(list, searchKey));
     }
 
-    private void consume(@Nullable PagedList<HttpTransaction> transactionPagedList, String searchKey) {
+    private void consume(@Nullable PagedList<Leaf> transactionPagedList, String searchKey) {
         transactionSampler.consume(new TransactionListWithSearchKeyModel(searchKey, transactionPagedList));
     }
 
     @Override
-    public void onTransactionClicked(HttpTransaction transaction) {
-        TransactionDetailsActivity.start(this, transaction.getId(), transaction.getPriority());
+    public void onTransactionClicked(Leaf transaction) {
+        LeafDetailsActivity.start(this, transaction.getId(), transaction.getPriority());
     }
 
     @Override
@@ -131,9 +123,9 @@ public class TransactionListActivity extends AppCompatActivity implements Transa
 
     static class TransactionListWithSearchKeyModel {
         final String searchKey;
-        final PagedList<HttpTransaction> pagedList;
+        final PagedList<Leaf> pagedList;
 
-        TransactionListWithSearchKeyModel(String searchKey, PagedList<HttpTransaction> pagedList) {
+        TransactionListWithSearchKeyModel(String searchKey, PagedList<Leaf> pagedList) {
             this.searchKey = searchKey;
             this.pagedList = pagedList;
         }

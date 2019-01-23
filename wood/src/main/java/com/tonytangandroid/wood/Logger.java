@@ -1,10 +1,10 @@
-package com.tonytangandroid.wood.internal.support;
+package com.tonytangandroid.wood;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
 
 @SuppressLint("LogNotTimber")
-public class Logger {
+class Logger {
     private static final String LOG_TAG = "WoodInterceptor";
 
     public static void i(String message) {

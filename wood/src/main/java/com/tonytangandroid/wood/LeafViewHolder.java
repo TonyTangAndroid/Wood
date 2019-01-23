@@ -1,22 +1,17 @@
-package com.tonytangandroid.wood.internal.ui.list;
+package com.tonytangandroid.wood;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.tonytangandroid.wood.R;
-import com.tonytangandroid.wood.internal.data.HttpTransaction;
-import com.tonytangandroid.wood.internal.support.FormatUtils;
-import com.tonytangandroid.wood.internal.support.WoodColorUtil;
-
 import javax.inject.Provider;
 
-class TransactionViewHolder extends RecyclerView.ViewHolder {
+class LeafViewHolder extends RecyclerView.ViewHolder {
 
     private final Context context;
     private final Provider<String> searchKey;
-    private final TransactionAdapter.Listener listener;
+    private final LeafAdapter.Listener listener;
 
 
     private final TextView tv_time;
@@ -24,10 +19,10 @@ class TransactionViewHolder extends RecyclerView.ViewHolder {
     private final TextView tv_size;
     private final TextView tv_body;
 
-    TransactionViewHolder(View itemView,
-                          Context context,
-                          Provider<String> searchKey,
-                          TransactionAdapter.Listener listener) {
+    LeafViewHolder(View itemView,
+                   Context context,
+                   Provider<String> searchKey,
+                   LeafAdapter.Listener listener) {
         super(itemView);
         this.context = context;
         this.listener = listener;
@@ -39,7 +34,7 @@ class TransactionViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    void bind(HttpTransaction transaction) {
+    void bind(Leaf transaction) {
         tv_tag.setText(transaction.getTag());
         tv_time.setText(transaction.getDate().toString());
         tv_body.setText(getHighlightedText(String.valueOf(transaction.body())));

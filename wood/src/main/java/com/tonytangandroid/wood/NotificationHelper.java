@@ -1,4 +1,4 @@
-package com.tonytangandroid.wood.internal.support;
+package com.tonytangandroid.wood;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -13,18 +13,14 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.LongSparseArray;
 
-import com.tonytangandroid.wood.Wood;
-import com.tonytangandroid.wood.R;
-import com.tonytangandroid.wood.internal.data.HttpTransaction;
-
 import static android.text.Spanned.SPAN_INCLUSIVE_EXCLUSIVE;
 
-public class NotificationHelper {
+class NotificationHelper {
 
     private static final String CHANNEL_ID = "wood_notification_log_channel";
     private static final int BUFFER_SIZE = 10;
 
-    private static final LongSparseArray<HttpTransaction> TRANSACTION_BUFFER = new LongSparseArray<>();
+    private static final LongSparseArray<Leaf> TRANSACTION_BUFFER = new LongSparseArray<>();
     private static int TRANSACTION_COUNT;
 
     private final Context mContext;
@@ -43,7 +39,7 @@ public class NotificationHelper {
         TRANSACTION_COUNT = 0;
     }
 
-    private static synchronized void addToBuffer(HttpTransaction transaction) {
+    private static synchronized void addToBuffer(Leaf transaction) {
         TRANSACTION_COUNT++;
         TRANSACTION_BUFFER.put(transaction.getId(), transaction);
         if (TRANSACTION_BUFFER.size() > BUFFER_SIZE) {
@@ -60,7 +56,7 @@ public class NotificationHelper {
         }
     }
 
-    public synchronized void show(HttpTransaction transaction, boolean stickyNotification) {
+    public synchronized void show(Leaf transaction, boolean stickyNotification) {
         addToBuffer(transaction);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, CHANNEL_ID)
                 .setContentIntent(PendingIntent.getActivity(mContext, 0, Wood.getLaunchIntent(mContext), 0))
@@ -93,7 +89,7 @@ public class NotificationHelper {
         mNotificationManager.notify(CHANNEL_ID.hashCode(), builder.build());
     }
 
-    private CharSequence getNotificationText(HttpTransaction transaction) {
+    private CharSequence getNotificationText(Leaf transaction) {
         int color = mColorUtil.getTransactionColor(transaction);
         String text = transaction.body();
         // Simple span no Truss required

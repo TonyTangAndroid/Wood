@@ -1,4 +1,4 @@
-package com.tonytangandroid.wood.internal.data;
+package com.tonytangandroid.wood;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -8,8 +8,8 @@ import android.arch.persistence.room.PrimaryKey;
 import java.util.Date;
 
 
-@Entity(tableName = "HttpTransaction")
-public class HttpTransaction {
+@Entity(tableName = "Leaf")
+class Leaf {
 
     @Ignore
     public String searchKey;

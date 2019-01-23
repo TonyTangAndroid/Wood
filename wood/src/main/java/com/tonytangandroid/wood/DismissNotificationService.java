@@ -1,4 +1,4 @@
-package com.tonytangandroid.wood.internal.support;
+package com.tonytangandroid.wood;
 
 import android.app.IntentService;
 import android.content.Intent;

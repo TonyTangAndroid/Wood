@@ -4,11 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.tonytangandroid.wood.internal.data.WoodDatabase;
-import com.tonytangandroid.wood.internal.data.HttpTransaction;
-import com.tonytangandroid.wood.internal.support.NotificationHelper;
-import com.tonytangandroid.wood.internal.support.RetentionManager;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Date;
@@ -16,7 +11,7 @@ import java.util.concurrent.Executor;
 
 import timber.log.Timber;
 
-public class WoodInterceptor extends Timber.DebugTree {
+public class WoodTree extends Timber.DebugTree {
 
     @NonNull
     private static final Period DEFAULT_RETENTION = Period.ONE_WEEK;
@@ -35,7 +30,7 @@ public class WoodInterceptor extends Timber.DebugTree {
     /**
      * @param context The current Context.
      */
-    public WoodInterceptor(@NonNull Context context) {
+    public WoodTree(@NonNull Context context) {
         executor = new JobExecutor();
         this.context = context.getApplicationContext();
         woodDatabase = WoodDatabase.getInstance(context);
@@ -46,10 +41,10 @@ public class WoodInterceptor extends Timber.DebugTree {
      * Control whether a notification is shown while HTTP activity is recorded.
      *
      * @param sticky true to show a sticky notification.
-     * @return The {@link WoodInterceptor} instance.
+     * @return The {@link WoodTree} instance.
      */
     @NonNull
-    public WoodInterceptor showNotification(boolean sticky) {
+    public WoodTree showNotification(boolean sticky) {
         this.stickyNotification = sticky;
         notificationHelper = new NotificationHelper(this.context);
         return this;
@@ -60,10 +55,10 @@ public class WoodInterceptor extends Timber.DebugTree {
      * The default is one week.
      *
      * @param period the period for which to retain HTTP transaction data.
-     * @return The {@link WoodInterceptor} instance.
+     * @return The {@link WoodTree} instance.
      */
     @NonNull
-    public WoodInterceptor retainDataFor(Period period) {
+    public WoodTree retainDataFor(Period period) {
         retentionManager = new RetentionManager(context, period);
         return this;
     }
@@ -73,10 +68,10 @@ public class WoodInterceptor extends Timber.DebugTree {
      * Warning: setting this value too high may cause unexpected results.
      *
      * @param max the maximum length (in bytes) for request/response content.
-     * @return The {@link WoodInterceptor} instance.
+     * @return The {@link WoodTree} instance.
      */
     @NonNull
-    public WoodInterceptor maxContentLength(int max) {
+    public WoodTree maxLength(int max) {
         this.maxContentLength = Math.min(max, 999999);// close to => 1 MB Max in a BLOB SQLite.
         return this;
     }
@@ -92,7 +87,7 @@ public class WoodInterceptor extends Timber.DebugTree {
     }
 
     private void doLog(int priority, String tag, @NonNull String message, Throwable t) {
-        HttpTransaction transaction = new HttpTransaction();
+        Leaf transaction = new Leaf();
         transaction.setPriority(priority);
         transaction.setDate(new Date());
         transaction.setTag(tag);
@@ -105,8 +100,8 @@ public class WoodInterceptor extends Timber.DebugTree {
     }
 
 
-    private void create(@NonNull HttpTransaction transaction) {
-        long transactionId = woodDatabase.httpTransactionDao().insertTransaction(transaction);
+    private void create(@NonNull Leaf transaction) {
+        long transactionId = woodDatabase.leafDao().insertTransaction(transaction);
         transaction.setId(transactionId);
         if (notificationHelper != null) {
             notificationHelper.show(transaction, stickyNotification);

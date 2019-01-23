@@ -1,11 +1,11 @@
-package com.tonytangandroid.wood.internal.support;
+package com.tonytangandroid.wood;
 
 import android.support.annotation.ColorInt;
 import android.text.TextPaint;
 import android.text.style.CharacterStyle;
 import android.text.style.UpdateAppearance;
 
-public class HighlightSpan extends CharacterStyle implements UpdateAppearance {
+class HighlightSpan extends CharacterStyle implements UpdateAppearance {
     private final int mBackgroundColor;
     private final int mTextColor;
     private final boolean mUnderLineText;

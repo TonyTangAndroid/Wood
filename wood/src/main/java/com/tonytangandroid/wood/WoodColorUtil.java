@@ -1,15 +1,12 @@
-package com.tonytangandroid.wood.internal.support;
+package com.tonytangandroid.wood;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
-import com.tonytangandroid.wood.R;
-import com.tonytangandroid.wood.internal.data.HttpTransaction;
 
-
-public class WoodColorUtil {
+class WoodColorUtil {
 
     public static final int SEARCHED_HIGHLIGHT_BACKGROUND_COLOR = Color.parseColor("#FD953F");
     public static final int HIGHLIGHT_BACKGROUND_COLOR = Color.parseColor("#FFFD38");
@@ -41,7 +38,7 @@ public class WoodColorUtil {
         return TRANSACTION_COLOR_UTIL_INSTANCE;
     }
 
-    public int getTransactionColor(HttpTransaction transaction) {
+    public int getTransactionColor(Leaf transaction) {
         return getTransactionColor(transaction.getPriority());
     }
 

@@ -4,21 +4,21 @@
 
     <application>
         <service
-            android:name=".internal.support.ClearTransactionsService"
+            android:name=".ClearTransactionsService"
             android:exported="false" />
         <service
-            android:name=".internal.support.DismissNotificationService"
+            android:name=".DismissNotificationService"
             android:exported="false" />
 
         <activity
-            android:name=".internal.ui.list.TransactionListActivity"
+            android:name=".LeafListActivity"
             android:launchMode="singleTask"
             android:taskAffinity="com.tonytangandroid.wood.task"
             android:theme="@style/Wood.Theme" />
 
         <activity
-            android:name=".internal.ui.details.TransactionDetailsActivity"
-            android:parentActivityName=".internal.ui.list.TransactionListActivity"
+            android:name=".LeafDetailsActivity"
+            android:parentActivityName=".LeafListActivity"
             android:theme="@style/Wood.Theme" />
     </application>
 

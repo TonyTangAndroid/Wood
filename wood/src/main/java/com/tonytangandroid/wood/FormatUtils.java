@@ -1,4 +1,4 @@
-package com.tonytangandroid.wood.internal.support;
+package com.tonytangandroid.wood;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,14 +8,11 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.widget.TextView;
 
-import com.tonytangandroid.wood.R;
-import com.tonytangandroid.wood.internal.data.HttpTransaction;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class FormatUtils {
+class FormatUtils {
 
     public static CharSequence formatTextHighlight(String text, String searchKey) {
         if (TextUtil.isNullOrWhiteSpace(text) || TextUtil.isNullOrWhiteSpace(searchKey)) {
@@ -50,7 +47,7 @@ public class FormatUtils {
     }
 
 
-    public static CharSequence getShareText(Context context, HttpTransaction transaction) {
+    public static CharSequence getShareText(Context context, Leaf transaction) {
         SpannableStringBuilder text = new SpannableStringBuilder();
         text.append(context.getString(R.string.wood_method)).append(": ").append(v(transaction.getTag())).append("\n");
         text.append(context.getString(R.string.wood_request_time)).append(": ").append(transaction.getDate().toString()).append("\n");

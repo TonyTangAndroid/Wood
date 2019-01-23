@@ -1,10 +1,10 @@
-package com.tonytangandroid.wood.internal.support.event;
+package com.tonytangandroid.wood;
 
 
 import android.os.Handler;
 import android.support.annotation.NonNull;
 
-public class Sampler<V> {
+class Sampler<V> {
 
     private final int interval;
     private final Callback<V> callback;

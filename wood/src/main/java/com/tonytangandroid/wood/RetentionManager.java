@@ -1,15 +1,12 @@
-package com.tonytangandroid.wood.internal.support;
+package com.tonytangandroid.wood;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.tonytangandroid.wood.WoodInterceptor;
-import com.tonytangandroid.wood.internal.data.WoodDatabase;
-
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class RetentionManager {
+class RetentionManager {
     private static final String PREFS_NAME = "wood_preferences";
     private static final String KEY_LAST_CLEANUP = "last_cleanup";
 
@@ -20,11 +17,11 @@ public class RetentionManager {
     private final long cleanupFrequency;
     private final SharedPreferences prefs;
 
-    public RetentionManager(Context context, WoodInterceptor.Period retentionPeriod) {
+    public RetentionManager(Context context, WoodTree.Period retentionPeriod) {
         this.woodDatabase = WoodDatabase.getInstance(context);
         period = toMillis(retentionPeriod);
         prefs = context.getSharedPreferences(PREFS_NAME, 0);
-        cleanupFrequency = (retentionPeriod == WoodInterceptor.Period.ONE_HOUR) ?
+        cleanupFrequency = (retentionPeriod == WoodTree.Period.ONE_HOUR) ?
                 TimeUnit.MINUTES.toMillis(30) : TimeUnit.HOURS.toMillis(2);
     }
 
@@ -52,7 +49,7 @@ public class RetentionManager {
     }
 
     private void deleteSince(long threshold) {
-        long rows = woodDatabase.httpTransactionDao().deleteTransactionsBefore(new Date(threshold));
+        long rows = woodDatabase.leafDao().deleteTransactionsBefore(new Date(threshold));
         Logger.i(rows + " transactions deleted");
     }
 
@@ -64,7 +61,7 @@ public class RetentionManager {
         return (period == 0) ? now : now - period;
     }
 
-    private long toMillis(WoodInterceptor.Period period) {
+    private long toMillis(WoodTree.Period period) {
         switch (period) {
             case ONE_HOUR:
                 return TimeUnit.HOURS.toMillis(1);

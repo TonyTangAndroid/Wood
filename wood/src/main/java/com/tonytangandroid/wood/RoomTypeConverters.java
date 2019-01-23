@@ -1,10 +1,10 @@
-package com.tonytangandroid.wood.internal.data;
+package com.tonytangandroid.wood;
 
 import android.arch.persistence.room.TypeConverter;
 
 import java.util.Date;
 
-public class RoomTypeConverters {
+class RoomTypeConverters {
 
     @TypeConverter
     public static Date fromLongToDate(Long value) {

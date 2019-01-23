@@ -2,13 +2,7 @@ package com.tonytangandroid.wood;
 
 import android.content.Context;
 
-import java.io.IOException;
-
-import okhttp3.Interceptor;
-import okhttp3.Response;
-
-@SuppressWarnings("NullableProblems")
-public class WoodInterceptor implements Interceptor {
+public class WoodInterceptor {
 
     /**
      * @param context The current Context.
@@ -59,10 +53,6 @@ public class WoodInterceptor implements Interceptor {
         return this;
     }
 
-    @Override
-    public Response intercept(Chain chain) throws IOException {
-        return chain.proceed(chain.request());
-    }
 
     public enum Period {
         /**

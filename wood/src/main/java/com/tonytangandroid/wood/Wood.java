@@ -9,8 +9,6 @@ import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.support.annotation.Nullable;
 
-import com.tonytangandroid.wood.internal.ui.list.TransactionListActivity;
-
 import java.util.Collections;
 
 /**
@@ -29,7 +27,7 @@ public class Wood {
      * @return An Intent for the main Wood Activity that can be started with {@link Context#startActivity(Intent)}.
      */
     public static Intent getLaunchIntent(Context context) {
-        return new Intent(context, TransactionListActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return new Intent(context, LeafListActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.tonytangandroid.wood.internal.ui.list;
+package com.tonytangandroid.wood;
 
 import android.arch.paging.PagedListAdapter;
 import android.content.Context;
@@ -8,12 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tonytangandroid.wood.R;
-import com.tonytangandroid.wood.internal.data.HttpTransaction;
-
 import javax.inject.Provider;
 
-class TransactionAdapter extends PagedListAdapter<HttpTransaction, TransactionViewHolder> implements Provider<String> {
+class LeafAdapter extends PagedListAdapter<Leaf, LeafViewHolder> implements Provider<String> {
 
     private final Context context;
     private final Listener listener;
@@ -21,7 +18,7 @@ class TransactionAdapter extends PagedListAdapter<HttpTransaction, TransactionVi
 
     private String searchKey;
 
-    TransactionAdapter(Context context, ListDiffUtil listDiffUtil, Listener listener) {
+    LeafAdapter(Context context, ListDiffUtil listDiffUtil, Listener listener) {
         super(listDiffUtil);
         this.context = context;
         this.listener = listener;
@@ -31,13 +28,13 @@ class TransactionAdapter extends PagedListAdapter<HttpTransaction, TransactionVi
             public void onItemRangeInserted(int positionStart, int itemCount) {
                 super.onItemRangeInserted(positionStart, itemCount);
                 // in the database inserts only occur at the top
-                TransactionAdapter.this.listener.onItemsInserted(positionStart);
+                LeafAdapter.this.listener.onItemsInserted(positionStart);
             }
         });
     }
 
 
-    TransactionAdapter setSearchKey(String searchKey) {
+    LeafAdapter setSearchKey(String searchKey) {
         this.searchKey = searchKey;
         return this;
     }
@@ -45,14 +42,14 @@ class TransactionAdapter extends PagedListAdapter<HttpTransaction, TransactionVi
 
     @NonNull
     @Override
-    public TransactionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LeafViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = layoutInflater.inflate(R.layout.wood_list_item_transaction, parent, false);
-        return new TransactionViewHolder(itemView, context, this, listener);
+        return new LeafViewHolder(itemView, context, this, listener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TransactionViewHolder viewHolder, int position) {
-        HttpTransaction transaction = getItem(position);
+    public void onBindViewHolder(@NonNull LeafViewHolder viewHolder, int position) {
+        Leaf transaction = getItem(position);
         if (transaction != null) {
             viewHolder.bind(transaction);
         }
@@ -64,7 +61,7 @@ class TransactionAdapter extends PagedListAdapter<HttpTransaction, TransactionVi
     }
 
     interface Listener {
-        void onTransactionClicked(HttpTransaction httpTransaction);
+        void onTransactionClicked(Leaf leaf);
 
         void onItemsInserted(int firstInsertedItemPosition);
     }

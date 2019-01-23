@@ -1,4 +1,4 @@
-package com.tonytangandroid.wood.internal.ui.details;
+package com.tonytangandroid.wood;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.ClipData;
@@ -31,13 +31,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tonytangandroid.wood.R;
-import com.tonytangandroid.wood.internal.data.HttpTransaction;
-import com.tonytangandroid.wood.internal.support.FormatUtils;
-import com.tonytangandroid.wood.internal.support.WoodColorUtil;
-import com.tonytangandroid.wood.internal.support.TextUtil;
-import com.tonytangandroid.wood.internal.support.event.Debouncer;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -47,10 +40,10 @@ import hugo.weaving.DebugLog;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
-import static com.tonytangandroid.wood.internal.support.WoodColorUtil.SEARCHED_HIGHLIGHT_BACKGROUND_COLOR;
+import static com.tonytangandroid.wood.WoodColorUtil.SEARCHED_HIGHLIGHT_BACKGROUND_COLOR;
 
 @DebugLog
-public class TransactionPayloadFragment extends Fragment implements View.OnClickListener, TextUtil.AsyncTextProvider, TextWatcher {
+public class LeafDetailFragment extends Fragment implements View.OnClickListener, TextUtil.AsyncTextProvider, TextWatcher {
 
     private static final String ARG_ID = "arg_id";
     private long id;
@@ -58,7 +51,7 @@ public class TransactionPayloadFragment extends Fragment implements View.OnClick
     private String searchKey;
     private WoodColorUtil colorUtil;
     private int currentSearchIndex;
-    private HttpTransaction httpTransaction;
+    private Leaf leaf;
     private List<Integer> searchIndexList = new ArrayList<>(0);
     private ExecutorService executor = Executors.newSingleThreadExecutor();
     private final Debouncer<String> searchDebouncer = new Debouncer<>(400, this::onSearchKeyEmitted);
@@ -73,8 +66,8 @@ public class TransactionPayloadFragment extends Fragment implements View.OnClick
     private FloatingActionButton floating_action_button;
 
 
-    public static TransactionPayloadFragment newInstance(long id) {
-        TransactionPayloadFragment fragment = new TransactionPayloadFragment();
+    public static LeafDetailFragment newInstance(long id) {
+        LeafDetailFragment fragment = new LeafDetailFragment();
         Bundle b = new Bundle();
         b.putLong(ARG_ID, id);
         fragment.setArguments(b);
@@ -138,18 +131,18 @@ public class TransactionPayloadFragment extends Fragment implements View.OnClick
     }
 
     private void observe() {
-        TransactionDetailViewModel viewModel = ViewModelProviders.of(requireActivity())
-                .get(TransactionDetailViewModel.class);
+        LeafDetailViewModel viewModel = ViewModelProviders.of(requireActivity())
+                .get(LeafDetailViewModel.class);
         viewModel.getTransactionWithId(id).observe(this, this::transactionUpdated);
     }
 
-    private void transactionUpdated(HttpTransaction transaction) {
-        this.httpTransaction = transaction;
+    private void transactionUpdated(Leaf transaction) {
+        this.leaf = transaction;
         populateUI();
     }
 
     private void populateUI() {
-        int color = colorUtil.getTransactionColor(httpTransaction);
+        int color = colorUtil.getTransactionColor(leaf);
         floating_action_button.setBackgroundTintList(colorStateList(color));
         search_bar.setBackgroundColor(color);
         et_key_word.setHint(R.string.wood_search_request_hint);
@@ -174,14 +167,14 @@ public class TransactionPayloadFragment extends Fragment implements View.OnClick
     private void populateBody() {
         ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         assert actionBar != null;
-        actionBar.setTitle(httpTransaction.getTag());
-        actionBar.setSubtitle(httpTransaction.getDate().toString());
+        actionBar.setTitle(leaf.getTag());
+        actionBar.setSubtitle(leaf.getDate().toString());
         TextUtil.asyncSetText(executor, this);
     }
 
     @Override
     public CharSequence getText() {
-        CharSequence body = httpTransaction.body();
+        CharSequence body = leaf.body();
         if (TextUtil.isNullOrWhiteSpace(body) || TextUtil.isNullOrWhiteSpace(searchKey)) {
             return body;
         } else {
@@ -301,10 +294,10 @@ public class TransactionPayloadFragment extends Fragment implements View.OnClick
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.share_text) {
-            share(FormatUtils.getShareText(requireContext(), httpTransaction));
+            share(FormatUtils.getShareText(requireContext(), leaf));
             return true;
         } else if (itemId == R.id.copy) {
-            copy(FormatUtils.getShareText(requireContext(), httpTransaction));
+            copy(FormatUtils.getShareText(requireContext(), leaf));
             return true;
         } else {
             return super.onOptionsItemSelected(item);

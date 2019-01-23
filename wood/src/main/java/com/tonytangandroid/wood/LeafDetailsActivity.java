@@ -1,4 +1,4 @@
-package com.tonytangandroid.wood.internal.ui.details;
+package com.tonytangandroid.wood;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,17 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.tonytangandroid.wood.R;
-import com.tonytangandroid.wood.internal.support.WoodColorUtil;
-
-public class TransactionDetailsActivity extends AppCompatActivity {
+public class LeafDetailsActivity extends AppCompatActivity {
 
     private static final String ARG_TRANSACTION_ID = "arg_transaction_id";
     private static final String ARG_PRIORITY = "arg_priority";
 
 
     public static void start(Context context, long id, int priority) {
-        Intent intent = new Intent(context, TransactionDetailsActivity.class);
+        Intent intent = new Intent(context, LeafDetailsActivity.class);
         intent.putExtra(ARG_TRANSACTION_ID, id);
         intent.putExtra(ARG_PRIORITY, priority);
         context.startActivity(intent);
@@ -41,7 +38,7 @@ public class TransactionDetailsActivity extends AppCompatActivity {
         final ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
-        bindFragment(TransactionPayloadFragment.newInstance(id));
+        bindFragment(LeafDetailFragment.newInstance(id));
     }
 
     private void bindFragment(Fragment fragment) {

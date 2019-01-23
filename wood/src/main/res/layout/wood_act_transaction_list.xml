@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".internal.ui.list.TransactionListActivity">
+    tools:context=".LeafListActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/wood_appbar"

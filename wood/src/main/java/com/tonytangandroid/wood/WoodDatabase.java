@@ -1,4 +1,4 @@
-package com.tonytangandroid.wood.internal.data;
+package com.tonytangandroid.wood;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
@@ -6,10 +6,9 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-@Database(entities = {HttpTransaction.class}, version = 1, exportSchema = false)
+@Database(entities = {Leaf.class}, version = 1, exportSchema = false)
 @TypeConverters({RoomTypeConverters.class})
-
-public abstract class WoodDatabase extends RoomDatabase {
+abstract class WoodDatabase extends RoomDatabase {
     private static WoodDatabase WOOD_DATABASE_INSTANCE;
 
     public static WoodDatabase getInstance(Context context) {
@@ -19,5 +18,5 @@ public abstract class WoodDatabase extends RoomDatabase {
         return WOOD_DATABASE_INSTANCE;
     }
 
-    public abstract TransactionDao httpTransactionDao();
+    public abstract LeafDao leafDao();
 }

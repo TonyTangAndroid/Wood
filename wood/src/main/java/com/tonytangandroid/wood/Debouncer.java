@@ -1,11 +1,11 @@
-package com.tonytangandroid.wood.internal.support.event;
+package com.tonytangandroid.wood;
 
 
 import android.os.Handler;
 import android.support.annotation.NonNull;
 
 
-public class Debouncer<V> {
+class Debouncer<V> {
 
     private final int mInterval;
     private final Callback<V> mCallback;

@@ -1,4 +1,4 @@
-package com.tonytangandroid.wood.internal.support;
+package com.tonytangandroid.wood;
 
 
 import android.os.Build;
@@ -11,7 +11,7 @@ import java.lang.ref.WeakReference;
 import java.util.concurrent.Executor;
 
 
-public class TextUtil {
+class TextUtil {
     /**
      * Pref Matters
      * <p>
