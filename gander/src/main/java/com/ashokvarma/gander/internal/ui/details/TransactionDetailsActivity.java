@@ -7,14 +7,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.ashokvarma.gander.R;
 import com.ashokvarma.gander.internal.support.GanderColorUtil;
-import com.ashokvarma.gander.internal.ui.BaseGanderActivity;
 
-public class TransactionDetailsActivity extends BaseGanderActivity {
+public class TransactionDetailsActivity extends AppCompatActivity {
 
     private static final String ARG_TRANSACTION_ID = "arg_transaction_id";
     private static final String ARG_PRIORITY = "arg_priority";

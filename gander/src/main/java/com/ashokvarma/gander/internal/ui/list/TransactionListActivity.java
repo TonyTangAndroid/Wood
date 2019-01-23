@@ -6,6 +6,7 @@ import android.arch.paging.PagedList;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,10 +21,9 @@ import com.ashokvarma.gander.internal.support.NotificationHelper;
 import com.ashokvarma.gander.internal.support.event.Callback;
 import com.ashokvarma.gander.internal.support.event.Debouncer;
 import com.ashokvarma.gander.internal.support.event.Sampler;
-import com.ashokvarma.gander.internal.ui.BaseGanderActivity;
 import com.ashokvarma.gander.internal.ui.details.TransactionDetailsActivity;
 
-public class TransactionListActivity extends BaseGanderActivity implements TransactionAdapter.Listener, SearchView.OnQueryTextListener {
+public class TransactionListActivity extends AppCompatActivity implements TransactionAdapter.Listener, SearchView.OnQueryTextListener {
 
     private TransactionAdapter adapter;
     private ListDiffUtil listDiffUtil;

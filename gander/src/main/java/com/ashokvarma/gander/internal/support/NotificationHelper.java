@@ -16,7 +16,6 @@ import android.util.LongSparseArray;
 import com.ashokvarma.gander.Gander;
 import com.ashokvarma.gander.R;
 import com.ashokvarma.gander.internal.data.HttpTransaction;
-import com.ashokvarma.gander.internal.ui.BaseGanderActivity;
 
 import static android.text.Spanned.SPAN_INCLUSIVE_EXCLUSIVE;
 
@@ -71,37 +70,35 @@ public class NotificationHelper {
 
     public synchronized void show(HttpTransaction transaction, boolean stickyNotification) {
         addToBuffer(transaction);
-        if (!BaseGanderActivity.isInForeground()) {
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, CHANNEL_ID)
-                    .setContentIntent(PendingIntent.getActivity(mContext, 0, Gander.getLaunchIntent(mContext), 0))
-                    .setLocalOnly(true)
-                    .setSmallIcon(R.drawable.gander_ic_notification_white_24dp)
-                    .setColor(ContextCompat.getColor(mContext, R.color.gander_colorPrimary))
-                    .setOngoing(stickyNotification)
-                    .setContentTitle(mContext.getString(R.string.gander_notification_title));
-            NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, CHANNEL_ID)
+                .setContentIntent(PendingIntent.getActivity(mContext, 0, Gander.getLaunchIntent(mContext), 0))
+                .setLocalOnly(true)
+                .setSmallIcon(R.drawable.gander_ic_notification_white_24dp)
+                .setColor(ContextCompat.getColor(mContext, R.color.gander_colorPrimary))
+                .setOngoing(stickyNotification)
+                .setContentTitle(mContext.getString(R.string.gander_notification_title));
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
 
-            int count = 0;
-            for (int i = TRANSACTION_BUFFER.size() - 1; i >= 0; i--) {
-                if (count < BUFFER_SIZE) {
-                    if (count == 0) {
-                        builder.setContentText(getNotificationText(TRANSACTION_BUFFER.valueAt(i)));
-                    }
-                    inboxStyle.addLine(getNotificationText(TRANSACTION_BUFFER.valueAt(i)));
+        int count = 0;
+        for (int i = TRANSACTION_BUFFER.size() - 1; i >= 0; i--) {
+            if (count < BUFFER_SIZE) {
+                if (count == 0) {
+                    builder.setContentText(getNotificationText(TRANSACTION_BUFFER.valueAt(i)));
                 }
-                count++;
+                inboxStyle.addLine(getNotificationText(TRANSACTION_BUFFER.valueAt(i)));
             }
-            builder.setAutoCancel(true);
-            builder.setStyle(inboxStyle);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                builder.setSubText(String.valueOf(TRANSACTION_COUNT));
-            } else {
-                builder.setNumber(TRANSACTION_COUNT);
-            }
-            builder.addAction(getDismissAction());
-            builder.addAction(getClearAction());
-            mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+            count++;
         }
+        builder.setAutoCancel(true);
+        builder.setStyle(inboxStyle);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            builder.setSubText(String.valueOf(TRANSACTION_COUNT));
+        } else {
+            builder.setNumber(TRANSACTION_COUNT);
+        }
+        builder.addAction(getDismissAction());
+        builder.addAction(getClearAction());
+        mNotificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 
     private CharSequence getNotificationText(HttpTransaction transaction) {
