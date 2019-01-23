@@ -38,7 +38,7 @@ public class WoodTree extends Timber.DebugTree {
     }
 
     /**
-     * Control whether a notification is shown while HTTP activity is recorded.
+     * Control whether a notification is shown while Timber log is recorded.
      *
      * @param sticky true to show a sticky notification.
      * @return The {@link WoodTree} instance.
@@ -51,10 +51,10 @@ public class WoodTree extends Timber.DebugTree {
     }
 
     /**
-     * Set the retention period for HTTP transaction data captured by this interceptor.
+     * Set the retention period for Timber log data captured by this interceptor.
      * The default is one week.
      *
-     * @param period the period for which to retain HTTP transaction data.
+     * @param period the period for which to retain Timber log data.
      * @return The {@link WoodTree} instance.
      */
     @NonNull

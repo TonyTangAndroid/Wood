@@ -9,7 +9,7 @@ ext {
     libraryName = 'Wood'
     artifact = 'wood'
 
-    libraryDescription = 'Wood is a simple in-app HTTP inspector for Android OkHttp clients. Wood intercepts and persists all HTTP requests and responses inside your application, and provides a UI for inspecting their content.'
+    libraryDescription = 'Wood is a simple in-app Timber log for Android. Wood records and persists all Timber log inside your application, and provides a UI for inspecting their content.'
 
     siteUrl = 'https://github.com/TonyTangAndroid/Wood'
     gitUrl = 'https://github.com/TonyTangAndroid/Wood.git'
@@ -18,7 +18,7 @@ ext {
 
     developerId = 'TonyTangAndroid'
     developerName = 'Tony Tang'
-    developerEmail = 'Tonyvitece@gmail.com'
+    developerEmail = 'tonythompsoncmu@gmail.com'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
@@ -54,16 +54,16 @@ android {
 }
 
 dependencies {
-    compile 'javax.inject:javax.inject:1'
-    api 'com.jakewharton.timber:timber:4.7.1'
+    implementation "javax.inject:javax.inject:$injectVersion"
+    implementation "com.jakewharton.timber:timber:$timberVersion"
 
-    compile "com.android.support:design:$supportLibVersion"
-    compile "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation "com.android.support:design:$supportLibVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
 
-    compile "android.arch.persistence.room:runtime:$roomVersion"
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
-    compile "android.arch.paging:runtime:$pagingVersion"
-    compile "android.arch.lifecycle:extensions:$viewModelVersion"
+    implementation "android.arch.paging:runtime:$pagingVersion"
+    implementation "android.arch.lifecycle:extensions:$viewModelVersion"
 }
 
 // Place it at the end of the file

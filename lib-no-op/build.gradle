@@ -8,7 +8,7 @@ ext {
     libraryName = 'WoodNoOp'
     artifact = 'wood-no-op'
 
-    libraryDescription = 'Wood is a simple in-app HTTP inspector for Android OkHttp clients. Wood intercepts and persists all HTTP requests and responses inside your application, and provides a UI for inspecting their content.'
+    libraryDescription = 'Wood is a simple in-app Timber log for Android. Wood records and persists all Timber log inside your application, and provides a UI for inspecting their content.'
 
     siteUrl = 'https://github.com/TonyTangAndroid/Wood'
     gitUrl = 'https://github.com/TonyTangAndroid/Wood.git'
@@ -17,7 +17,7 @@ ext {
 
     developerId = 'TonyTangAndroid'
     developerName = 'Tony Tang'
-    developerEmail = 'Tonyvitece@gmail.com'
+    developerEmail = 'tonythompsoncmu@gmail.com'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
