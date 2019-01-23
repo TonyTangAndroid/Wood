@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_menu_github"
-        android:title="Github Page"
         android:icon="@drawable/ic_github_circle_white_24dp"
+        android:title="@string/github_page"
         app:showAsAction="ifRoom" />
 </menu>

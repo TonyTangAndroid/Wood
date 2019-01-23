@@ -1,0 +1,15 @@
+<resources>
+    <string name="wood_notification_title">Recording Timber log</string>
+    <string name="wood_clear">Clear</string>
+    <string name="wood_dismiss">Dismiss</string>
+    <string name="wood_browse_sql_database">Browse SQLite database</string>
+    <string name="wood_tag">Tag</string>
+    <string name="wood_time">Time</string>
+    <string name="wood_size">Size</string>
+    <string name="wood_share">Share</string>
+    <string name="wood_search">Search</string>
+    <string name="wood_body_truncated">\n\n--- Content truncated ---</string>
+    <string name="wood_notification_category">Wood Timber log notifications</string>
+    <string name="wood_search_hint"><font size="12">Search Request and Headers</font></string>
+    <string name="wood_copy">Copy</string>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tonytangandroid.wood">
+
+    <application>
+        <service
+            android:name=".ClearTransactionsService"
+            android:exported="false" />
+        <service
+            android:name=".DismissNotificationService"
+            android:exported="false" />
+
+        <activity
+            android:name=".LeafListActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.tonytangandroid.wood.task"
+            android:theme="@style/Wood.Theme" />
+
+        <activity
+            android:name=".LeafDetailsActivity"
+            android:parentActivityName=".LeafListActivity"
+            android:theme="@style/Wood.Theme" />
+    </application>
+
+</manifest>

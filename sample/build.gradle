@@ -2,23 +2,27 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        release {
-            keyAlias 'release'
-            keyPassword 'release'
-            storeFile file('release.jks')
-            storePassword 'release'
+        tony_dev_sign {
+            keyAlias 'tony_dev_sign'
+            keyPassword 'tony_dev_sign'
+            storeFile file('tony_dev_sign.jks')
+            storePassword 'tony_dev_sign'
         }
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
     defaultConfig {
-        applicationId "com.ashokvarma.gander.sample"
+        applicationId "com.tonytangandroid.github.wood.sample"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
-        signingConfig signingConfigs.release
-//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.tony_dev_sign
     }
     buildTypes {
         release {
@@ -29,17 +33,9 @@ android {
 }
 
 dependencies {
-    implementation project(':gander')
-//    debugImplementation project(':gander')
-//    releaseImplementation project(':gander-no-op')
-
+    implementation project(':wood')
+//    debugImplementation project(':wood')
+//    releaseImplementation project(':wood-no-op')
+    implementation "com.jakewharton.timber:timber:$timberVersion"
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
-
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3Version"
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-
-//    testImplementation 'junit:junit:4.12'
-//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
