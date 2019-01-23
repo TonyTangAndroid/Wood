@@ -10,13 +10,13 @@ import android.content.Context;
 @TypeConverters({RoomTypeConverters.class})
 
 public abstract class WoodDatabase extends RoomDatabase {
-    private static WoodDatabase GANDER_DATABASE_INSTANCE;
+    private static WoodDatabase WOOD_DATABASE_INSTANCE;
 
     public static WoodDatabase getInstance(Context context) {
-        if (GANDER_DATABASE_INSTANCE == null) {
-            GANDER_DATABASE_INSTANCE = Room.databaseBuilder(context, WoodDatabase.class, "WoodDatabase").build();
+        if (WOOD_DATABASE_INSTANCE == null) {
+            WOOD_DATABASE_INSTANCE = Room.databaseBuilder(context, WoodDatabase.class, "WoodDatabase").build();
         }
-        return GANDER_DATABASE_INSTANCE;
+        return WOOD_DATABASE_INSTANCE;
     }
 
     public abstract TransactionDao httpTransactionDao();
