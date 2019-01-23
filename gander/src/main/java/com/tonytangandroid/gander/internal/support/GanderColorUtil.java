@@ -8,13 +8,7 @@ import android.util.Log;
 import com.tonytangandroid.gander.R;
 import com.tonytangandroid.gander.internal.data.HttpTransaction;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 04/06/18
- */
+
 public class GanderColorUtil {
 
     public static final int SEARCHED_HIGHLIGHT_BACKGROUND_COLOR = Color.parseColor("#FD953F");

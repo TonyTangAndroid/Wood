@@ -6,13 +6,6 @@ import android.support.annotation.Nullable;
 
 import com.tonytangandroid.gander.internal.data.GanderDatabase;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 03/06/18
- */
 public class ClearTransactionsService extends IntentService {
 
     public ClearTransactionsService() {

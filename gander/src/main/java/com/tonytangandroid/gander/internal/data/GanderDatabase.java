@@ -6,13 +6,6 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 03/06/18
- */
 @Database(entities = {HttpTransaction.class}, version = 1, exportSchema = false)
 @TypeConverters({RoomTypeConverters.class})
 

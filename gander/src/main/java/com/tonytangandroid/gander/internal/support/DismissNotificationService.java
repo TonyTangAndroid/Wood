@@ -4,13 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 03/06/18
- */
+
 public class DismissNotificationService extends IntentService {
 
     public DismissNotificationService() {

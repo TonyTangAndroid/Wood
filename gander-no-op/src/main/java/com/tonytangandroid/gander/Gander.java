@@ -5,13 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 03/06/18
- */
 public class Gander {
 
     /**

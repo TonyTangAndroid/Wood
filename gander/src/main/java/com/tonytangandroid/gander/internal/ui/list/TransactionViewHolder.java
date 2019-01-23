@@ -12,7 +12,6 @@ import com.tonytangandroid.gander.internal.support.GanderColorUtil;
 
 import javax.inject.Provider;
 
-
 class TransactionViewHolder extends RecyclerView.ViewHolder {
 
     private final Context context;

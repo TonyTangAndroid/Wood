@@ -7,13 +7,6 @@ import java.io.IOException;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 02/06/18
- */
 @SuppressWarnings("NullableProblems")
 public class GanderInterceptor implements Interceptor {
 

@@ -10,13 +10,7 @@ import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.util.concurrent.Executor;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 04/06/18
- */
+
 public class TextUtil {
     /**
      * Pref Matters

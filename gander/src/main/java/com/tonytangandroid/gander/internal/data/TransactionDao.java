@@ -14,13 +14,6 @@ import android.util.Log;
 
 import java.util.Date;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 03/06/18
- */
 @Dao
 public abstract class TransactionDao {
     public static final int SEARCH_DEFAULT = Log.VERBOSE;

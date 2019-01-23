@@ -4,14 +4,7 @@ package com.tonytangandroid.gander.internal.support.event;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 
-/**
- * Class description
- * only emit an item from an event bus. if a particular timespan has passed without it emitting another item
- *
- * @author ashok
- * @version 1.0
- * @since 04/06/18
- */
+
 public class Debouncer<V> {
 
     private final int mInterval;

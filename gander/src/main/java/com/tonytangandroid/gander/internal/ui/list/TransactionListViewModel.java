@@ -12,13 +12,7 @@ import com.tonytangandroid.gander.internal.data.GanderDatabase;
 import com.tonytangandroid.gander.internal.data.HttpTransaction;
 import com.tonytangandroid.gander.internal.data.TransactionDao;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 03/06/18
- */
+
 public class TransactionListViewModel extends AndroidViewModel {
     private final static PagedList.Config config
             = new PagedList.Config.Builder()

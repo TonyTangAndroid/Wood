@@ -6,13 +6,7 @@ import android.support.v7.util.DiffUtil;
 
 import com.tonytangandroid.gander.internal.data.HttpTransaction;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 03/06/18
- */
+
 public class ListDiffUtil extends DiffUtil.ItemCallback<HttpTransaction> {
 
     private String mSearchKey;

@@ -14,13 +14,7 @@ import com.tonytangandroid.gander.internal.data.HttpTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Class description
- *
- * @author ashok
- * @version 1.0
- * @since 03/06/18
- */
+
 public class FormatUtils {
 
     public static CharSequence formatTextHighlight(String text, String searchKey) {
