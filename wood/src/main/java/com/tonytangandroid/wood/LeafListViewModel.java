@@ -9,7 +9,7 @@ import android.arch.paging.PagedList;
 import android.os.AsyncTask;
 
 
-class LeafListViewModel extends AndroidViewModel {
+public class LeafListViewModel extends AndroidViewModel {
     private final static PagedList.Config config
             = new PagedList.Config.Builder()
             .setPageSize(15) // page size
