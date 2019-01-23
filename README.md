@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/TonyTangAndroid/Wood/master/icon.png"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/TonyTangAndroid/Wood/icon.png"/></p>
 
 
 # Wood
