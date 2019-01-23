@@ -4,41 +4,33 @@ package com.ashokvarma.gander.internal.support.event;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 
-/**
- * Class description :
- * Batches all events in given interval and emits final item at the end of interval
- *
- * @author ashok
- * @version 1.0
- * @since 04/06/18
- */
 public class Sampler<V> {
 
-    private final int mInterval;
-    private final Callback<V> mCallback;
-    private final Handler mHandler;
+    private final int interval;
+    private final Callback<V> callback;
+    private final Handler handler;
 
     private Counter<V> currentRunnable;
 
     public Sampler(int intervalInMills, @NonNull Callback<V> callback) {
-        mInterval = intervalInMills;
-        mCallback = callback;
-        mHandler = new Handler();
+        interval = intervalInMills;
+        this.callback = callback;
+        handler = new Handler();
     }
 
     public void consume(V event) {
         if (currentRunnable == null) {
             // first runnable
-            currentRunnable = new Counter<>(event, mCallback);
-            mHandler.postDelayed(currentRunnable, mInterval);
+            currentRunnable = new Counter<>(event, callback);
+            handler.postDelayed(currentRunnable, interval);
         } else {
             if (currentRunnable.state == Counter.STATE_CREATED || currentRunnable.state == Counter.STATE_QUEUED) {
                 //  yet to emit (with in an interval)
                 currentRunnable.updateEvent(event);
             } else if (currentRunnable.state == Counter.STATE_RUNNING || currentRunnable.state == Counter.STATE_FINISHED) {
                 // interval finished. open new batch
-                currentRunnable = new Counter<>(event, mCallback);
-                mHandler.postDelayed(currentRunnable, mInterval);
+                currentRunnable = new Counter<>(event, callback);
+                handler.postDelayed(currentRunnable, interval);
             }
         }
     }
