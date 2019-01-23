@@ -1,6 +1,3 @@
-<p align="center"><img src="https://raw.githubusercontent.com/TonyTangAndroid/Wood/icon.png"/></p>
-
-
 # Wood
 
 ## What is this library about?
