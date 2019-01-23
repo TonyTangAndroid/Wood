@@ -17,13 +17,12 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.tonytangandroid.wood.sample.board"
+        applicationId "com.tonytangandroid.github.wood.sample"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         signingConfig signingConfigs.tony_dev_sign
-//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -38,6 +37,5 @@ dependencies {
 //    debugImplementation project(':wood')
 //    releaseImplementation project(':wood-no-op')
     implementation "com.jakewharton.timber:timber:$timberVersion"
-
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
 }
