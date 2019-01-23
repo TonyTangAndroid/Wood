@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/Ashok-Varma/Wood/master/LogoDesigns/logotype1.1.png"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/TonyTangAndroid/Wood/master/LogoDesigns/logotype1.1.png"/></p>
 
 
 # Wood
@@ -141,7 +141,7 @@ Wood uses the following open source libraries:
 License
 -------
 
-    Copyright (C) 2018 Ashok Varma.
+    Copyright (C) 2018 Tony Tang.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -155,11 +155,6 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
     
-## Other Open Source Libraries
-1. [SqliteManager](https://github.com/Ashok-Varma/SqliteManager) : Sqlite Manager is a Dev Debug tool that helps to manage(Edit, Add, Clear) your android Sqlite Databases.
-2. [SharedPrefManager](https://github.com/Ashok-Varma/SharedPrefManager) : SharedPref Manager is a Dev Debug tool that helps to manage(Edit, Add, Clear) your android Shared Preferences. 
-3. [BottomNavigation](https://github.com/Ashok-Varma/BottomNavigation) : This Library helps users to use Bottom Navigation Bar (A new pattern from google) with ease and allows ton of customizations.
-
 [mavenAarDownload]: https://repo1.maven.org/maven2/com/tonytangandroid/android/wood/1.4.0/wood-1.4.0.aar
 [googlePlayStoreLink]: https://play.google.com/store/apps/details?id=com.tonytangandroid.wood.sample
 [chuckLink]: https://github.com/jgilfelt/chuck

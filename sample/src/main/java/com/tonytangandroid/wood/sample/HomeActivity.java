@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.tonytangandroid.wood.Wood;
 
@@ -19,18 +18,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        findViewById(R.id.do_http_call).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                doHttpActivity();
-            }
-        });
-        findViewById(R.id.launch_wood_directly).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchWoodDirectly();
-            }
-        });
+        findViewById(R.id.btn_generate_log).setOnClickListener(view -> generateTimberLog());
+        findViewById(R.id.launch_wood_directly).setOnClickListener(view -> launchWoodDirectly());
         Wood.addAppShortcut(this);
     }
 
@@ -45,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_menu_github:
-                String url = "https://github.com/Ashok-Varma/Wood";
+                String url = "https://github.com/TonyTangAndroid/Wood";
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);
@@ -56,24 +45,22 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void launchWoodDirectly() {
-        // Optionally launch Wood directly from your own app UI
         startActivity(Wood.getLaunchIntent(this));
     }
 
-    private void doHttpActivity() {
+    private void generateTimberLog() {
 
-        Timber.v("This is a verbose message.");
-        Timber.d("This is an debug message ");
-        Timber.i("Hello from Tysons");
-        Timber.w("Warning. Your spaceship is on danger");
-        Timber.e("Something is wrong.");
+        Timber.v("This is a VERBOSE message.");
+        Timber.d("This is an DEBUG message.");
+        Timber.i("This is an INFO message.");
+        Timber.w("This is an WARNING message.");
+        Timber.e("This is an ERROR message.");
         logError();
-
     }
 
     private void logError() {
         try {
-            String shortSrc = "a";
+            String shortSrc = "";
             String substring = shortSrc.substring(10);
             Timber.v(substring + substring + substring);
         } catch (Exception e) {

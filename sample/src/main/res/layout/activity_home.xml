@@ -9,10 +9,10 @@
     tools:context=".HomeActivity">
 
     <Button
-        android:id="@+id/do_http_call"
+        android:id="@+id/btn_generate_log"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/do_http_activity" />
+        android:text="@string/generate_timber_log" />
 
     <Button
         android:id="@+id/launch_wood_directly"

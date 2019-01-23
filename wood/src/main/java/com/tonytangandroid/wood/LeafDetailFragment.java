@@ -142,7 +142,7 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
         int color = colorUtil.getTransactionColor(leaf);
         floating_action_button.setBackgroundTintList(colorStateList(color));
         search_bar.setBackgroundColor(color);
-        et_key_word.setHint(R.string.wood_search_request_hint);
+        et_key_word.setHint(R.string.wood_search_hint);
         populateBody();
     }
 

@@ -49,11 +49,11 @@ class FormatUtils {
 
     public static CharSequence getShareText(Context context, Leaf transaction) {
         SpannableStringBuilder text = new SpannableStringBuilder();
-        text.append(context.getString(R.string.wood_method)).append(": ").append(v(transaction.getTag())).append("\n");
-        text.append(context.getString(R.string.wood_request_time)).append(": ").append(transaction.getDate().toString()).append("\n");
-        text.append(context.getString(R.string.wood_request_size)).append(": ").append(String.valueOf(transaction.length())).append("\n");
-        text.append(context.getString(R.string.wood_body_content_truncated)).append(": ").append(String.valueOf(transaction.body())).append("\n");
-        text.append("---------- ").append(context.getString(R.string.wood_request)).append(" ----------\n\n");
+        text.append(context.getString(R.string.wood_tag)).append(": ").append(v(transaction.getTag())).append("\n");
+        text.append(context.getString(R.string.wood_time)).append(": ").append(transaction.getDate().toString()).append("\n");
+        text.append(context.getString(R.string.wood_size)).append(": ").append(String.valueOf(transaction.length())).append("\n");
+        text.append(context.getString(R.string.wood_body_truncated)).append(": ").append(String.valueOf(transaction.body())).append("\n");
+        text.append("---------- ").append(" ----------\n\n");
         return text;
     }
 

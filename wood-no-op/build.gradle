@@ -10,14 +10,14 @@ ext {
 
     libraryDescription = 'Wood is a simple in-app HTTP inspector for Android OkHttp clients. Wood intercepts and persists all HTTP requests and responses inside your application, and provides a UI for inspecting their content.'
 
-    siteUrl = 'https://github.com/Ashok-Varma/Wood'
-    gitUrl = 'https://github.com/Ashok-Varma/Wood.git'
+    siteUrl = 'https://github.com/TonyTangAndroid/Wood'
+    gitUrl = 'https://github.com/TonyTangAndroid/Wood.git'
 
     libraryVersion = rootProject.ext.versionName
 
-    developerId = 'Ashok-Varma'
-    developerName = 'Ashok Varma'
-    developerEmail = 'ashokvitece@gmail.com'
+    developerId = 'TonyTangAndroid'
+    developerName = 'Tony Tang'
+    developerEmail = 'Tonyvitece@gmail.com'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'

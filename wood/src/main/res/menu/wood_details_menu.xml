@@ -9,6 +9,6 @@
     <item
         android:id="@+id/copy"
         android:icon="@drawable/wood_content_copy_white_24dp"
-        android:title="@string/copy"
+        android:title="@string/wood_copy"
         app:showAsAction="ifRoom" />
 </menu>
