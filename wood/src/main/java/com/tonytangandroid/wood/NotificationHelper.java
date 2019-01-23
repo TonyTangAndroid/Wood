@@ -61,7 +61,7 @@ class NotificationHelper {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, CHANNEL_ID)
                 .setContentIntent(PendingIntent.getActivity(mContext, 0, Wood.getLaunchIntent(mContext), 0))
                 .setLocalOnly(true)
-                .setSmallIcon(R.drawable.wood_ic_notification_white_24dp)
+                .setSmallIcon(R.drawable.wood_icon)
                 .setColor(ContextCompat.getColor(mContext, R.color.wood_colorPrimary))
                 .setOngoing(stickyNotification)
                 .setContentTitle(mContext.getString(R.string.wood_notification_title));
