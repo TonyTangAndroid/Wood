@@ -20,14 +20,26 @@ Wood requires Android 4.1+ and Timber.
 Based on your IDE you can import library in one of the following ways
 
 ##### Gradle:
-Add the dependency in your `build.gradle` file. Add it alongside the `no-op` variant to isolate Wood from release builds as follows:
+1, Add JitPack at your root level `build.gradle` file.
 ```gradle
-debugImplementation 'com.tonytangandroid.android:wood:0.1.7'
-releaseImplementation 'com.tonytangandroid.android:wood-no-op:0.1.7'
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
+//com.github.UsherAndroid:external
+
+2, Add the dependency in your `build.gradle` file. Add it alongside the `no-op` variant to isolate Wood from release builds as follows:
+```gradle
+debugImplementation 'com.github.tonytangandroid:wood:0.1.7'
+releaseImplementation 'com.github.tonytangandroid:wood-no-op:0.1.7'
 ```
 If you want this in library in both release and compile, then try this : 
 ```gradle
-implementation 'com.tonytangandroid.android:wood:0.1.7'
+implementation 'com.github.tonytangandroid:wood:0.1.7'
 ```
 
 ### Usage
