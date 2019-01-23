@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/wood_colorAccent</item>
     </style>
 
-    <style name="Wood.Theme" parent="Wood.BaseTheme"/>
+    <style name="Wood.Theme" parent="Wood.BaseTheme" />
 
     <style name="Wood.TextAppearance.ListItem" parent="android:TextAppearance">
         <item name="android:textStyle">bold</item>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                                            xmlns:tools="http://schemas.android.com/tools"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:scrollbars="vertical"
-                                            tools:context=".internal.ui.details.fragments.TransactionOverviewFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    tools:context=".internal.ui.details.fragments.TransactionOverviewFragment">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -20,14 +20,14 @@
                 style="@style/Wood.TextAppearance.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wood_url"/>
+                android:text="@string/wood_url" />
 
             <TextView
                 android:id="@+id/wood_details_url"
                 style="@style/Wood.TextAppearance.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="https://example.com/path/to/resource?here=might_be_really_long"/>
+                tools:text="https://example.com/path/to/resource?here=might_be_really_long" />
 
         </TableRow>
 
@@ -39,14 +39,14 @@
                 style="@style/Wood.TextAppearance.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wood_method"/>
+                android:text="@string/wood_method" />
 
             <TextView
                 android:id="@+id/wood_details_method"
                 style="@style/Wood.TextAppearance.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="GET"/>
+                tools:text="GET" />
 
         </TableRow>
 
@@ -58,14 +58,14 @@
                 style="@style/Wood.TextAppearance.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wood_protocol"/>
+                android:text="@string/wood_protocol" />
 
             <TextView
                 android:id="@+id/wood_details_protocol"
                 style="@style/Wood.TextAppearance.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="HTTP/1.1"/>
+                tools:text="HTTP/1.1" />
 
         </TableRow>
 
@@ -77,14 +77,14 @@
                 style="@style/Wood.TextAppearance.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wood_status"/>
+                android:text="@string/wood_status" />
 
             <TextView
                 android:id="@+id/wood_details_status"
                 style="@style/Wood.TextAppearance.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Complete"/>
+                tools:text="Complete" />
 
         </TableRow>
 
@@ -96,14 +96,14 @@
                 style="@style/Wood.TextAppearance.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wood_response"/>
+                android:text="@string/wood_response" />
 
             <TextView
                 android:id="@+id/wood_details_response"
                 style="@style/Wood.TextAppearance.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="200 OK"/>
+                tools:text="200 OK" />
 
         </TableRow>
 
@@ -115,14 +115,14 @@
                 style="@style/Wood.TextAppearance.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wood_ssl"/>
+                android:text="@string/wood_ssl" />
 
             <TextView
                 android:id="@+id/wood_details_ssl"
                 style="@style/Wood.TextAppearance.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Yes"/>
+                tools:text="Yes" />
 
         </TableRow>
 
@@ -135,14 +135,14 @@
                 style="@style/Wood.TextAppearance.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wood_request_time"/>
+                android:text="@string/wood_request_time" />
 
             <TextView
                 android:id="@+id/wood_details_request_time"
                 style="@style/Wood.TextAppearance.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="05/02/17 11:52:49"/>
+                tools:text="05/02/17 11:52:49" />
 
         </TableRow>
 
@@ -154,14 +154,14 @@
                 style="@style/Wood.TextAppearance.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wood_response_time"/>
+                android:text="@string/wood_response_time" />
 
             <TextView
                 android:id="@+id/wood_details_response_time"
                 style="@style/Wood.TextAppearance.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="05/02/17 11:52:49"/>
+                tools:text="05/02/17 11:52:49" />
 
         </TableRow>
 
@@ -173,14 +173,14 @@
                 style="@style/Wood.TextAppearance.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wood_duration"/>
+                android:text="@string/wood_duration" />
 
             <TextView
                 android:id="@+id/wood_details_duration"
                 style="@style/Wood.TextAppearance.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="405 ms"/>
+                tools:text="405 ms" />
 
         </TableRow>
 
@@ -193,14 +193,14 @@
                 style="@style/Wood.TextAppearance.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wood_request_size"/>
+                android:text="@string/wood_request_size" />
 
             <TextView
                 android:id="@+id/wood_details_request_size"
                 style="@style/Wood.TextAppearance.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="53 KB"/>
+                tools:text="53 KB" />
 
         </TableRow>
 
@@ -212,14 +212,14 @@
                 style="@style/Wood.TextAppearance.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wood_response_size"/>
+                android:text="@string/wood_response_size" />
 
             <TextView
                 android:id="@+id/wood_details_response_size"
                 style="@style/Wood.TextAppearance.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="148 KB"/>
+                tools:text="148 KB" />
 
         </TableRow>
 
@@ -231,14 +231,14 @@
                 style="@style/Wood.TextAppearance.Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wood_total_size"/>
+                android:text="@string/wood_total_size" />
 
             <TextView
                 android:id="@+id/wood_details_total_size"
                 style="@style/Wood.TextAppearance.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="201 KB"/>
+                tools:text="201 KB" />
 
         </TableRow>
 

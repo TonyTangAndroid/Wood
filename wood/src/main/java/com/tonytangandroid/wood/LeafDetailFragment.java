@@ -46,22 +46,19 @@ import static com.tonytangandroid.wood.WoodColorUtil.SEARCHED_HIGHLIGHT_BACKGROU
 public class LeafDetailFragment extends Fragment implements View.OnClickListener, TextUtil.AsyncTextProvider, TextWatcher {
 
     private static final String ARG_ID = "arg_id";
+    private final BackgroundColorSpan colorSpan = new BackgroundColorSpan(SEARCHED_HIGHLIGHT_BACKGROUND_COLOR);
     private long id;
-
     private String searchKey;
     private WoodColorUtil colorUtil;
     private int currentSearchIndex;
     private Leaf leaf;
     private List<Integer> searchIndexList = new ArrayList<>(0);
     private ExecutorService executor = Executors.newSingleThreadExecutor();
-    private final Debouncer<String> searchDebouncer = new Debouncer<>(400, this::onSearchKeyEmitted);
-    private final BackgroundColorSpan colorSpan = new BackgroundColorSpan(SEARCHED_HIGHLIGHT_BACKGROUND_COLOR);
-
-
     private View search_bar;
     private EditText et_key_word;
     private TextView tv_search_count;
     private AppCompatTextView tv_body;
+    private final Debouncer<String> searchDebouncer = new Debouncer<>(400, this::onSearchKeyEmitted);
     private NestedScrollView nested_scroll_view;
     private FloatingActionButton floating_action_button;
 
