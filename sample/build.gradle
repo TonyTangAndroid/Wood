@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation project(':wood')
+    implementation project(':lib')
 //    debugImplementation project(':wood')
 //    releaseImplementation project(':wood-no-op')
 
