@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation project(':lib')
+    implementation project(':wood')
 //    debugImplementation project(':wood')
 //    releaseImplementation project(':wood-no-op')
     implementation "com.jakewharton.timber:timber:$timberVersion"
