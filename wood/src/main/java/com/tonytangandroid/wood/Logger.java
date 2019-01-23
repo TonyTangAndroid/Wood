@@ -5,7 +5,7 @@ import android.util.Log;
 
 @SuppressLint("LogNotTimber")
 class Logger {
-    private static final String LOG_TAG = "WoodInterceptor";
+    private static final String LOG_TAG = "WoodTree";
 
     public static void i(String message) {
         Log.i(LOG_TAG, message);

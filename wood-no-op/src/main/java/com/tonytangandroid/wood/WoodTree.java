@@ -2,22 +2,22 @@ package com.tonytangandroid.wood;
 
 import android.content.Context;
 
-public class WoodInterceptor {
+public class WoodTree {
 
     /**
      * @param context The current Context.
      */
-    public WoodInterceptor(Context context) {
+    public WoodTree(Context context) {
     }
 
     /**
      * Control whether a notification is shown while Timber log activity is recorded.
      *
      * @param sticky true to show a sticky notification.
-     * @return The {@link WoodInterceptor} instance.
+     * @return The {@link WoodTree} instance.
      */
 
-    public WoodInterceptor showNotification(boolean sticky) {
+    public WoodTree showNotification(boolean sticky) {
         return this;
     }
 
@@ -26,9 +26,9 @@ public class WoodInterceptor {
      * The default is one week.
      *
      * @param period the period for which to retain Timber log data.
-     * @return The {@link WoodInterceptor} instance.
+     * @return The {@link WoodTree} instance.
      */
-    public WoodInterceptor retainDataFor(Period period) {
+    public WoodTree retainDataFor(Period period) {
         return this;
     }
 
@@ -37,9 +37,9 @@ public class WoodInterceptor {
      * Warning: setting this value too high may cause unexpected results.
      *
      * @param max the maximum length (in bytes) for request/response content.
-     * @return The {@link WoodInterceptor} instance.
+     * @return The {@link WoodTree} instance.
      */
-    public WoodInterceptor maxContentLength(long max) {
+    public WoodTree maxContentLength(long max) {
         return this;
     }
 
@@ -47,9 +47,9 @@ public class WoodInterceptor {
      * Set headers names that shouldn't be stored by wood
      *
      * @param name the name of header to redact
-     * @return The {@link WoodInterceptor} instance.
+     * @return The {@link WoodTree} instance.
      */
-    public WoodInterceptor redactHeader(String name) {
+    public WoodTree redactHeader(String name) {
         return this;
     }
 

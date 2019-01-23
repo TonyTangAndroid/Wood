@@ -75,13 +75,13 @@ Wood.addAppShortcut(this);
 ##### Max Length
 Set Response Max length to store
 ```java
-new WoodInterceptor(context).maxContentLength(10240L)//the maximum length (in bytes)
+new WoodTree(context).maxContentLength(10240L)//the maximum length (in bytes)
 ```
 
 ##### Retention Period
 Set the retention period for Timber log data captured
 ```java
-new WoodInterceptor(context).retainDataFor(Period.ONE_WEEK)
+new WoodTree(context).retainDataFor(Period.ONE_WEEK)
 ```
  
 ## Acknowledgements
