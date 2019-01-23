@@ -165,8 +165,13 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
         ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle(leaf.getTag());
-        actionBar.setSubtitle(leaf.getDate().toString());
+        actionBar.setSubtitle(timeDesc(leaf));
         TextUtil.asyncSetText(executor, this);
+    }
+
+    @NonNull
+    private String timeDesc(Leaf leaf) {
+        return FormatUtils.timeDesc(leaf.getCreateAt());
     }
 
     @Override

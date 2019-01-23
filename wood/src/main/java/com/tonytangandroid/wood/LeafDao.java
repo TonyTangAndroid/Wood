@@ -12,8 +12,6 @@ import android.arch.persistence.room.Update;
 import android.support.annotation.IntRange;
 import android.util.Log;
 
-import java.util.Date;
-
 @Dao
 abstract class LeafDao {
     public static final int SEARCH_DEFAULT = Log.VERBOSE;
@@ -27,8 +25,8 @@ abstract class LeafDao {
     @Delete
     public abstract int deleteTransactions(Leaf... leaves);
 
-    @Query("DELETE FROM Leaf WHERE date < :beforeDate")
-    public abstract int deleteTransactionsBefore(Date beforeDate);
+    @Query("DELETE FROM Leaf WHERE createAt < :beforeDate")
+    public abstract int deleteTransactionsBefore(long beforeDate);
 
     @Query("DELETE FROM Leaf")
     public abstract int clearAll();
@@ -46,7 +44,7 @@ abstract class LeafDao {
     }
 
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("SELECT id,date,length,priority,body FROM Leaf WHERE (tag LIKE :endWildCard OR body LIKE :doubleWildCard) AND priority >= :priority ORDER BY id DESC")
+    @Query("SELECT id,createAt,length,priority,body FROM Leaf WHERE (tag LIKE :endWildCard OR body LIKE :doubleWildCard) AND priority >= :priority ORDER BY id DESC")
     abstract DataSource.Factory<Integer, Leaf> getAllTransactionsIncludeRequestResponse(String endWildCard, String doubleWildCard, int priority);
 
 }

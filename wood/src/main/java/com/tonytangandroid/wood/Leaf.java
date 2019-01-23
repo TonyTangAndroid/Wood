@@ -5,8 +5,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.Date;
-
 
 @Entity(tableName = "Leaf")
 class Leaf {
@@ -17,8 +15,8 @@ class Leaf {
     @PrimaryKey(autoGenerate = true)
     private long id;
 
-    @ColumnInfo(name = "date")
-    private Date date;
+    @ColumnInfo(name = "createAt")
+    private long createAt;
     @ColumnInfo(name = "tag")
     private String tag;
     @ColumnInfo(name = "priority")
@@ -44,12 +42,12 @@ class Leaf {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
+    public long getCreateAt() {
+        return createAt;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreateAt(long createAt) {
+        this.createAt = createAt;
     }
 
     public String getTag() {

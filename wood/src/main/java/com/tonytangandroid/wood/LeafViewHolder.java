@@ -16,7 +16,7 @@ class LeafViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView tv_time;
     private final TextView tv_tag;
-    private final TextView tv_size;
+    private final TextView tv_id;
     private final TextView tv_body;
 
     LeafViewHolder(View itemView,
@@ -28,7 +28,7 @@ class LeafViewHolder extends RecyclerView.ViewHolder {
         this.listener = listener;
         this.searchKey = searchKey;
         tv_time = itemView.findViewById(R.id.tv_time);
-        tv_size = itemView.findViewById(R.id.tv_size);
+        tv_id = itemView.findViewById(R.id.tv_id);
         tv_tag = itemView.findViewById(R.id.tv_tag);
         tv_body = itemView.findViewById(R.id.tv_body);
     }
@@ -36,9 +36,9 @@ class LeafViewHolder extends RecyclerView.ViewHolder {
 
     void bind(Leaf transaction) {
         tv_tag.setText(transaction.getTag());
-        tv_time.setText(transaction.getDate().toString());
+        tv_time.setText(FormatUtils.timeDesc(transaction.getCreateAt()));
         tv_body.setText(getHighlightedText(String.valueOf(transaction.body())));
-        tv_size.setText(String.valueOf(transaction.length()));
+        tv_id.setText(String.valueOf(transaction.getId()));
         tv_tag.setTextColor(WoodColorUtil.getInstance(context).getTransactionColor(transaction));
         itemView.setOnClickListener(v -> listener.onTransactionClicked(transaction));
     }

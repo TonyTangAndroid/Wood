@@ -49,7 +49,7 @@ class RetentionManager {
     }
 
     private void deleteSince(long threshold) {
-        long rows = woodDatabase.leafDao().deleteTransactionsBefore(new Date(threshold));
+        long rows = woodDatabase.leafDao().deleteTransactionsBefore(threshold);
         Logger.i(rows + " transactions deleted");
     }
 

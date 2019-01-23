@@ -50,8 +50,10 @@ android {
 }
 
 dependencies {
+
     implementation "javax.inject:javax.inject:$injectVersion"
     implementation "com.jakewharton.timber:timber:$timberVersion"
+    implementation "com.jakewharton.threetenabp:threetenabp:$abpVersion"
 
     implementation "com.android.support:design:$supportLibVersion"
     implementation "com.android.support:appcompat-v7:$supportLibVersion"

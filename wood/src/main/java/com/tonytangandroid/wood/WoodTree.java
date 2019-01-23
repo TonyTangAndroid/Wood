@@ -4,9 +4,10 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Date;
 import java.util.concurrent.Executor;
 
 import timber.log.Timber;
@@ -35,6 +36,7 @@ public class WoodTree extends Timber.DebugTree {
         this.context = context.getApplicationContext();
         woodDatabase = WoodDatabase.getInstance(context);
         retentionManager = new RetentionManager(this.context, DEFAULT_RETENTION);
+        AndroidThreeTen.init(context);
     }
 
     /**
@@ -89,7 +91,7 @@ public class WoodTree extends Timber.DebugTree {
     private void doLog(int priority, String tag, @NonNull String message, Throwable t) {
         Leaf transaction = new Leaf();
         transaction.setPriority(priority);
-        transaction.setDate(new Date());
+        transaction.setCreateAt(System.currentTimeMillis());
         transaction.setTag(tag);
         transaction.setLength(message.length());
         if (t != null) {
