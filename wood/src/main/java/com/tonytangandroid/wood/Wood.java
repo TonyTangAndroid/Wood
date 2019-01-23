@@ -38,7 +38,7 @@ public class Wood {
      * It can be used if you want to remove this shortcut later on.
      */
     @TargetApi(Build.VERSION_CODES.N_MR1)
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
     @Nullable
     public static String addAppShortcut(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
@@ -46,7 +46,7 @@ public class Wood {
             final ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
             final ShortcutInfo shortcut = new ShortcutInfo.Builder(context, id).setShortLabel("Wood")
                     .setLongLabel("Open Wood")
-                    .setIcon(Icon.createWithResource(context, R.drawable.wood_ic_shortcut_primary_24dp))
+                    .setIcon(Icon.createWithResource(context, R.drawable.wood_icon))
                     .setIntent(getLaunchIntent(context).setAction(Intent.ACTION_VIEW))
                     .build();
             shortcutManager.addDynamicShortcuts(Collections.singletonList(shortcut));

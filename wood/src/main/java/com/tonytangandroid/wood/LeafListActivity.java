@@ -43,7 +43,7 @@ public class LeafListActivity extends AppCompatActivity implements LeafAdapter.L
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wood_act_transaction_list);
+        setContentView(R.layout.wood_activity_leaf_list);
         Toolbar toolbar = findViewById(R.id.wood_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setSubtitle(getApplicationName());

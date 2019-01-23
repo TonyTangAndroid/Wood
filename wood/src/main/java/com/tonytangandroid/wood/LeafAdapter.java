@@ -43,7 +43,7 @@ class LeafAdapter extends PagedListAdapter<Leaf, LeafViewHolder> implements Prov
     @NonNull
     @Override
     public LeafViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = layoutInflater.inflate(R.layout.wood_list_item_transaction, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.wood_list_item_leaf, parent, false);
         return new LeafViewHolder(itemView, context, this, listener);
     }
 

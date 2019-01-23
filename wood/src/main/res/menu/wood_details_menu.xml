@@ -8,7 +8,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/copy"
-        android:icon="@drawable/ic_content_copy_white_24dp"
+        android:icon="@drawable/wood_content_copy_white_24dp"
         android:title="@string/copy"
         app:showAsAction="ifRoom" />
 </menu>

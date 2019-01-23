@@ -29,5 +29,5 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         tools:context=".internal.ui.TransactionListFragment"
-        tools:listitem="@layout/wood_list_item_transaction" />
+        tools:listitem="@layout/wood_list_item_leaf" />
 </LinearLayout>

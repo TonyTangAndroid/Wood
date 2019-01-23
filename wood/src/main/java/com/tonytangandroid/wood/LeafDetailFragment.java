@@ -84,7 +84,7 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.wood_frag_transaction_payload, container, false);
+        View rootView = inflater.inflate(R.layout.wood_fragment_leaf_detail, container, false);
         bindView(rootView);
         return rootView;
     }

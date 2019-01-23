@@ -55,7 +55,7 @@
             android:inputType="text"
             android:textColor="#FFFFFF"
             android:textColorHint="#33FFFFFF"
-            android:textCursorDrawable="@drawable/search_cursor"
+            android:textCursorDrawable="@drawable/wood_search_cursor"
             android:textSize="16sp"
             tools:ignore="LabelFor,UnusedAttribute" />
 

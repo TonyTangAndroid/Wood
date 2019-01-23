@@ -27,7 +27,7 @@ public class LeafDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wood_act_transaction_details);
+        setContentView(R.layout.wood_activity_leaf_details);
         long id = getIntent().getLongExtra(ARG_TRANSACTION_ID, 0);
         int priority = getIntent().getIntExtra(ARG_PRIORITY, Log.VERBOSE);
         WoodColorUtil colorUtil = WoodColorUtil.getInstance(this);
