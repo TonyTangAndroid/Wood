@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 @Database(entities = {Leaf.class}, version = 1, exportSchema = false)
-abstract class WoodDatabase extends RoomDatabase {
+public abstract class WoodDatabase extends RoomDatabase {
     private static WoodDatabase WOOD_DATABASE_INSTANCE;
 
     public static WoodDatabase getInstance(Context context) {

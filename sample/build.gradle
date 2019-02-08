@@ -26,7 +26,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -34,8 +34,6 @@ android {
 
 dependencies {
     implementation project(':wood')
-//    debugImplementation project(':wood')
-//    releaseImplementation project(':wood-no-op')
     implementation "com.jakewharton.timber:timber:$timberVersion"
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
 }
