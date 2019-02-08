@@ -17,12 +17,7 @@ public class WoodTree {
         return this;
     }
 
-
-    public WoodTree maxContentLength(long max) {
-        return this;
-    }
-
-    public WoodTree redactHeader(String name) {
+    public WoodTree maxLength(int max) {
         return this;
     }
 
