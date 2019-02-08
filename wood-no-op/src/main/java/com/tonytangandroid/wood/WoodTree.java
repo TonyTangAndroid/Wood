@@ -2,7 +2,12 @@ package com.tonytangandroid.wood;
 
 import android.content.Context;
 
-public class WoodTree {
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import timber.log.Timber;
+
+public class WoodTree extends Timber.Tree {
 
     public WoodTree(Context context) {
     }
@@ -19,6 +24,11 @@ public class WoodTree {
 
     public WoodTree maxLength(int max) {
         return this;
+    }
+
+    @Override
+    protected void log(int priority, @Nullable String tag, @NotNull String message, @Nullable Throwable t) {
+
     }
 
 
