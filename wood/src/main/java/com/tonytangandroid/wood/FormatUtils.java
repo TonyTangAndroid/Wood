@@ -12,10 +12,10 @@ import org.threeten.bp.Instant;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
-import org.threeten.bp.format.FormatStyle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 
@@ -96,7 +96,7 @@ class FormatUtils {
         ZoneId zoneId = ZoneId.of(TimeZone.getDefault().getID());
         Instant timeInstant = Instant.ofEpochMilli(nowInMilliseconds);
         ZonedDateTime zoneDateTime = ZonedDateTime.ofInstant(timeInstant, zoneId);
-        DateTimeFormatter pattern = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("HH:mm:ss.SSS MMM-dd", Locale.US);
         return zoneDateTime.format(pattern);
     }
 }
