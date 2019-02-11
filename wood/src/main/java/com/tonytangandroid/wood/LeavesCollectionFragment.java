@@ -94,7 +94,7 @@ public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Li
 
     @Override
     public void onItemsInserted(int firstInsertedItemPosition) {
-        recyclerView.smoothScrollToPosition(firstInsertedItemPosition);
+//        recyclerView.smoothScrollToPosition(firstInsertedItemPosition);
     }
 
     @Override
