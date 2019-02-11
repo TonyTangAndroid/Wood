@@ -23,11 +23,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/wood_transaction_list"
+    <fragment
+        android:id="@+id/wood_fragment"
+        android:name="com.tonytangandroid.wood.LeafListFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        tools:context=".internal.ui.TransactionListFragment"
-        tools:listitem="@layout/wood_list_item_leaf" />
+        android:layout_height="match_parent" />
+
 </LinearLayout>
