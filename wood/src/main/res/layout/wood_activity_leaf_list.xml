@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/wood_fragment"
-        android:name="com.tonytangandroid.wood.LeafListFragment"
+        android:name="com.tonytangandroid.wood.LeavesCollectionFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

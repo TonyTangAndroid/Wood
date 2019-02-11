@@ -18,7 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class LeafListFragment extends Fragment implements LeafAdapter.Listener, SearchView.OnQueryTextListener {
+public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Listener, SearchView.OnQueryTextListener {
 
     private LeafAdapter adapter;
     private ListDiffUtil listDiffUtil;
@@ -46,7 +46,7 @@ public class LeafListFragment extends Fragment implements LeafAdapter.Listener, 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.wood_fragment_leaf_list, container, false);
+        View rootView = inflater.inflate(R.layout.wood_fragment_leaves_collection, container, false);
         bindView(rootView);
         return rootView;
     }
