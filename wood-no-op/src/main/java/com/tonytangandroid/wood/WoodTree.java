@@ -53,6 +53,9 @@ public class WoodTree {
         return this;
     }
 
+    public WoodTree autoScroll(boolean autoScroll) {
+        return this;
+    }
 
     public enum Period {
         /**

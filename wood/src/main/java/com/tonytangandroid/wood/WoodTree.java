@@ -25,6 +25,7 @@ public class WoodTree extends Timber.DebugTree {
     @NonNull
     private RetentionManager retentionManager;
     private int maxContentLength = 250000;
+    private boolean autoScroll = false;
     private boolean stickyNotification = false;
 
     /**
@@ -60,6 +61,18 @@ public class WoodTree extends Timber.DebugTree {
     @NonNull
     public WoodTree retainDataFor(Period period) {
         retentionManager = new RetentionManager(context, period);
+        return this;
+    }
+
+    /**
+     * Set the log should auto scroll like Android Logcat console. By default it is false.
+     *
+     * @param autoScroll true if you want to make the log auto scroll.
+     * @return The {@link WoodTree} instance.
+     */
+    @NonNull
+    public WoodTree autoScroll(boolean autoScroll) {
+        this.autoScroll = autoScroll;
         return this;
     }
 
