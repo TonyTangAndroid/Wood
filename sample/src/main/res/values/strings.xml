@@ -3,4 +3,5 @@
     <string name="generate_timber_log">Generate Timber log</string>
     <string name="launch_wood_directly">Launch Wood directly</string>
     <string name="github_page">Github Page</string>
+    <string name="keep_generating_log">Keep generating log</string>
 </resources>

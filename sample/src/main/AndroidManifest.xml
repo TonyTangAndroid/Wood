@@ -19,6 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.tonytangandroid.wood.sample.GeneratingLogActivity"
+            android:label="@string/keep_generating_log" />
     </application>
 
 </manifest>

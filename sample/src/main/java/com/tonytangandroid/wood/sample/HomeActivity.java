@@ -19,8 +19,13 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         findViewById(R.id.btn_generate_log).setOnClickListener(view -> generateTimberLog());
+        findViewById(R.id.btn_test_extreme_log).setOnClickListener(view -> keepGenerateLog());
         findViewById(R.id.launch_wood_directly).setOnClickListener(view -> launchWoodDirectly());
         Wood.addAppShortcut(this);
+    }
+
+    private void keepGenerateLog() {
+        startActivity(new Intent(this, GeneratingLogActivity.class));
     }
 
     @Override
