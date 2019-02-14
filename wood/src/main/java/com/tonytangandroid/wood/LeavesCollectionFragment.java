@@ -94,7 +94,9 @@ public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Li
 
     @Override
     public void onItemsInserted(int firstInsertedItemPosition) {
-//        recyclerView.smoothScrollToPosition(firstInsertedItemPosition);
+        if (WoodTree.autoScroll(requireContext())) {
+            recyclerView.smoothScrollToPosition(firstInsertedItemPosition);
+        }
     }
 
     @Override

@@ -33,7 +33,8 @@ android {
 }
 
 dependencies {
-    implementation project(':wood')
+//    implementation project(':wood')
+    implementation project(':wood-no-op')
     implementation "com.jakewharton.timber:timber:$timberVersion"
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
 }

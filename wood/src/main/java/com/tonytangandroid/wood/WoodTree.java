@@ -1,6 +1,7 @@
 package com.tonytangandroid.wood;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -16,6 +17,8 @@ public class WoodTree extends Timber.DebugTree {
 
     @NonNull
     private static final Period DEFAULT_RETENTION = Period.ONE_WEEK;
+    private static final String PREF_WOOD_CONFIG = "pref_wood_config";
+    private static final String PREF_KEY_AUTO_SCROLL = "pref_key_auto_scroll";
     @NonNull
     private final Context context;
     @NonNull
@@ -27,6 +30,7 @@ public class WoodTree extends Timber.DebugTree {
     private RetentionManager retentionManager;
     private int maxContentLength = 250000;
     private boolean stickyNotification = false;
+    private final SharedPreferences sharedPreferences;
 
     /**
      * @param context The current Context.
@@ -37,7 +41,14 @@ public class WoodTree extends Timber.DebugTree {
         woodDatabase = WoodDatabase.getInstance(context);
         retentionManager = new RetentionManager(this.context, DEFAULT_RETENTION);
         AndroidThreeTen.init(context);
+        sharedPreferences = context.getSharedPreferences(PREF_WOOD_CONFIG, Context.MODE_PRIVATE);
     }
+
+    public static boolean autoScroll(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_WOOD_CONFIG, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(PREF_KEY_AUTO_SCROLL, true);
+    }
+
 
     /**
      * Control whether a notification is shown while Timber log is recorded.
@@ -62,6 +73,18 @@ public class WoodTree extends Timber.DebugTree {
     @NonNull
     public WoodTree retainDataFor(Period period) {
         retentionManager = new RetentionManager(context, period);
+        return this;
+    }
+
+    /**
+     * Set the log should auto scroll like Android Logcat console. By default it is false.
+     *
+     * @param autoScroll true if you want to make the log auto scroll.
+     * @return The {@link WoodTree} instance.
+     */
+    @NonNull
+    public WoodTree autoScroll(boolean autoScroll) {
+        sharedPreferences.edit().putBoolean(PREF_KEY_AUTO_SCROLL, autoScroll).apply();
         return this;
     }
 

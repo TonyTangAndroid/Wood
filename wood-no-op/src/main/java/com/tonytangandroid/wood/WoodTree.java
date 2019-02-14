@@ -31,6 +31,13 @@ public class WoodTree extends Timber.Tree {
 
     }
 
+    public WoodTree autoScroll(boolean autoScroll) {
+        return this;
+    }
+
+    public static boolean autoScroll(Context context) {
+        return false;
+    }
 
     public enum Period {
         ONE_HOUR,
