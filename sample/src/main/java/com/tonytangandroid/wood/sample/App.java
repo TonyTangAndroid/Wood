@@ -13,6 +13,7 @@ public class App extends Application {
         super.onCreate();
         Timber.plant(new WoodTree(this)
                 .retainDataFor(WoodTree.Period.FOREVER)
+                .autoScroll(false)
                 .maxLength(100000).showNotification(true));
 
     }
