@@ -57,6 +57,10 @@ public class WoodTree {
         return this;
     }
 
+    public static boolean autoScroll(Context context) {
+        return false;
+    }
+
     public enum Period {
         /**
          * Retain data for the last hour.

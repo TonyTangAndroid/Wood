@@ -1,6 +1,7 @@
 package com.tonytangandroid.wood;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -15,6 +16,8 @@ public class WoodTree extends Timber.DebugTree {
 
     @NonNull
     private static final Period DEFAULT_RETENTION = Period.ONE_WEEK;
+    private static final String PREF_WOOD_CONFIG = "pref_wood_config";
+    private static final String PREF_KEY_AUTO_SCROLL = "pref_key_auto_scroll";
     @NonNull
     private final Context context;
     @NonNull
@@ -25,8 +28,8 @@ public class WoodTree extends Timber.DebugTree {
     @NonNull
     private RetentionManager retentionManager;
     private int maxContentLength = 250000;
-    private boolean autoScroll = false;
     private boolean stickyNotification = false;
+    private final SharedPreferences sharedPreferences;
 
     /**
      * @param context The current Context.
@@ -36,7 +39,14 @@ public class WoodTree extends Timber.DebugTree {
         this.context = context.getApplicationContext();
         woodDatabase = WoodDatabase.getInstance(context);
         retentionManager = new RetentionManager(this.context, DEFAULT_RETENTION);
+        sharedPreferences = context.getSharedPreferences(PREF_WOOD_CONFIG, Context.MODE_PRIVATE);
     }
+
+    public static boolean autoScroll(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_WOOD_CONFIG, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(PREF_KEY_AUTO_SCROLL, true);
+    }
+
 
     /**
      * Control whether a notification is shown while Timber log is recorded.
@@ -72,7 +82,7 @@ public class WoodTree extends Timber.DebugTree {
      */
     @NonNull
     public WoodTree autoScroll(boolean autoScroll) {
-        this.autoScroll = autoScroll;
+        sharedPreferences.edit().putBoolean(PREF_KEY_AUTO_SCROLL, autoScroll).apply();
         return this;
     }
 
