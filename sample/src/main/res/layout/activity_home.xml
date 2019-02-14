@@ -15,6 +15,12 @@
         android:text="@string/generate_timber_log" />
 
     <Button
+        android:id="@+id/btn_test_extreme_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/keep_generating_log" />
+
+    <Button
         android:id="@+id/launch_wood_directly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

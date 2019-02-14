@@ -1,1 +1,11 @@
-<manifest package="com.tonytangandroid.wood" />
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tonytangandroid.wood">
+
+    <application>
+        <activity
+            android:name=".LeafListActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.tonytangandroid.wood.task"/>
+    </application>
+</manifest>

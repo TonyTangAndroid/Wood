@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
-class LeafDetailViewModel extends AndroidViewModel {
+public class LeafDetailViewModel extends AndroidViewModel {
     private final LeafDao mLeafDao;
 
     public LeafDetailViewModel(Application application) {

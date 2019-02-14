@@ -2,55 +2,33 @@ package com.tonytangandroid.wood;
 
 import android.content.Context;
 
-public class WoodTree {
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-    /**
-     * @param context The current Context.
-     */
+import timber.log.Timber;
+
+public class WoodTree extends Timber.Tree {
+
     public WoodTree(Context context) {
     }
 
-    /**
-     * Control whether a notification is shown while Timber log activity is recorded.
-     *
-     * @param sticky true to show a sticky notification.
-     * @return The {@link WoodTree} instance.
-     */
 
     public WoodTree showNotification(boolean sticky) {
         return this;
     }
 
-    /**
-     * Set the retention period for Timber log data.
-     * The default is one week.
-     *
-     * @param period the period for which to retain Timber log data.
-     * @return The {@link WoodTree} instance.
-     */
+
     public WoodTree retainDataFor(Period period) {
         return this;
     }
 
-    /**
-     * Set the maximum length for request and response content before it is truncated.
-     * Warning: setting this value too high may cause unexpected results.
-     *
-     * @param max the maximum length (in bytes) for request/response content.
-     * @return The {@link WoodTree} instance.
-     */
-    public WoodTree maxContentLength(long max) {
+    public WoodTree maxLength(int max) {
         return this;
     }
 
-    /**
-     * Set headers names that shouldn't be stored by wood
-     *
-     * @param name the name of header to redact
-     * @return The {@link WoodTree} instance.
-     */
-    public WoodTree redactHeader(String name) {
-        return this;
+    @Override
+    protected void log(int priority, @Nullable String tag, @NotNull String message, @Nullable Throwable t) {
+
     }
 
     public WoodTree autoScroll(boolean autoScroll) {
@@ -62,21 +40,9 @@ public class WoodTree {
     }
 
     public enum Period {
-        /**
-         * Retain data for the last hour.
-         */
         ONE_HOUR,
-        /**
-         * Retain data for the last day.
-         */
         ONE_DAY,
-        /**
-         * Retain data for the last week.
-         */
         ONE_WEEK,
-        /**
-         * Retain data forever.
-         */
         FOREVER
     }
 }

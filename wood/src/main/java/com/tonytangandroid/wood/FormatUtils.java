@@ -8,8 +8,15 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.widget.TextView;
 
+import org.threeten.bp.Instant;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 
 class FormatUtils {
@@ -50,7 +57,7 @@ class FormatUtils {
     public static CharSequence getShareText(Context context, Leaf transaction) {
         SpannableStringBuilder text = new SpannableStringBuilder();
         text.append(context.getString(R.string.wood_tag)).append(": ").append(v(transaction.getTag())).append("\n");
-        text.append(context.getString(R.string.wood_time)).append(": ").append(transaction.getDate().toString()).append("\n");
+        text.append(context.getString(R.string.wood_time)).append(": ").append(FormatUtils.timeDesc(transaction.getCreateAt())).append("\n");
         text.append(context.getString(R.string.wood_size)).append(": ").append(String.valueOf(transaction.length())).append("\n");
         text.append(context.getString(R.string.wood_body_truncated)).append(": ").append(String.valueOf(transaction.body())).append("\n");
         text.append("---------- ").append(" ----------\n\n");
@@ -83,5 +90,13 @@ class FormatUtils {
         }
 
         return new ArrayList<>(0);
+    }
+
+    public static String timeDesc(long nowInMilliseconds) {
+        ZoneId zoneId = ZoneId.of(TimeZone.getDefault().getID());
+        Instant timeInstant = Instant.ofEpochMilli(nowInMilliseconds);
+        ZonedDateTime zoneDateTime = ZonedDateTime.ofInstant(timeInstant, zoneId);
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("HH:mm:ss.SSS MMM-dd", Locale.US);
+        return zoneDateTime.format(pattern);
     }
 }

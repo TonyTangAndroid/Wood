@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
 class JobExecutor implements Executor {
 
     static final int INITIAL_POOL_SIZE = 2;
-    static final int MAX_POOL_SIZE = 10;
-    static final int KEEP_ALIVE_TIME = 10;
+    static final int MAX_POOL_SIZE = 5;
+    static final int KEEP_ALIVE_TIME = 3;
     static final TimeUnit KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS;
 
     ThreadPoolExecutor threadPoolExecutor;
@@ -31,7 +31,7 @@ class JobExecutor implements Executor {
 
 
     static class JobThreadFactory implements ThreadFactory {
-        static final String THREAD_NAME = "android_";
+        static final String THREAD_NAME = "log_";
         private int counter = 0;
 
         @Override

@@ -6,7 +6,7 @@
     <color name="wood_colorAccent">#bef67a</color>
 
     <color name="wood_status_default">@android:color/black</color>
-    <color name="wood_log_verbose">@android:color/darker_gray</color>
+    <color name="wood_log_verbose">@android:color/black</color>
     <color name="wood_log_debug">@android:color/holo_blue_light</color>
     <color name="wood_log_info">@android:color/holo_green_light</color>
     <color name="wood_log_warning">@android:color/holo_orange_light</color>
