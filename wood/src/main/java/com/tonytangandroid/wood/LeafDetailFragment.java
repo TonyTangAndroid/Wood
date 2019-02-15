@@ -293,10 +293,10 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.share_text) {
-            share(FormatUtils.getShareText(requireContext(), leaf));
+            share(FormatUtils.getShareText(leaf));
             return true;
         } else if (itemId == R.id.copy) {
-            copy(FormatUtils.getShareText(requireContext(), leaf));
+            copy(FormatUtils.getShareText(leaf));
             return true;
         } else {
             return super.onOptionsItemSelected(item);
