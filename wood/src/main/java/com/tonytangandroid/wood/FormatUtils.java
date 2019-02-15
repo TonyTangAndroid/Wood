@@ -1,10 +1,8 @@
 package com.tonytangandroid.wood;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.widget.TextView;
 
@@ -54,14 +52,8 @@ class FormatUtils {
     }
 
 
-    public static CharSequence getShareText(Context context, Leaf transaction) {
-        SpannableStringBuilder text = new SpannableStringBuilder();
-        text.append(context.getString(R.string.wood_tag)).append(": ").append(v(transaction.getTag())).append("\n");
-        text.append(context.getString(R.string.wood_time)).append(": ").append(FormatUtils.timeDesc(transaction.getCreateAt())).append("\n");
-        text.append(context.getString(R.string.wood_size)).append(": ").append(String.valueOf(transaction.length())).append("\n");
-        text.append(context.getString(R.string.wood_body_truncated)).append(": ").append(String.valueOf(transaction.body())).append("\n");
-        text.append("---------- ").append(" ----------\n\n");
-        return text;
+    public static CharSequence getShareText(Leaf transaction) {
+        return transaction.body();
     }
 
 
