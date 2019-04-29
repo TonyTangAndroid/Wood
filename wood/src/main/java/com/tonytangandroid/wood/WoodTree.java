@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -40,7 +39,6 @@ public class WoodTree extends Timber.DebugTree {
         this.context = context.getApplicationContext();
         woodDatabase = WoodDatabase.getInstance(context);
         retentionManager = new RetentionManager(this.context, DEFAULT_RETENTION);
-        AndroidThreeTen.init(context);
         sharedPreferences = context.getSharedPreferences(PREF_WOOD_CONFIG, Context.MODE_PRIVATE);
     }
 
