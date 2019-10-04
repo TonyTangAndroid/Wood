@@ -2,7 +2,7 @@ package com.tonytangandroid.wood;
 
 
 import android.os.Build;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.text.PrecomputedText;
 import android.widget.TextView;
 

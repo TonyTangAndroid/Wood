@@ -1,8 +1,8 @@
 package com.tonytangandroid.wood;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 public class LeafDetailViewModel extends AndroidViewModel {
     private final LeafDao mLeafDao;

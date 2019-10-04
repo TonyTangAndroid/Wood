@@ -1,6 +1,6 @@
 package com.tonytangandroid.wood;
 
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 import android.text.TextPaint;
 import android.text.style.CharacterStyle;
 import android.text.style.UpdateAppearance;

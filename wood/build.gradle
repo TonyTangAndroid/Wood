@@ -53,13 +53,13 @@ dependencies {
     implementation "javax.inject:javax.inject:$injectVersion"
     implementation "com.jakewharton.timber:timber:$timberVersion"
 
-    implementation "com.android.support:design:$supportLibVersion"
-    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation "com.google.android.material:material:$materialVersioon"
+    implementation "androidx.appcompat:appcompat:$appcompatVersioon"
 
-    implementation "android.arch.persistence.room:runtime:$roomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
-    implementation "android.arch.paging:runtime:$pagingVersion"
-    implementation "android.arch.lifecycle:extensions:$viewModelVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
 }
 
 // Place it at the end of the file

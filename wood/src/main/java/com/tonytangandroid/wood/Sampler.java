@@ -2,7 +2,7 @@ package com.tonytangandroid.wood;
 
 
 import android.os.Handler;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 class Sampler<V> {
 
