@@ -43,4 +43,7 @@ ext {
     timberVersion = '4.7.1'
     injectVersion = '1'
 
+    //test
+    truthVersion = '1.0'
+
 }

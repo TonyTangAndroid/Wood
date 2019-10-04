@@ -60,6 +60,10 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.paging:paging-runtime:$pagingVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "com.google.truth:truth:$truthVersion"
 }
 
 // Place it at the end of the file

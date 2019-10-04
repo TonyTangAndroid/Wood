@@ -37,4 +37,7 @@ dependencies {
 //    implementation project(':wood-no-op')
     implementation "com.jakewharton.timber:timber:$timberVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersioon"
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "com.google.truth:truth:$truthVersion"
 }
