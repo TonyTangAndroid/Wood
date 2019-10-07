@@ -2,12 +2,15 @@ package com.tonytangandroid.wood;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 
 import timber.log.Timber;
@@ -29,7 +32,9 @@ public class WoodTree extends Timber.DebugTree {
     private RetentionManager retentionManager;
     private int maxContentLength = 250000;
     private boolean stickyNotification = false;
+    private List<String> supportedTaggerList = new ArrayList<>();
     private final SharedPreferences sharedPreferences;
+    private int logLevel = Log.DEBUG;
 
     /**
      * @param context The current Context.
@@ -60,6 +65,26 @@ public class WoodTree extends Timber.DebugTree {
         notificationHelper = new NotificationHelper(this.context);
         return this;
     }
+
+    @NonNull
+    public WoodTree limitToTheseTaggerList(@NonNull List<String> supportedTaggerList) {
+        this.supportedTaggerList = supportedTaggerList;
+        return this;
+    }
+
+    /**
+     * If you want to only log warning or above, pass {@link  android.util.Log#WARN}.
+     * By default, it will log all debug log {@link  android.util.Log#DEBUG} or above
+     *
+     * @param logLevel the log level value from {@link android.util.Log}
+     * @return The {@link WoodTree} instance.
+     */
+    @NonNull
+    public WoodTree logLevel(int logLevel) {
+        this.logLevel = logLevel;
+        return this;
+    }
+
 
     /**
      * Set the retention period for Timber log data captured by this interceptor.
@@ -101,12 +126,41 @@ public class WoodTree extends Timber.DebugTree {
 
     @Override
     protected void log(final int priority, final String tag, final @NonNull String message, final Throwable t) {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                doLog(priority, tag, message, t);
+        if (shouldBeLogged(priority, tag)) {
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    doLog(priority, tag, message, t);
+                }
+            });
+        }
+
+    }
+
+    private boolean shouldBeLogged(int priority, String tag) {
+        if (priority < logLevel) {
+            return false;
+        }
+
+        if (hasNoTagFilter()) {
+            return true;
+        }
+
+        return tagIsListedCaseInsensitive(tag);
+    }
+
+    private boolean tagIsListedCaseInsensitive(String tag) {
+        String toLowerCase = tag.toLowerCase();
+        for (String supportedTagger : supportedTaggerList) {
+            if (supportedTagger.toLowerCase().contains(toLowerCase)) {
+                return true;
             }
-        });
+        }
+        return false;
+    }
+
+    private boolean hasNoTagFilter() {
+        return supportedTaggerList.size() == 0;
     }
 
     private void doLog(int priority, String tag, @NonNull String message, Throwable t) {

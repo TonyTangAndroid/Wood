@@ -5,6 +5,8 @@ import android.content.Context;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 import timber.log.Timber;
 
 public class WoodTree extends Timber.Tree {
@@ -29,6 +31,14 @@ public class WoodTree extends Timber.Tree {
     @Override
     protected void log(int priority, @Nullable String tag, @NotNull String message, @Nullable Throwable t) {
 
+    }
+
+    public WoodTree limitToTheseTaggerList(List<String> supportedTaggerList) {
+        return this;
+    }
+
+    public WoodTree logLevel(int logLevel) {
+        return this;
     }
 
     public WoodTree autoScroll(boolean autoScroll) {
