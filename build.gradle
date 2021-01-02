@@ -35,16 +35,16 @@ ext {
 
     versionCode = 19
     versionName = "2.0.0"
-    appcompatVersioon = '1.1.0'
-    materialVersioon = '1.0.0'
-    lifecycleVersion = '2.1.0'
-    pagingVersion = '2.1.0'
-    roomVersion = '2.1.0'
+    appcompatVersioon = '1.2.0'
+    materialVersioon = '1.2.1'
+    lifecycleVersion = '2.2.0'
+    pagingVersion = '2.1.2'
+    roomVersion = '2.2.6'
     abpVersion = '1.1.1'
     timberVersion = '4.7.1'
     injectVersion = '1'
 
     //test
-    truthVersion = '1.0'
+    truthVersion = '1.0.1'
 
 }
