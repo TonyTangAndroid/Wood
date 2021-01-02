@@ -80,7 +80,7 @@ public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Li
             currentSubscription.removeObservers(this);
         }
         currentSubscription = pagedListLiveData;
-        currentSubscription.observe(this, list -> consume(list, searchKey));
+        currentSubscription.observe(getViewLifecycleOwner(), list -> consume(list, searchKey));
     }
 
     private void consume(@Nullable PagedList<Leaf> transactionPagedList, String searchKey) {

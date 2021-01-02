@@ -127,7 +127,7 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
     private void observe() {
         LeafDetailViewModel viewModel = ViewModelProviders.of(requireActivity())
                 .get(LeafDetailViewModel.class);
-        viewModel.getTransactionWithId(id).observe(this, this::transactionUpdated);
+        viewModel.getTransactionWithId(id).observe(getViewLifecycleOwner(), this::transactionUpdated);
     }
 
     private void transactionUpdated(Leaf transaction) {
