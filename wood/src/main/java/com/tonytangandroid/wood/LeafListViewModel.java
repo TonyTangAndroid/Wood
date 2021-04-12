@@ -71,6 +71,7 @@ public class LeafListViewModel extends AndroidViewModel {
 
         @Override
         protected CharSequence doInBackground(Void... v) {
+            Timber.tag(TAG).d("Getting records");
             final List<Leaf> transactions = leafDao.getAllTransactions();
             Timber.tag(TAG).d("Sharing %d transactions", transactions.size());
             final SpannableStringBuilder sb = new SpannableStringBuilder();
