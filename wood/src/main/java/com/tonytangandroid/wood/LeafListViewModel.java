@@ -11,8 +11,6 @@ import androidx.paging.PagedList;
 
 
 public class LeafListViewModel extends AndroidViewModel {
-    private final static String TAG = "LeafListViewModel";
-
     private final static PagedList.Config config
             = new PagedList.Config.Builder()
             .setPageSize(15) // page size
