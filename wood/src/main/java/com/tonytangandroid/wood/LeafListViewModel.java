@@ -1,6 +1,7 @@
 package com.tonytangandroid.wood;
 
 import android.app.Application;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.text.SpannableStringBuilder;
 
@@ -9,8 +10,6 @@ import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
-
-import java.util.List;
 
 import timber.log.Timber;
 
@@ -72,13 +71,25 @@ public class LeafListViewModel extends AndroidViewModel {
         @Override
         protected CharSequence doInBackground(Void... v) {
             Timber.tag(TAG).d("Getting records");
-            final List<Leaf> transactions = leafDao.getAllTransactions();
-            Timber.tag(TAG).d("Sharing %d transactions", transactions.size());
+
             final SpannableStringBuilder sb = new SpannableStringBuilder();
 
-            for(Leaf leaf: transactions){
-                sb.append(FormatUtils.getShareTextFull(leaf));
-                sb.append("\n");
+            try (Cursor cursor = leafDao.getAllTransactions()) {
+                Leaf leaf = new Leaf();
+                if (cursor.isAfterLast()) return "No data";
+                int cCreateAt = cursor.getColumnIndex("createAt");
+                int cTag = cursor.getColumnIndex("tag");
+                int cPriority = cursor.getColumnIndex("priority");
+                int cBody = cursor.getColumnIndex("body");
+                while (cursor.moveToNext()) {
+                    leaf.setCreateAt(cursor.getLong(cCreateAt));
+                    leaf.setTag(cursor.getString(cTag));
+                    leaf.setPriority(cursor.getInt(cPriority));
+                    leaf.setBody(cursor.getString(cBody));
+
+                    sb.append(FormatUtils.getShareTextFull(leaf));
+                    sb.append("\n");
+                }
             }
 
             return sb;

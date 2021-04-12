@@ -10,6 +10,8 @@ import androidx.room.Query;
 import androidx.room.RoomWarnings;
 import androidx.room.Update;
 import androidx.annotation.IntRange;
+
+import android.database.Cursor;
 import android.util.Log;
 
 import java.util.List;
@@ -36,8 +38,8 @@ abstract class LeafDao {
     @Query("SELECT * FROM Leaf ORDER BY id DESC")
     public abstract DataSource.Factory<Integer, Leaf> getPagedTransactions();
 
-    @Query("SELECT * FROM Leaf ORDER BY id DESC LIMIT 1000")
-    public abstract List<Leaf> getAllTransactions();
+    @Query("SELECT * FROM Leaf ORDER BY id DESC LIMIT 10000")
+    public abstract Cursor getAllTransactions();
 
     @Query("SELECT * FROM Leaf WHERE id = :id")
     public abstract LiveData<Leaf> getTransactionsWithId(long id);
