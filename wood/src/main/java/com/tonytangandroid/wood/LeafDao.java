@@ -36,7 +36,7 @@ abstract class LeafDao {
     @Query("SELECT * FROM Leaf ORDER BY id DESC")
     public abstract DataSource.Factory<Integer, Leaf> getPagedTransactions();
 
-    @Query("SELECT * FROM Leaf ORDER BY id DESC")
+    @Query("SELECT * FROM Leaf ORDER BY id DESC LIMIT 1000")
     public abstract List<Leaf> getAllTransactions();
 
     @Query("SELECT * FROM Leaf WHERE id = :id")
