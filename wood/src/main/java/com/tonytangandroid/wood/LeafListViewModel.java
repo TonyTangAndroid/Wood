@@ -12,8 +12,12 @@ import androidx.paging.PagedList;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 
 public class LeafListViewModel extends AndroidViewModel {
+    private final static String TAG = "LeafListViewModel";
+
     private final static PagedList.Config config
             = new PagedList.Config.Builder()
             .setPageSize(15) // page size
@@ -68,6 +72,7 @@ public class LeafListViewModel extends AndroidViewModel {
         @Override
         protected CharSequence doInBackground(Void... v) {
             final List<Leaf> transactions = leafDao.getAllTransactions();
+            Timber.tag(TAG).d("Sharing %d transactions", transactions.size());
             final SpannableStringBuilder sb = new SpannableStringBuilder();
 
             for(Leaf leaf: transactions){
