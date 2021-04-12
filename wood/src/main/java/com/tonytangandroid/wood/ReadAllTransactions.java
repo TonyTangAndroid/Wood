@@ -26,8 +26,8 @@ public class ReadAllTransactions {
                 leaf.setPriority(cursor.getInt(cPriority));
                 leaf.setBody(cursor.getString(cBody));
 
-                sb.append(FormatUtils.getShareTextFull(leaf));
-                sb.append("\n");
+                sb.insert(0, "\n");
+                sb.insert(0, FormatUtils.getShareTextFull(leaf));
 
                 if (sb.length() > maxSize){
                     break;
