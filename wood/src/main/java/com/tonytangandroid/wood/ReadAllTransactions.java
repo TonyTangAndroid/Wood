@@ -1,25 +1,17 @@
 package com.tonytangandroid.wood;
 
 import android.database.Cursor;
-import android.os.AsyncTask;
-import android.text.SpannableStringBuilder;
 
-public class ReadAllAssyncTask extends AsyncTask<Void, Void, String> {
+public class ReadAllTransactions {
     private final LeafDao leafDao;
-    private Callback<String> callback;
+    public int maxSize = 100000;
 
-    public ReadAllAssyncTask(LeafDao leafDao) {
+    public ReadAllTransactions(LeafDao leafDao) {
         this.leafDao = leafDao;
     }
 
-    public void execute(Callback<String> callback){
-        this.callback = callback;
-        execute();
-    }
-
-    @Override
-    protected String doInBackground(Void... v) {
-        final SpannableStringBuilder sb = new SpannableStringBuilder();
+    public String load(){
+        final StringBuilder sb = new StringBuilder();
 
         try (Cursor cursor = leafDao.getAllTransactions()) {
             Leaf leaf = new Leaf();
@@ -37,20 +29,12 @@ public class ReadAllAssyncTask extends AsyncTask<Void, Void, String> {
                 sb.append(FormatUtils.getShareTextFull(leaf));
                 sb.append("\n");
 
-                if (sb.length() > 2000000){
+                if (sb.length() > maxSize){
                     break;
                 }
             }
         }
 
         return sb.toString();
-    }
-
-    @Override
-    protected void onPostExecute(String content) {
-        super.onPostExecute(content);
-        if (callback != null) {
-            callback.onEmit(content);
-        }
     }
 }

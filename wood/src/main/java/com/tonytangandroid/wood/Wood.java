@@ -9,7 +9,6 @@ import android.graphics.drawable.Icon;
 import android.os.Build;
 import androidx.annotation.Nullable;
 
-import java.io.InputStream;
 import java.util.Collections;
 
 /**
@@ -58,9 +57,15 @@ public class Wood {
 
     }
 
-    public static void getAllTransactions(Context context, Callback<String> callback){
+    /**
+     * Loads transactions to a string
+     * This method is blocking so it should be used only in a backgound thread
+     * @param maxSize Approximative maximum content size to return
+     */
+    public static String getAllTransactions(Context context, int maxSize){
         final LeafDao leafDao = WoodDatabase.getInstance(context).leafDao();
-        final ReadAllAssyncTask task = new ReadAllAssyncTask(leafDao);
-        task.execute(callback);
+        final ReadAllTransactions task = new ReadAllTransactions(leafDao);
+        task.maxSize = maxSize;
+        return task.load();
     }
 }
