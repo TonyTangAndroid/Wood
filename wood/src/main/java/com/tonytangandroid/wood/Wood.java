@@ -9,6 +9,7 @@ import android.graphics.drawable.Icon;
 import android.os.Build;
 import androidx.annotation.Nullable;
 
+import java.io.InputStream;
 import java.util.Collections;
 
 /**
@@ -55,5 +56,11 @@ public class Wood {
             return null;
         }
 
+    }
+
+    public static void getAllTransactions(Context context, Callback<String> callback){
+        final LeafDao leafDao = WoodDatabase.getInstance(context).leafDao();
+        final ReadAllAssyncTask task = new ReadAllAssyncTask(leafDao);
+        task.execute(callback);
     }
 }

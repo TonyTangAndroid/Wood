@@ -1,16 +1,6 @@
 package com.tonytangandroid.wood;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.paging.PagedList;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +8,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.snackbar.Snackbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Listener, SearchView.OnQueryTextListener {
 
@@ -112,10 +111,7 @@ public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Li
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.share_text) {
-            share(viewModel.getShareTransactions());
-            return true;
-        } else if (item.getItemId() == R.id.clear) {
+        if (item.getItemId() == R.id.clear) {
             viewModel.clearAll();
             NotificationHelper.clearBuffer();
             return true;
@@ -135,13 +131,6 @@ public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Li
     public boolean onQueryTextChange(String newText) {
         searchDebouncer.consume(newText);
         return true;
-    }
-
-    private void share(LeafListViewModel.BuildAsText textBuilder) {
-        Snackbar.make(recyclerView, R.string.preparing_content, Snackbar.LENGTH_LONG).show();
-        textBuilder.execute(content -> {
-            TextUtil.share(requireContext(), content);
-        });
     }
 
     static class TransactionListWithSearchKeyModel {
