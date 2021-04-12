@@ -34,7 +34,7 @@ ext {
     compileSdkVersion = 29
 
     versionCode = 20
-    versionName = "0.5.10"
+    versionName = "0.8.0"
     appcompatVersioon = '1.2.0'
     materialVersioon = '1.2.1'
     lifecycleVersion = '2.2.0'
