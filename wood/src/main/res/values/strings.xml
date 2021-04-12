@@ -12,4 +12,5 @@
     <string name="wood_notification_category">Wood Timber log notifications</string>
     <string name="wood_search_hint"><font size="12">Search Request and Headers</font></string>
     <string name="wood_copy">Copy</string>
+    <string name="preparing_content">The content for sharing is being prepared</string>
 </resources>

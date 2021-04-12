@@ -1,12 +1,16 @@
 package com.tonytangandroid.wood;
 
 import android.app.Application;
+import android.os.AsyncTask;
+import android.text.SpannableStringBuilder;
+
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
-import android.os.AsyncTask;
+
+import java.util.List;
 
 
 public class LeafListViewModel extends AndroidViewModel {
@@ -18,12 +22,12 @@ public class LeafListViewModel extends AndroidViewModel {
             .setEnablePlaceholders(true)
             .build();
     private final LeafDao mLeafDao;
-    private LiveData<PagedList<Leaf>> mTransactions;
+    private final LiveData<PagedList<Leaf>> mTransactions;
 
     public LeafListViewModel(Application application) {
         super(application);
         mLeafDao = WoodDatabase.getInstance(application).leafDao();
-        DataSource.Factory<Integer, Leaf> factory = mLeafDao.getAllTransactions();
+        DataSource.Factory<Integer, Leaf> factory = mLeafDao.getPagedTransactions();
         mTransactions = new LivePagedListBuilder<>(factory, config).build();
     }
 
@@ -42,6 +46,45 @@ public class LeafListViewModel extends AndroidViewModel {
 
     void clearAll() {
         new clearAsyncTask(mLeafDao).execute();
+    }
+
+    BuildAsText getShareTransactions(){
+        return new BuildAsText(mLeafDao);
+    }
+
+    public static class BuildAsText extends AsyncTask<Void, Void, CharSequence> {
+        private final LeafDao leafDao;
+        private Callback<CharSequence> callback;
+
+        public BuildAsText(LeafDao leafDao) {
+            this.leafDao = leafDao;
+        }
+
+        public void execute(Callback<CharSequence> callback){
+            this.callback = callback;
+            execute();
+        }
+
+        @Override
+        protected CharSequence doInBackground(Void... v) {
+            final List<Leaf> transactions = leafDao.getAllTransactions();
+            final SpannableStringBuilder sb = new SpannableStringBuilder();
+
+            for(Leaf leaf: transactions){
+                sb.append(FormatUtils.getShareTextFull(leaf));
+                sb.append("\n");
+            }
+
+            return sb;
+        }
+
+        @Override
+        protected void onPostExecute(CharSequence charSequence) {
+            super.onPostExecute(charSequence);
+            if (callback != null) {
+                callback.onEmit(charSequence);
+            }
+        }
     }
 
     private static class deleteAsyncTask extends AsyncTask<Leaf, Void, Integer> {

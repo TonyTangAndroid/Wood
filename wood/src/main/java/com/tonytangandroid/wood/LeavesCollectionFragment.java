@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Listener, SearchView.OnQueryTextListener {
 
     private LeafAdapter adapter;
@@ -110,7 +112,10 @@ public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Li
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.clear) {
+        if (item.getItemId() == R.id.share_text) {
+            share(viewModel.getShareTransactions());
+            return true;
+        } else if (item.getItemId() == R.id.clear) {
             viewModel.clearAll();
             NotificationHelper.clearBuffer();
             return true;
@@ -130,6 +135,13 @@ public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Li
     public boolean onQueryTextChange(String newText) {
         searchDebouncer.consume(newText);
         return true;
+    }
+
+    private void share(LeafListViewModel.BuildAsText textBuilder) {
+        Snackbar.make(recyclerView, R.string.preparing_content, Snackbar.LENGTH_LONG).show();
+        textBuilder.execute(content -> {
+            TextUtil.share(requireContext(), content);
+        });
     }
 
     static class TransactionListWithSearchKeyModel {

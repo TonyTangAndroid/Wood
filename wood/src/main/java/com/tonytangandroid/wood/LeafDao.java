@@ -12,6 +12,8 @@ import androidx.room.Update;
 import androidx.annotation.IntRange;
 import android.util.Log;
 
+import java.util.List;
+
 @Dao
 abstract class LeafDao {
     public static final int SEARCH_DEFAULT = Log.VERBOSE;
@@ -32,7 +34,10 @@ abstract class LeafDao {
     public abstract int clearAll();
 
     @Query("SELECT * FROM Leaf ORDER BY id DESC")
-    public abstract DataSource.Factory<Integer, Leaf> getAllTransactions();
+    public abstract DataSource.Factory<Integer, Leaf> getPagedTransactions();
+
+    @Query("SELECT * FROM Leaf ORDER BY id DESC")
+    public abstract List<Leaf> getAllTransactions();
 
     @Query("SELECT * FROM Leaf WHERE id = :id")
     public abstract LiveData<Leaf> getTransactionsWithId(long id);
