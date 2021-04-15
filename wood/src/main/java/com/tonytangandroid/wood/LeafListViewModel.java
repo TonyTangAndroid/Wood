@@ -1,12 +1,13 @@
 package com.tonytangandroid.wood;
 
 import android.app.Application;
+import android.os.AsyncTask;
+
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
-import android.os.AsyncTask;
 
 
 public class LeafListViewModel extends AndroidViewModel {
@@ -18,12 +19,12 @@ public class LeafListViewModel extends AndroidViewModel {
             .setEnablePlaceholders(true)
             .build();
     private final LeafDao mLeafDao;
-    private LiveData<PagedList<Leaf>> mTransactions;
+    private final LiveData<PagedList<Leaf>> mTransactions;
 
     public LeafListViewModel(Application application) {
         super(application);
         mLeafDao = WoodDatabase.getInstance(application).leafDao();
-        DataSource.Factory<Integer, Leaf> factory = mLeafDao.getAllTransactions();
+        DataSource.Factory<Integer, Leaf> factory = mLeafDao.getPagedTransactions();
         mTransactions = new LivePagedListBuilder<>(factory, config).build();
     }
 

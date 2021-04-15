@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.util.Log;
 import android.widget.TextView;
 
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +16,8 @@ import java.util.Locale;
 
 
 class FormatUtils {
+
+    private final static SimpleDateFormat FORMAT_TIME = new SimpleDateFormat("yy-MM-dd HH:mm:ss.SSS", Locale.US);
 
     public static CharSequence formatTextHighlight(String text, String searchKey) {
         if (TextUtil.isNullOrWhiteSpace(text) || TextUtil.isNullOrWhiteSpace(searchKey)) {
@@ -47,11 +51,18 @@ class FormatUtils {
         }
     }
 
-
     public static CharSequence getShareText(Leaf transaction) {
         return transaction.body();
     }
 
+    public static CharSequence getShareTextFull(Leaf transaction) {
+
+        return MessageFormat.format("{0} {1}/{2}: {3}",
+                timeDesc(transaction.getCreateAt()),
+                transactionPriority(transaction.getPriority()),
+                transaction.getTag(),
+                transaction.body());
+    }
 
     private static CharSequence v(CharSequence charSequence) {
         return (charSequence != null) ? charSequence : "";
@@ -82,7 +93,24 @@ class FormatUtils {
 
     public static String timeDesc(long nowInMilliseconds) {
         Date date = new Date(nowInMilliseconds);
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS MMM-dd", Locale.US);
-        return formatter.format(date);
+        return FORMAT_TIME.format(date);
+    }
+
+    public static String transactionPriority(int priority) {
+        if (priority == Log.VERBOSE) {
+            return "V";
+        } else if (priority == Log.DEBUG) {
+            return "D";
+        } else if (priority == Log.INFO) {
+            return "I";
+        } else if (priority == Log.WARN) {
+            return "W";
+        } else if (priority == Log.ERROR) {
+            return "E";
+        } else if (priority == Log.ASSERT) {
+            return "A";
+        } else {
+            return String.valueOf(priority);
+        }
     }
 }

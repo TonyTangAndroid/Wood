@@ -56,4 +56,16 @@ public class Wood {
         }
 
     }
+
+    /**
+     * Loads transactions to a string
+     * This method is blocking so it should be used only in a backgound thread or in a coroutine
+     * @param maxSize Approximate maximum content size to return. In fact the size can be slightly bigger
+     */
+    public static String getAllTransactions(Context context, int maxSize){
+        final LeafDao leafDao = WoodDatabase.getInstance(context).leafDao();
+        final ReadAllTransactions task = new ReadAllTransactions(leafDao);
+        task.maxSize = maxSize;
+        return task.load();
+    }
 }

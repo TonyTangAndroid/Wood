@@ -1,5 +1,5 @@
 package com.tonytangandroid.wood;
 
-interface Callback<T> {
+public interface Callback<T> {
     void onEmit(T event);
 }

@@ -1,6 +1,8 @@
 package com.tonytangandroid.wood;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import androidx.appcompat.widget.AppCompatTextView;
 import android.text.PrecomputedText;
@@ -64,5 +66,13 @@ class TextUtil {
         CharSequence getText();
 
         AppCompatTextView getTextView();
+    }
+
+    public static void share(Context context, CharSequence content) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, content);
+        sendIntent.setType("text/plain");
+        context.startActivity(Intent.createChooser(sendIntent, null));
     }
 }
