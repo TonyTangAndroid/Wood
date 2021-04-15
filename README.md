@@ -8,6 +8,35 @@ Wood is a simple in-app Timber log recorder. Wood records and persists all Timbe
 1. Apps using Wood will display a notification showing a summary of ongoing Timber log activity. Tapping on the notification launches the full Wood UI. Apps can optionally suppress the notification, and launch the Wood UI directly from within their own interface. Log can be copied into clipboard or exported via a share intent.
 2. Search Log by any keyword.
 3. The main Wood activity is launched in its own task, allowing it to be displayed alongside the host app UI using Android 7.x multi-window support.
+4. Allows to grab whole log as a string (recent records limited by file size). Example of usage:
+
+```kotlin
+    GlobalScope.launch {
+        val content = Wood.getAllTransactions(this@MainActivity, 1000000)
+            sendLogs(content.toByteArray())
+    }
+
+    private fun sendLogs(content: ByteArray) {
+        val storage = Firebase.storage
+
+        val fileName = "${FORMAT_LOG_FILE_NAME.format(System.currentTimeMillis())}.log"
+        Timber.tag(TAG).w("Sending log file $fileName to cloud")
+
+        val fileRef = storage.getReference("logs/$fileName")
+        fileRef.putBytes(content)
+            .addOnFailureListener { ex ->
+                Timber.tag(TAG).e(ex, "Failed to upload logs")
+                Snackbar.make(rootView, R.string.logs_upload_failed, Snackbar.LENGTH_LONG)
+                    .show()
+            }
+            .addOnSuccessListener {
+                Timber.tag(TAG).w("Logs uploaded.")
+                Snackbar.make(rootView, R.string.logs_uploaded, Snackbar.LENGTH_LONG)
+                    .show()
+            }
+
+    }
+```
 
 Wood requires Android 4.1+ and Timber.
 
