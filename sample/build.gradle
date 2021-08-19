@@ -40,6 +40,6 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$timberVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersioon"
 
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation "junit:junit:$junit"
     testImplementation "com.google.truth:truth:$truthVersion"
 }

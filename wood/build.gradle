@@ -52,16 +52,18 @@ dependencies {
 
     api "javax.inject:javax.inject:$injectVersion"
     api "com.jakewharton.timber:timber:$timberVersion"
+    //noinspection GradleDependency
     api "com.google.android.material:material:$materialVersioon"
     api "androidx.appcompat:appcompat:$appcompatVersioon"
     api "androidx.room:room-runtime:$roomVersion"
+    //noinspection GradleDependency
     api "androidx.paging:paging-runtime:$pagingVersion"
     api "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
 
 
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
 
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation "junit:junit:$junit"
     testImplementation "com.google.truth:truth:$truthVersion"
 }
 
