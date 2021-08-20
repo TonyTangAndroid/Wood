@@ -50,15 +50,15 @@ android {
 
 dependencies {
 
-    api "javax.inject:javax.inject:$injectVersion"
-    api "com.jakewharton.timber:timber:$timberVersion"
+    implementation "javax.inject:javax.inject:$injectVersion"
+    implementation "com.jakewharton.timber:timber:$timberVersion"
     //noinspection GradleDependency
-    api "com.google.android.material:material:$materialVersioon"
-    api "androidx.appcompat:appcompat:$appcompatVersioon"
-    api "androidx.room:room-runtime:$roomVersion"
+    implementation "com.google.android.material:material:$materialVersioon"
+    implementation "androidx.appcompat:appcompat:$appcompatVersioon"
+    implementation "androidx.room:room-runtime:$roomVersion"
     //noinspection GradleDependency
-    api "androidx.paging:paging-runtime:$pagingVersion"
-    api "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
 
 
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
