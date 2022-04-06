@@ -31,8 +31,6 @@ android {
         consumerProguardFiles 'proguard-rules.pro'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
     }
 
     buildTypes {
