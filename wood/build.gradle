@@ -49,6 +49,7 @@ android {
 }
 
 dependencies {
+    api 'com.github.tzltdc:SafePendingIntent:0.1'
 
     implementation "javax.inject:javax.inject:$injectVersion"
     implementation "com.jakewharton.timber:timber:$timberVersion"

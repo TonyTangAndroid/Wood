@@ -15,6 +15,8 @@ import android.util.LongSparseArray;
 
 import static android.text.Spanned.SPAN_INCLUSIVE_EXCLUSIVE;
 
+import com.tony.tang.safe.pending.intent.sdk.SafePendingIntent;
+
 class NotificationHelper {
 
     private static final String CHANNEL_ID = "wood_notification_log_channel";
@@ -59,7 +61,7 @@ class NotificationHelper {
     public synchronized void show(Leaf transaction, boolean stickyNotification) {
         addToBuffer(transaction);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, CHANNEL_ID)
-                .setContentIntent(PendingIntent.getActivity(mContext, 0, Wood.getLaunchIntent(mContext), 0))
+                .setContentIntent(SafePendingIntent.getActivity(mContext, 0, Wood.getLaunchIntent(mContext), 0))
                 .setLocalOnly(true)
                 .setSmallIcon(R.drawable.wood_icon)
                 .setColor(ContextCompat.getColor(mContext, R.color.wood_colorPrimary))
@@ -102,7 +104,7 @@ class NotificationHelper {
     private NotificationCompat.Action getClearAction() {
         CharSequence clearTitle = mContext.getString(R.string.wood_clear);
         Intent deleteIntent = new Intent(mContext, ClearTransactionsService.class);
-        PendingIntent intent = PendingIntent.getService(mContext, 11, deleteIntent, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent intent = SafePendingIntent.getService(mContext, 11, deleteIntent, PendingIntent.FLAG_ONE_SHOT);
         return new NotificationCompat.Action(R.drawable.wood_ic_delete_white_24dp, clearTitle, intent);
     }
 
@@ -110,7 +112,7 @@ class NotificationHelper {
     private NotificationCompat.Action getDismissAction() {
         CharSequence dismissTitle = mContext.getString(R.string.wood_dismiss);
         Intent dismissIntent = new Intent(mContext, DismissNotificationService.class);
-        PendingIntent intent = PendingIntent.getService(mContext, 12, dismissIntent, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent intent = SafePendingIntent.getService(mContext, 12, dismissIntent, PendingIntent.FLAG_ONE_SHOT);
         return new NotificationCompat.Action(0, dismissTitle, intent);
     }
 
