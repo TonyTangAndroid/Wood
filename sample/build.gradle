@@ -9,7 +9,7 @@ android {
             storePassword 'tony_dev_sign'
         }
     }
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdk rootProject.ext.compileSdkVersion
 
     compileOptions {
         sourceCompatibility 1.8
@@ -18,8 +18,8 @@ android {
 
     defaultConfig {
         applicationId "com.tonytangandroid.github.wood.sample"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdk rootProject.ext.minSdkVersion
+        targetSdk rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         signingConfig signingConfigs.tony_dev_sign
