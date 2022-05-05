@@ -9,7 +9,6 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.fragment.app.Fragment;
 import androidx.core.widget.NestedScrollView;
 import androidx.appcompat.app.ActionBar;
@@ -27,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,7 +57,7 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
     private AppCompatTextView tv_body;
     private final Debouncer<String> searchDebouncer = new Debouncer<>(400, this::onSearchKeyEmitted);
     private NestedScrollView nested_scroll_view;
-    private FloatingActionButton floating_action_button;
+    private Button wood_details_search_btn;
 
 
     public static LeafDetailFragment newInstance(long id) {
@@ -89,14 +89,14 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
     private void bindView(View rootView) {
         tv_body = rootView.findViewById(R.id.wood_details_body);
         nested_scroll_view = rootView.findViewById(R.id.wood_details_scroll_parent);
-        floating_action_button = rootView.findViewById(R.id.wood_details_search_fab);
+        wood_details_search_btn = rootView.findViewById(R.id.wood_details_search_btn);
         search_bar = rootView.findViewById(R.id.wood_details_search_bar);
         View searchBarPrev = rootView.findViewById(R.id.wood_details_search_prev);
         View searchBarNext = rootView.findViewById(R.id.wood_details_search_next);
         View searchBarClose = rootView.findViewById(R.id.wood_details_search_close);
         et_key_word = rootView.findViewById(R.id.wood_details_search);
         tv_search_count = rootView.findViewById(R.id.wood_details_search_count);
-        floating_action_button.setOnClickListener(this);
+        wood_details_search_btn.setOnClickListener(this);
         searchBarPrev.setOnClickListener(this);
         searchBarNext.setOnClickListener(this);
         searchBarClose.setOnClickListener(this);
@@ -137,7 +137,6 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
 
     private void populateUI() {
         int color = colorUtil.getTransactionColor(leaf);
-        floating_action_button.setBackgroundTintList(colorStateList(color));
         search_bar.setBackgroundColor(color);
         et_key_word.setHint(R.string.wood_search_hint);
         populateBody();
@@ -255,7 +254,7 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.wood_details_search_fab) {
+        if (id == R.id.wood_details_search_btn) {
             showSearch();
         } else if (id == R.id.wood_details_search_close) {
             clearSearch();
@@ -268,7 +267,7 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
 
     private void clearSearch() {
         if (TextUtil.isNullOrWhiteSpace(searchKey)) {
-            floating_action_button.show();
+            wood_details_search_btn.setVisibility(View.VISIBLE);
             search_bar.setVisibility(View.GONE);
             nested_scroll_view.setPadding(0, 0, 0, nested_scroll_view.getBottom());
             hideKeyboard();
@@ -278,7 +277,7 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
     }
 
     private void showSearch() {
-        floating_action_button.hide();
+        wood_details_search_btn.setVisibility(View.GONE);
         search_bar.setVisibility(View.VISIBLE);
         nested_scroll_view.setPadding(0, getResources().getDimensionPixelSize(R.dimen.wood_search_bar_height), 0, nested_scroll_view.getBottom());
         showKeyboard();

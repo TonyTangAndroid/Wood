@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import com.google.android.material.appbar.AppBarLayout;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,10 +28,6 @@ public class LeafDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wood_activity_leaf_details);
         long id = getIntent().getLongExtra(ARG_TRANSACTION_ID, 0);
-        int priority = getIntent().getIntExtra(ARG_PRIORITY, Log.VERBOSE);
-        WoodColorUtil colorUtil = WoodColorUtil.getInstance(this);
-        AppBarLayout appBarLayout = findViewById(R.id.wood_details_appbar);
-        appBarLayout.setBackgroundColor(colorUtil.getTransactionColor(priority));
         Toolbar toolbar = findViewById(R.id.wood_details_toolbar);
         setSupportActionBar(toolbar);
         final ActionBar actionBar = getSupportActionBar();
