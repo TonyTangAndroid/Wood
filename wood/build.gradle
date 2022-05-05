@@ -51,7 +51,6 @@ dependencies {
 
     implementation "javax.inject:javax.inject:$injectVersion"
     implementation "com.jakewharton.timber:timber:$timberVersion"
-    //noinspection GradleDependency
     implementation "com.google.android.material:material:$materialVersioon"
     implementation "androidx.appcompat:appcompat:$appcompatVersioon"
     implementation "androidx.room:room-runtime:$roomVersion"
