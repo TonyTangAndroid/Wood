@@ -43,14 +43,14 @@ android {
 
 dependencies {
     api 'com.github.tzltdc:SafePendingIntent:0.1'
-
-    implementation "javax.inject:javax.inject:$injectVersion"
-    implementation "com.jakewharton.timber:timber:$timberVersion"
-    implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    implementation "androidx.room:room-runtime:$roomVersion"
+    api "javax.inject:javax.inject:$injectVersion"
+    api "com.jakewharton.timber:timber:$timberVersion"
+    api "androidx.appcompat:appcompat:$appcompatVersion"
+    api "androidx.room:room-runtime:$roomVersion"
     //noinspection GradleDependency
-    implementation "androidx.paging:paging-runtime:$pagingVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    api "androidx.paging:paging-runtime:$pagingVersion"
+    api "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    api "com.google.android.material:material:$materialVersioon"
 
 
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
