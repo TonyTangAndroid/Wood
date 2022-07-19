@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,13 +22,14 @@
             android:textIsSelectable="true" />
     </androidx.core.widget.NestedScrollView>
 
-    <Button
-        android:id="@+id/wood_details_search_btn"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/wood_details_search_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:text="Search"
+        android:src="@drawable/wood_ic_search_white_24dp"
+        app:fabSize="mini"
       tools:ignore="HardcodedText" />
 
     <LinearLayout
