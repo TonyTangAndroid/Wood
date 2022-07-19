@@ -1,5 +1,6 @@
-apply plugin: 'com.android.library'
-
+plugins {
+    id 'com.android.library'
+}
 ext {
     bintrayRepo = 'maven'
     bintrayName = 'Wood'
@@ -33,12 +34,6 @@ android {
         targetSdk rootProject.ext.targetSdkVersion
     }
 
-    buildTypes {
-        debug {
-            defaultPublishConfig "debug"
-        }
-    }
-
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
@@ -51,7 +46,7 @@ dependencies {
 
     implementation "javax.inject:javax.inject:$injectVersion"
     implementation "com.jakewharton.timber:timber:$timberVersion"
-    implementation "androidx.appcompat:appcompat:$appcompatVersioon"
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
     //noinspection GradleDependency
     implementation "androidx.paging:paging-runtime:$pagingVersion"
@@ -63,7 +58,3 @@ dependencies {
     testImplementation "junit:junit:$junit"
     testImplementation "com.google.truth:truth:$truthVersion"
 }
-
-// Place it at the end of the file
-//apply from: 'install_lib.gradle'
-//apply from: 'bintray_lib.gradle'
