@@ -32,6 +32,8 @@ android {
         consumerProguardFiles 'proguard-rules.pro'
         minSdk rootProject.ext.minSdkVersion
         targetSdk rootProject.ext.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     compileOptions {
@@ -54,6 +56,10 @@ dependencies {
 
 
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation "com.google.truth:truth:$truthVersion"
 
     testImplementation "junit:junit:$junit"
     testImplementation "com.google.truth:truth:$truthVersion"
