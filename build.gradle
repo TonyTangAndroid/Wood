@@ -16,7 +16,7 @@ ext {
     materialVersioon = '1.6.1'
     lifecycleVersion = '2.2.0'
     pagingVersion = '2.1.2'
-    roomVersion = '2.4.2'
+    roomVersion = '2.4.3'
     timberVersion = '5.0.1'
     injectVersion = '1'
 
