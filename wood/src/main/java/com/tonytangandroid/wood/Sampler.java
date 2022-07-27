@@ -40,24 +40,24 @@ class Sampler<V> {
         static final int STATE_QUEUED = 2;
         static final int STATE_RUNNING = 3;
         static final int STATE_FINISHED = 4;
-        private final Callback<T> mCallback;
+        private final Callback<T> callback;
         int state;
-        private T mEvent;
+        private T event;
 
         Counter(T event, Callback<T> callback) {
-            mEvent = event;
-            mCallback = callback;
+            this.event = event;
+            this.callback = callback;
             state = STATE_CREATED;
         }
 
         void updateEvent(T deliverable) {
-            this.mEvent = deliverable;
+            this.event = deliverable;
         }
 
         @Override
         public void run() {
             state = STATE_RUNNING;
-            mCallback.onEmit(mEvent);
+            callback.onEmit(event);
             state = STATE_FINISHED;
         }
     }

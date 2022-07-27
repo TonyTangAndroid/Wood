@@ -1,6 +1,7 @@
 package com.tonytangandroid.wood;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Li
     private LiveData<PagedList<Leaf>> currentSubscription;
 
     // 100 mills delay. batch all changes in 100 mills and emit last item at the end of 100 mills
-    private Sampler<TransactionListWithSearchKeyModel> transactionSampler = new Sampler<>(100, new Callback<TransactionListWithSearchKeyModel>() {
+    private final Sampler<TransactionListWithSearchKeyModel> transactionSampler = new Sampler<>(100, new Callback<TransactionListWithSearchKeyModel>() {
         @Override
         public void onEmit(TransactionListWithSearchKeyModel event) {
             listDiffUtil.setSearchKey(event.searchKey);
@@ -36,7 +37,7 @@ public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Li
     });
 
     // 300 mills delay min. Max no limit
-    private Debouncer<String> searchDebouncer = new Debouncer<>(300, new Callback<String>() {
+    private final Debouncer<String> searchDebounce = new Debouncer<>(300, new Callback<String>() {
         @Override
         public void onEmit(String event) {
             loadResults(event, viewModel.getTransactions(event));
@@ -71,7 +72,7 @@ public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Li
         recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-        viewModel = ViewModelProviders.of(this).get(LeafListViewModel.class);
+        viewModel = new ViewModelProvider(this).get(LeafListViewModel.class);
         loadResults(null, viewModel.getTransactions(null));
     }
 
@@ -100,7 +101,7 @@ public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Li
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater menuInflater) {
         menuInflater.inflate(R.menu.wood_list_menu, menu);
         MenuItem searchMenuItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) searchMenuItem.getActionView();
@@ -128,7 +129,7 @@ public class LeavesCollectionFragment extends Fragment implements LeafAdapter.Li
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        searchDebouncer.consume(newText);
+        searchDebounce.consume(newText);
         return true;
     }
 
