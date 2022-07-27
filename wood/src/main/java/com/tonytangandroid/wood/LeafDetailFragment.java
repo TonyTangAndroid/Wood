@@ -1,6 +1,6 @@
 package com.tonytangandroid.wood;
 
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -50,12 +50,12 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
     private int currentSearchIndex;
     private Leaf leaf;
     private List<Integer> searchIndexList = new ArrayList<>(0);
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private View search_bar;
     private EditText et_key_word;
     private TextView tv_search_count;
     private AppCompatTextView tv_body;
-    private final Debouncer<String> searchDebouncer = new Debouncer<>(400, this::onSearchKeyEmitted);
+    private final Debouncer<String> searchDebounce = new Debouncer<>(400, this::onSearchKeyEmitted);
     private NestedScrollView nested_scroll_view;
     private FloatingActionButton floating_action_button;
 
@@ -110,7 +110,7 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        searchDebouncer.consume(s.toString());
+        searchDebounce.consume(s.toString());
     }
 
     @Override
@@ -125,9 +125,12 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
     }
 
     private void observe() {
-        LeafDetailViewModel viewModel = ViewModelProviders.of(requireActivity())
-                .get(LeafDetailViewModel.class);
+        LeafDetailViewModel viewModel = create();
         viewModel.getTransactionWithId(id).observe(getViewLifecycleOwner(), this::transactionUpdated);
+    }
+
+    private LeafDetailViewModel create() {
+        return new ViewModelProvider(requireActivity()).get(LeafDetailViewModel.class);
     }
 
     private void transactionUpdated(Leaf transaction) {
@@ -244,6 +247,7 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         if (!isVisibleToUser) {
@@ -285,7 +289,7 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater menuInflater) {
         menuInflater.inflate(R.menu.wood_details_menu, menu);
     }
 
