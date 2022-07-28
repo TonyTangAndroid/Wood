@@ -52,6 +52,10 @@ dependencies {
     api "androidx.appcompat:appcompat:$appcompatVersion"
     api "androidx.room:room-runtime:$roomVersion"
     api "androidx.room:room-rxjava2:$roomVersion"
+
+    api "com.uber.autodispose:autodispose:1.4.0"
+    api "com.uber.autodispose:autodispose-android:1.4.0"
+    api "com.uber.autodispose:autodispose-android-archcomponents:1.4.0"
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
     api "androidx.paging:paging-rxjava2:$pagingVersion"
     api "androidx.paging:paging-runtime:$pagingVersion"
