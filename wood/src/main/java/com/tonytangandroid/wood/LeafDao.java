@@ -19,9 +19,6 @@ abstract class LeafDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract long insertTransaction(Leaf leaf);
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    public abstract int updateTransaction(Leaf leafs);
-
     @Delete
     public abstract int deleteTransactions(Leaf... leaves);
 

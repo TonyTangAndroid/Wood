@@ -8,7 +8,7 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import android.os.AsyncTask;
 
-
+@SuppressWarnings("deprecation")
 public class LeafListViewModel extends AndroidViewModel {
     private final static PagedList.Config config
             = new PagedList.Config.Builder()
@@ -17,38 +17,37 @@ public class LeafListViewModel extends AndroidViewModel {
             .setPrefetchDistance(10)// trigger when to fetch a page
             .setEnablePlaceholders(true)
             .build();
-    private final LeafDao mLeafDao;
-    private LiveData<PagedList<Leaf>> mTransactions;
+    private final LeafDao leafDao;
+    private final LiveData<PagedList<Leaf>> transactions;
 
     public LeafListViewModel(Application application) {
         super(application);
-        mLeafDao = WoodDatabase.getInstance(application).leafDao();
-        DataSource.Factory<Integer, Leaf> factory = mLeafDao.getAllTransactions();
-        mTransactions = new LivePagedListBuilder<>(factory, config).build();
+        leafDao = WoodDatabase.getInstance(application).leafDao();
+        transactions = new LivePagedListBuilder<>(leafDao.getAllTransactions(), config).build();
     }
 
     LiveData<PagedList<Leaf>> getTransactions(String key) {
         if (key == null || key.trim().length() == 0) {
-            return mTransactions;
+            return transactions;
         } else {
-            DataSource.Factory<Integer, Leaf> factory = mLeafDao.getAllTransactionsWith(key, LeafDao.SEARCH_DEFAULT);
+            DataSource.Factory<Integer, Leaf> factory = leafDao.getAllTransactionsWith(key, LeafDao.SEARCH_DEFAULT);
             return new LivePagedListBuilder<>(factory, config).build();
         }
     }
 
     public void deleteItem(Leaf transaction) {
-        new deleteAsyncTask(mLeafDao).execute(transaction);
+        new DeleteAsyncTask(leafDao).execute(transaction);
     }
 
     void clearAll() {
-        new clearAsyncTask(mLeafDao).execute();
+        new ClearAsyncTask(leafDao).execute();
     }
 
-    private static class deleteAsyncTask extends AsyncTask<Leaf, Void, Integer> {
+    private static class DeleteAsyncTask extends AsyncTask<Leaf, Void, Integer> {
 
         private final LeafDao leafDao;
 
-        deleteAsyncTask(LeafDao leafDao) {
+        DeleteAsyncTask(LeafDao leafDao) {
             this.leafDao = leafDao;
         }
 
@@ -59,11 +58,11 @@ public class LeafListViewModel extends AndroidViewModel {
 
     }
 
-    private static class clearAsyncTask extends AsyncTask<Leaf, Void, Integer> {
+    private static class ClearAsyncTask extends AsyncTask<Leaf, Void, Integer> {
 
         private final LeafDao leafDao;
 
-        clearAsyncTask(LeafDao leafDao) {
+        ClearAsyncTask(LeafDao leafDao) {
             this.leafDao = leafDao;
         }
 
