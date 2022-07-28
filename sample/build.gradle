@@ -46,7 +46,6 @@ dependencies {
     implementation "com.google.android.material:material:$materialVersioon"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
-    //noinspection GradleDependency
     implementation "androidx.paging:paging-runtime:$pagingVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
 

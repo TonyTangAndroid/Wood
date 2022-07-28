@@ -1,8 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id 'com.android.application' version '7.2.0' apply false
-    id 'com.android.library' version '7.2.0' apply false
+    id 'com.android.application' version '7.2.1' apply false
+    id 'com.android.library' version '7.2.1' apply false
 }
 
 ext {
@@ -15,7 +15,7 @@ ext {
     appcompatVersion = '1.4.2'
     materialVersioon = '1.6.1'
     lifecycleVersion = '2.2.0'
-    pagingVersion = '2.1.2'
+    pagingVersion = '3.1.1'
     roomVersion = '2.4.3'
     timberVersion = '5.0.1'
     injectVersion = '1'
