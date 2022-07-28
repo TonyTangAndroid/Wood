@@ -11,6 +11,7 @@ import androidx.room.RoomWarnings;
 import androidx.room.Update;
 import androidx.annotation.IntRange;
 import android.util.Log;
+import io.reactivex.Flowable;
 
 @Dao
 abstract class LeafDao {
@@ -32,7 +33,7 @@ abstract class LeafDao {
     public abstract DataSource.Factory<Integer, Leaf> getAllTransactions();
 
     @Query("SELECT * FROM Leaf WHERE id = :id")
-    public abstract LiveData<Leaf> getTransactionsWithId(long id);
+    public abstract Flowable<Leaf> getTransactionsWithId(long id);
 
     public DataSource.Factory<Integer, Leaf> getAllTransactionsWith(String key, @IntRange(from = 2, to = 7) int priority) {
         String endWildCard = key + "%";

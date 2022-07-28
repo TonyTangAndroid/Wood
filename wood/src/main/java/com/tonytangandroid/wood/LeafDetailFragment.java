@@ -31,6 +31,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -39,6 +41,8 @@ import java.util.concurrent.Executors;
 import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 import static com.tonytangandroid.wood.WoodColorUtil.SEARCHED_HIGHLIGHT_BACKGROUND_COLOR;
+import static com.uber.autodispose.AutoDispose.autoDisposable;
+import static com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider.from;
 
 public class LeafDetailFragment extends Fragment implements View.OnClickListener, TextUtil.AsyncTextProvider, TextWatcher {
 
@@ -126,7 +130,11 @@ public class LeafDetailFragment extends Fragment implements View.OnClickListener
 
     private void observe() {
         LeafDetailViewModel viewModel = create();
-        viewModel.getTransactionWithId(id).observe(getViewLifecycleOwner(), this::transactionUpdated);
+        viewModel.getTransactionWithId(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .as(autoDisposable(from(getViewLifecycleOwner())))
+            .subscribe(this::transactionUpdated);
     }
 
     private LeafDetailViewModel create() {

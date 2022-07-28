@@ -2,17 +2,17 @@ package com.tonytangandroid.wood;
 
 import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
+import io.reactivex.Flowable;
 
 public class LeafDetailViewModel extends AndroidViewModel {
-    private final LeafDao mLeafDao;
+    private final LeafDao leafDao;
 
     public LeafDetailViewModel(Application application) {
         super(application);
-        mLeafDao = WoodDatabase.getInstance(application).leafDao();
+        leafDao = WoodDatabase.getInstance(application).leafDao();
     }
 
-    public LiveData<Leaf> getTransactionWithId(long id) {
-        return mLeafDao.getTransactionsWithId(id);
+    public Flowable<Leaf> getTransactionWithId(long id) {
+        return leafDao.getTransactionsWithId(id);
     }
 }
