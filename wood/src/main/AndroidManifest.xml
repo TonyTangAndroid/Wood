@@ -18,6 +18,13 @@
             android:theme="@style/Wood.Theme" />
 
         <activity
+            android:name=".HelloActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.tonytangandroid.wood.task"
+            android:exported="true"
+            android:theme="@style/Wood.Theme" />
+
+        <activity
             android:name=".LeafDetailsActivity"
             android:parentActivityName=".LeafListActivity"
             android:theme="@style/Wood.Theme" />

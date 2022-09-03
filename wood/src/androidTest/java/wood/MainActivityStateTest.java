@@ -8,7 +8,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
-import com.tonytangandroid.wood.LeafListActivity;
+import com.tonytangandroid.wood.HelloActivity;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,11 +18,10 @@ import org.junit.runner.RunWith;
 public class MainActivityStateTest {
 
   @Rule
-  public ActivityScenarioRule<LeafListActivity> rule =
-      new ActivityScenarioRule<>(LeafListActivity.class);
+  public ActivityScenarioRule<HelloActivity> rule = new ActivityScenarioRule<>(HelloActivity.class);
 
   @Test
   public void whenNoItemQueried_shouldShowEmptyContentHint() {
-    onView(withText("123")).check(matches(isDisplayed()));
+    onView(withText("test123")).check(matches(isDisplayed()));
   }
 }
