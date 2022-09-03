@@ -1,6 +1,5 @@
-plugins {
-    id 'com.android.library'
-}
+apply plugin: 'com.android.library'
+
 ext {
     bintrayRepo = 'maven'
     bintrayName = 'Wood'
@@ -34,6 +33,12 @@ android {
         targetSdk rootProject.ext.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+    }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
     }
 
     compileOptions {

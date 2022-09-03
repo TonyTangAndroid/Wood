@@ -1,5 +1,8 @@
 # Wood
 
+[![codecov](https://codecov.io/gh/TonyTangAndroid/Wood/branch/master/graph/badge.svg)](https://codecov.io/gh/TonyTangAndroid/Wood)
+
+
 ## What is this library about?
 Wood is a simple in-app Timber log recorder. Wood records and persists all Timber log into Room Database , and provides a UI for reviewing their content.
 
