@@ -2,7 +2,7 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
 jobs:
   check:
@@ -18,5 +18,12 @@ jobs:
       - name: Assembling app debug flavor
         run: ./gradlew :app:assembleDebug
       - name: run java unit tests
-        run: ./gradlew test
-
+        run: ./gradlew rootCoverageReport -Penable_android_test=false -Penable_unit_test=true -Pcoverage
+      - name: upload code coverage report
+        uses: codecov/codecov-action@v3.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./build/reports/jacoco.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true

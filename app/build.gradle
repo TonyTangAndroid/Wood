@@ -1,8 +1,11 @@
-plugins {
-    id 'com.android.application'
-}
-
+apply plugin: 'com.android.application'
 android {
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+    }
+
     signingConfigs {
         tony_dev_sign {
             keyAlias 'tony_dev_sign'

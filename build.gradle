@@ -1,21 +1,43 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath "nl.neotech.plugin:android-root-coverage-plugin:${neotech_coverage}"
+    }
+}
+
+
 plugins {
-    id 'com.android.application' version '7.2.2' apply false
-    id 'com.android.library' version '7.2.2' apply false
     id "com.github.sherter.google-java-format" version "0.9"
 }
 
 apply from: "${rootDir}/gradle/google_java_format.gradle"
 
+if (project.hasProperty('coverage')){
+    apply from: "${rootDir}/gradle/root_code_coverage.gradle"
+}
+
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+        google()
+        mavenCentral()
+    }
+}
+
 ext {
     minSdkVersion = 21
-    targetSdkVersion = 33
-    compileSdkVersion = 33
+    targetSdkVersion = 32
+    compileSdkVersion = 32
 
     versionCode = 19
     versionName = "2.0.0"
-    appcompatVersion = '1.5.0'
+    appcompatVersion = '1.4.2'
     materialVersioon = '1.6.1'
     lifecycleVersion = '2.2.0'
     lifecycleModelVersion = '2.5.1'
