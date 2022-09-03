@@ -69,10 +69,23 @@ dependencies {
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleModelVersion"
     api "com.google.android.material:material:$materialVersioon"
 
+
+    api "com.google.dagger:dagger:${daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
+    testAnnotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
+
+    api "com.google.dagger:dagger-android-support:${daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
     androidTestImplementation "com.google.truth:truth:$truthVersion"
-
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation "androidx.fragment:fragment-testing:1.5.2"
+    androidTestImplementation 'com.adevinta.android:barista:4.2.0'
     testImplementation "junit:junit:$junit"
     testImplementation "com.google.truth:truth:$truthVersion"
 }
