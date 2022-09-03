@@ -5,73 +5,74 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-
 @Entity(tableName = "Leaf")
 class Leaf {
 
-    @Ignore
-    public String searchKey;
+  @Ignore public String searchKey;
 
-    @PrimaryKey(autoGenerate = true)
-    private long id;
+  @PrimaryKey(autoGenerate = true)
+  private long id;
 
-    @ColumnInfo(name = "createAt")
-    private long createAt;
-    @ColumnInfo(name = "tag")
-    private String tag;
-    @ColumnInfo(name = "priority")
-    private int priority;
-    @ColumnInfo(name = "length")
-    private int length;
-    @ColumnInfo(name = "body", typeAffinity = ColumnInfo.TEXT)
-    private String body;
+  @ColumnInfo(name = "createAt")
+  private long createAt;
 
-    public int getPriority() {
-        return priority;
-    }
+  @ColumnInfo(name = "tag")
+  private String tag;
 
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
+  @ColumnInfo(name = "priority")
+  private int priority;
 
-    public long getId() {
-        return id;
-    }
+  @ColumnInfo(name = "length")
+  private int length;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+  @ColumnInfo(name = "body", typeAffinity = ColumnInfo.TEXT)
+  private String body;
 
-    public long getCreateAt() {
-        return createAt;
-    }
+  public int getPriority() {
+    return priority;
+  }
 
-    public void setCreateAt(long createAt) {
-        this.createAt = createAt;
-    }
+  public void setPriority(int priority) {
+    this.priority = priority;
+  }
 
-    public String getTag() {
-        return tag;
-    }
+  public long getId() {
+    return id;
+  }
 
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
+  public void setId(long id) {
+    this.id = id;
+  }
 
-    public int length() {
-        return length;
-    }
+  public long getCreateAt() {
+    return createAt;
+  }
 
-    public void setLength(int length) {
-        this.length = length;
-    }
+  public void setCreateAt(long createAt) {
+    this.createAt = createAt;
+  }
 
-    public String body() {
-        return body;
-    }
+  public String getTag() {
+    return tag;
+  }
 
-    public void setBody(String body) {
-        this.body = body;
-    }
+  public void setTag(String tag) {
+    this.tag = tag;
+  }
 
+  public int length() {
+    return length;
+  }
+
+  public void setLength(int length) {
+    this.length = length;
+  }
+
+  public String body() {
+    return body;
+  }
+
+  public void setBody(String body) {
+    this.body = body;
+  }
 }

@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 
 public class LeavesCollectionFragment extends Fragment {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.wood_fragment_leaves_collection, container, false);
-    }
+  @Override
+  public View onCreateView(
+      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.wood_fragment_leaves_collection, container, false);
+  }
 }
