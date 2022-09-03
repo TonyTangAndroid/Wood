@@ -19,6 +19,11 @@ public class LeafListActivity extends AppCompatActivity {
   private String getApplicationName() {
     ApplicationInfo applicationInfo = getApplicationInfo();
     int stringId = applicationInfo.labelRes;
-    return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : getString(stringId);
+    return stringId == 0 ? fallback(applicationInfo) : getString(stringId);
+  }
+
+  private String fallback(ApplicationInfo applicationInfo) {
+    CharSequence nonLocalizedLabel = applicationInfo.nonLocalizedLabel;
+    return nonLocalizedLabel == null ? getPackageName() : nonLocalizedLabel.toString();
   }
 }
