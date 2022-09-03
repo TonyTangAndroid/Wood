@@ -15,4 +15,4 @@ jobs:
           distribution: 'adopt-openj9'
           java-version: 11
       - name: Build with Gradle
-        run: ./gradlew :sample:assembleDebug
+        run: ./gradlew :app:assembleDebug

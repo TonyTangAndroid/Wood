@@ -13,6 +13,6 @@ dependencyResolutionManagement {
         maven { url 'https://jitpack.io' }
     }
 }
-include ':sample'
+include ':app'
 include ':wood'
 include ':wood-no-op'
