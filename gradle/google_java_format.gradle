@@ -1,0 +1,19 @@
+subprojects { project ->
+  project.tasks.withType(JavaCompile) {
+    dependsOn(installGitHooks)
+  }
+}
+
+googleJavaFormat {
+  //default version to googleJavaFormat 0.8
+  toolVersion = "1.8"
+}
+
+//  Google Java Format pre-commit hook installation
+tasks.register('installGitHooks', Copy) {
+  from(file("$rootDir/gradle/hooks/pre-commit-stub")) {
+    rename 'pre-commit-stub', 'pre-commit'
+  }
+  into file('.git/hooks')
+  fileMode 0777
+}
