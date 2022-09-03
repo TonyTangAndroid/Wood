@@ -7,14 +7,15 @@ plugins {
 
 ext {
     minSdkVersion = 21
-    targetSdkVersion = 32
-    compileSdkVersion = 32
+    targetSdkVersion = 33
+    compileSdkVersion = 33
 
     versionCode = 19
     versionName = "2.0.0"
-    appcompatVersion = '1.4.2'
+    appcompatVersion = '1.5.0'
     materialVersioon = '1.6.1'
     lifecycleVersion = '2.2.0'
+    lifecycleModelVersion = '2.5.1'
     pagingVersion = '3.1.1'
     roomVersion = '2.4.3'
     timberVersion = '5.0.1'
