@@ -31,7 +31,7 @@ android {
         consumerProguardFiles 'proguard-rules.pro'
         minSdk rootProject.ext.minSdkVersion
         targetSdk rootProject.ext.targetSdkVersion
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "wood.DemoEspressoApplicationJunitRunner"
 
     }
 

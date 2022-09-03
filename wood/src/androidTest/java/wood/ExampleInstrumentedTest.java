@@ -1,4 +1,4 @@
-package com.example.test;
+package wood;
 
 import static org.junit.Assert.*;
 
