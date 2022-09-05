@@ -49,10 +49,28 @@ implementation 'com.github.TonyTangAndroid.Wood:wood:0.9.9.1'
 
 In your application code, create an instance of `WoodTree` and add it as an Timber tree when planting your Timber tree:
 
-```java
-Timber.plant(new WoodTree(this)
-                .retainDataFor(WoodTree.Period.FOREVER)
-                .maxLength(100000).showNotification(true));
+```kotlin
+package com.tonytangandroid.wood.sample
+
+import android.app.Application
+import android.util.Log
+import com.tonytangandroid.wood.WoodTree
+import timber.log.Timber
+
+object WoodIntegrationUtil {
+
+  @JvmStatic
+  fun initWood(application: Application) {
+    Timber.plant(
+      WoodTree(application)
+        .retainDataFor(WoodTree.Period.FOREVER)
+        .logLevel(Log.VERBOSE)
+        .autoScroll(false)
+        .maxLength(100000)
+        .showNotification(true)
+    )
+  }
+}
 ```
 
 That's it! Wood will now record all Timber log.
