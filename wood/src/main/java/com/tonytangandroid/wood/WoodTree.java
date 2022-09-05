@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Executor;
 import timber.log.Timber;
 
@@ -20,6 +21,7 @@ public class WoodTree extends Timber.DebugTree {
   @NonNull private final Context context;
   @NonNull private final WoodDatabase woodDatabase;
   private final Executor executor;
+  private final String threadTagPrefix;
   @Nullable private NotificationHelper notificationHelper;
   @NonNull private RetentionManager retentionManager;
   private int maxContentLength = 250000;
@@ -30,11 +32,20 @@ public class WoodTree extends Timber.DebugTree {
 
   /** @param context The current Context. */
   public WoodTree(@NonNull Context context) {
-    executor = new JobExecutor();
+    this(context, "");
+  }
+
+  /**
+   * @param context context
+   * @param threadTagPrefix the extra prefix added on the logged message.
+   */
+  public WoodTree(@NonNull Context context, String threadTagPrefix) {
+    this.threadTagPrefix = threadTagPrefix;
+    this.executor = new JobExecutor();
     this.context = context.getApplicationContext();
-    woodDatabase = WoodDatabase.getInstance(context);
-    retentionManager = new RetentionManager(this.context, DEFAULT_RETENTION);
-    sharedPreferences = context.getSharedPreferences(PREF_WOOD_CONFIG, Context.MODE_PRIVATE);
+    this.woodDatabase = WoodDatabase.getInstance(context);
+    this.retentionManager = new RetentionManager(this.context, DEFAULT_RETENTION);
+    this.sharedPreferences = context.getSharedPreferences(PREF_WOOD_CONFIG, Context.MODE_PRIVATE);
   }
 
   public static boolean autoScroll(Context context) {
@@ -117,14 +128,14 @@ public class WoodTree extends Timber.DebugTree {
   protected void log(
       final int priority, final String tag, final @NonNull String message, final Throwable t) {
     if (shouldBeLogged(priority, tag)) {
-      executor.execute(
-          new Runnable() {
-            @Override
-            public void run() {
-              doLog(priority, tag, message, t);
-            }
-          });
+      String assembledMessage = formatThreadTag(message, this.threadTagPrefix);
+      executor.execute(() -> doLog(priority, tag, assembledMessage, t));
     }
+  }
+
+  private static String formatThreadTag(String message, String threadTagPrefix) {
+    return String.format(
+        Locale.US, "[%s#%s]:%s", threadTagPrefix, Thread.currentThread().getName(), message);
   }
 
   private boolean shouldBeLogged(int priority, String tag) {
@@ -188,6 +199,7 @@ public class WoodTree extends Timber.DebugTree {
 
   /** From https://stackoverflow.com/a/1149712/4068957 */
   static class ErrorUtil {
+
     public static String asString(Throwable throwable) {
       StringWriter sw = new StringWriter();
       PrintWriter pw = new PrintWriter(sw);

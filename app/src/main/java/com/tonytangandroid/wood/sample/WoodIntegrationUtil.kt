@@ -10,7 +10,7 @@ object WoodIntegrationUtil {
   @JvmStatic
   fun initWood(application: Application) {
     Timber.plant(
-      WoodTree(application)
+      WoodTree(application,"tony")
         .retainDataFor(WoodTree.Period.FOREVER)
         .logLevel(Log.VERBOSE)
         .autoScroll(false)

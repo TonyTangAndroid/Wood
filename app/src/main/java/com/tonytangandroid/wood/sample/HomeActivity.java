@@ -60,6 +60,10 @@ public class HomeActivity extends AppCompatActivity {
     logError();
   }
 
+  public static void logInBackground() {
+    new Thread(() -> Timber.i("This is an INFO message triggered in background thread.")).start();
+  }
+
   private void logError() {
     try {
       String shortSrc = "";
