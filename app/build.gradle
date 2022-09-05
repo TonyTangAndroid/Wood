@@ -42,10 +42,8 @@ dependencies {
 //    implementation project(':wood-no-op')
 //    implementation 'com.github.TonyTangAndroid.Wood:wood:0.7.0'
 
-    implementation "com.jakewharton.timber:timber:$timberVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "javax.inject:javax.inject:$injectVersion"
-    implementation "com.jakewharton.timber:timber:$timberVersion"
     implementation "com.google.android.material:material:$materialVersioon"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
