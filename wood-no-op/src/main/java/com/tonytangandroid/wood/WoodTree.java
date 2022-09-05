@@ -10,6 +10,8 @@ public class WoodTree extends Timber.Tree {
 
   public WoodTree(Context context) {}
 
+  public WoodTree(Context context, String threadTagPrefix) {}
+
   public WoodTree showNotification(boolean sticky) {
     return this;
   }
